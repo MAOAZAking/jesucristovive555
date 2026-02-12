@@ -2,3 +2,5 @@
 multimedia/audio/musica-instrumental-1.mp3 filter=lfs diff=lfs merge=lfs -text
 multimedia/**/*.mp3 filter=lfs diff=lfs merge=lfs -text
 multimedia/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mp3 filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
