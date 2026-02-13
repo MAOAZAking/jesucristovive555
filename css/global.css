@@ -7,7 +7,7 @@
     /*imagen de fondo que acopla el maximo su alto y se centra*/
     url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/portada-ministerio-de-restauracion-jesucristo-vive.png');
     background-repeat: no-repeat;
-    background-size: flex 100%;
+    background-size: 100% 100%;
     background-position: center;
     color: white;
     padding: 100px 0;
