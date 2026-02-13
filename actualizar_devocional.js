@@ -1,9 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 
-// ⚠️ IMPORTANTE: Coloca tu API KEY aquí (la misma que en global.js)
-const API_KEY = "AIzaSyDyKL5_g8e-6tnsTENC1GsapctRxLfLIto"; 
-const CHANNEL_ID = "UCZRzRrdOC4vxIQYm03US9Wg";
+// Leemos las credenciales desde las variables de entorno (GitHub Secrets)
+const API_KEY = process.env.API_KEY;
+const CHANNEL_ID = process.env.CHANNEL_ID;
+
+if (!API_KEY) {
+    console.error("❌ Error: No se encontro la variable de entorno API_KEY. Asegúrate de configurar los GitHub Secrets.");
+    process.exit(1);
+}
+if (!CHANNEL_ID) {
+    console.error("❌ Error: No se encontro la variable de entorno CHANNEL_ID. Asegúrate de configurar los GitHub Secrets.");
+    process.exit(1);
+}
 
 async function actualizar() {
     // 1. Obtener fecha actual en formato ddmmaa (FORZANDO HORA COLOMBIA)
