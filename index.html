@@ -8,183 +8,16 @@
         <link rel="icon" href="https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/logo-1-ministerio-de-restauracion-jesucristo-¡vive!.png" type="image/png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
-        <style>
-            html { 
-                scroll-behavior: smooth; 
-            }
-            body { 
-                background: #f8f9fa; 
-            }
-
-            .barra-superior {
-                background: linear-gradient(90deg, rgb(65, 13, 253), rgb(41, 13, 196));
-                color: white;
-                font-size: 14px;
-                padding: 8px 0;
-                font-weight: 500;
-                position: fixed;
-                top: 0;
-                width: 100%;
-                z-index: 1100;
-                letter-spacing: 0.5px;
-            }
-
-            .navbar {
-                 transition: 0.4s; top: 35px; 
-                }
-            .navbar.barra-activa { 
-                background: #000 !important; 
-                box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
-            }
-
-            .portada {
-                background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-                /*imagen de fondo que acopla el maximo su alto y se centra*/
-                url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-¡vive!.jpeg');
-                background-repeat: no-repeat;
-                background-size: flex 100%;
-                background-position: center;
-                color: white;
-                padding: 100px 0;
-            }
-
-            .portada h1 { 
-                animation: aparecerAbajo 1.5s ease; 
-            }
-
-            .portada p  {
-                 animation: aparecerArriba 2s ease;
-                 }
-
-            @keyframes aparecerAbajo { 
-                from { opacity: 0;
-                     transform: translateY(-40px);
-                     } to { opacity: 1; 
-                        transform: translateY(0); 
-                    } }
-            @keyframes aparecerArriba   
-            { from { opacity: 0; 
-                transform: translateY(40px); 
-            }  to { opacity: 1;
-                 transform: translateY(0); 
-                } }
-
-            .card { 
-                transition: 0.4s; 
-                border-radius: 15px; 
-            }
-
-            .card:hover { 
-                transform: translateY(-10px); 
-                box-shadow: 0 25px 45px rgba(0,0,0,0.15); 
-            }
-
-            .estadisticas {
-                 background: #0d6efd; 
-                color: white; 
-            }
-
-            .contador { 
-                font-size: 40px; font-weight: bold;
-             }
-
-            .galeria-imagenes img { 
-                height: 250px;
-                 object-fit: cover; 
-                 transition: 0.4s; 
-                 cursor: pointer; border-radius: 12px; 
-                }
-
-            .galeria-imagenes img:hover { 
-                transform: scale(1.08); 
-            }
-
-            .tarjeta-contacto { 
-                border-radius: 20px;
-                 transition: 0.4s; 
-                }
-
-            .tarjeta-contacto:hover { 
-                transform: translateY(-5px);
-                 box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
-                }
-
-            .campo-icono { 
-                position: relative;
-             }
-
-            .campo-icono i {
-                 position: absolute; 
-                 top: 50%; 
-                 left: 15px; 
-                 transform: translateY(-50%); 
-                 color: #0d6efd; 
-                }
-
-            .campo-icono input,.campo-icono textarea { 
-                padding-left: 40px;
-                 border-radius: 10px;
-                 }
-
-            #boton-subir { 
-                position: fixed; 
-                bottom: 20px; 
-                right: 20px; 
-                display: none; 
-                z-index: 99; 
-            }
-
-            footer { background: #111; 
-                color: white; 
-                padding: 40px 0; 
-            }
-
-            .animacion-scroll { 
-                opacity: 0; 
-                transform: translateY(40px); 
-                transition: all 1s ease; 
-            }
-
-            .animacion-scroll.visible { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-
-            .aparecer-izquierda { 
-                opacity: 0;
-                transform: translateX(-60px); 
-                transition: all 1s ease;
-            }
-
-            .aparecer-izquierda.visible { 
-                opacity: 1; 
-                transform: translateX(0); 
-            }
-
-            .zoom-entrada { 
-                opacity: 0; 
-                transform: scale(0.8); 
-                transition: all 1s ease; 
-            }
-            
-            .zoom-entrada.visible { 
-                opacity: 1; 
-                transform: scale(1); 
-            }
-        </style>
+        <link rel="stylesheet" href="css/index.css">
     </head>
-
     <body>
         <div class="barra-superior text-center">Servicios: Domingos 9:30 AM | Miércoles 6:30 PM | Vienes 6:30 PM</div>
-
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="#">Ministerio de Restauración Jesucristo ¡VIVE!</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal">
+                <a class="navbar-brand fw-bold" href="index.html">Ministerio de Restauración Jesucristo ¡VIVE!</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="menu-principal">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
@@ -237,13 +70,12 @@
         </section>
 
         <section id="seccion-multimedia" class="py-5">
-        <!-- Aqui abajo añadiremos un iframe donde pondremos un video incsrustandolo desde youtube y un audio que es de musica instrumental para orar -->
             <div id="contenedor-multimedia"class="container">
                 <div id="contenedor-video-devocional-diario" class="row g-4">
                 <div id="devocional-diario" class="col-md-7">
                     <h4>Devocional diario</h4>
                     <div id="contenedor-video-devocional-diario" class="ratio ratio-16x9">
-                        <iframe width="560" 
+                        <iframe id="youtubeFrame" width="560" 
                                 height="315" 
                                 src="https://www.youtube.com/embed/im0giwDUnSs?rel=0" 
                                 title="YouTube video player" 
@@ -259,11 +91,13 @@
                         <h4>Música para Orar</h4>
                         <div id="contenedor-musica-para-orar" class="card shadow p-4 text-center">
                             <audio controls class="w-100">
-                                <source src="https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/audio/musica-instrumental-1.mp3" type="audio/mpeg">
+                                <source src="multimedia/audio/musica-instrumental-1.mp3" type="audio/mpeg">
                             </audio>
-                            <a href="https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/audio/musica-instrumental-1.mp3" class="btn btn-outline-primary mt-3" download>
-                                <i class="bi bi-download"></i> Descargar Música para Orar
-                            </a>
+                                <a href="multimedia/audio/musica-instrumental-1.mp3"
+                                    class="btn btn-outline-primary mt-3"
+                                    download="musica-instrumental-1.mp3">
+                                    <i class="bi bi-download"></i> Descargar Música para Orar
+                                </a>
                         </div>
                     </div>
                     <br>
@@ -271,15 +105,16 @@
                         <h4>Predica Dominical</h4>
                         <div id="contenedor-predica-dominical" class="card shadow p-4 text-center">
                             <audio controls class="w-100">
-                                <source src="https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/audio/predica-dominical-1.mp3" type="audio/mpeg">
+                                <source src="multimedia/audio/predica-dominical-1.mp3" type="audio/mpeg">
                             </audio>
-                            <a href="https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/audio/predica-dominical-1.mp3" class="btn btn-outline-primary mt-3" download>
+                            <a href="multimedia/audio/predica-dominical-1.mp3"
+                                class="btn btn-outline-primary mt-3"
+                                download="predica-dominical-1.mp3">
                                 <i class="bi bi-download"></i> Descargar Predica Dominical
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>    
         </section>
 
@@ -312,7 +147,7 @@
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="card shadow">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" class="card-img-top">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" class="card-img-top" alt="Conferencia Juvenil">
                             <div class="card-body">
                                 <h5>Conferencia Juvenil</h5>
                                 <p>15 Marzo 2026</p>
@@ -321,7 +156,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card shadow">
-                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="card-img-top">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="card-img-top" alt="Retiro Espiritual">
                             <div class="card-body">
                                 <h5>Retiro Espiritual</h5>
                                 <p>10 Abril 2026</p>
@@ -330,7 +165,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card shadow">
-                            <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="card-img-top">
+                            <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="card-img-top" alt="Jornada Social">
                             <div class="card-body">
                                 <h5>Jornada Social</h5>
                                 <p>25 Abril 2026</p>
@@ -345,9 +180,9 @@
             <div class="container">
                 <h2 class="text-center fw-bold mb-5">Galería</h2>
                 <div class="row g-4 galeria-imagenes">
-                    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="img-fluid"></div>
-                    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" class="img-fluid"></div>
-                    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1507692049790-de58290a4334" class="img-fluid"></div>
+                    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="img-fluid" alt="Imagen de galería 1"></div>
+                    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" class="img-fluid" alt="Imagen de galería 2"></div>
+                    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1507692049790-de58290a4334" class="img-fluid" alt="Imagen de galería 3"></div>
                 </div>
             </div>
         </section>
@@ -371,7 +206,7 @@
                                     <i class="bi bi-chat-dots"></i>
                                     <textarea class="form-control" rows="4" placeholder="Mensaje" required></textarea>
                                 </div>
-                                <button class="btn btn-primary w-100">Enviar</button>
+                                <button type="submit" class="btn btn-primary w-100">Enviar</button>
                                 <div class="text-success text-center mt-3 d-none" id="mensaje-enviado">
                                     <i class="bi bi-check-circle-fill"></i> Mensaje enviado correctamente
                                 </div>
@@ -388,103 +223,9 @@
             </div>
         </footer>
 
-        <button id="boton-subir" class="btn btn-primary rounded-circle"><i class="bi bi-arrow-up"></i></button>
+        <button id="boton-subir" class="btn btn-primary rounded-circle" aria-label="Subir"><i class="bi bi-arrow-up"></i></button>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-        <script>
-            window.addEventListener('scroll', function () {
-                document.querySelector('.navbar').classList.toggle('barra-activa', window.scrollY > 50);
-                document.getElementById('boton-subir').style.display = window.scrollY > 300 ? 'block' : 'none';
-            });
-
-            document.getElementById('boton-subir').addEventListener('click', function () {
-                const duration = 800;
-                const start = window.scrollY;
-                const startTime = performance.now();
-
-                function animate(time) {
-                    const progress = Math.min((time - startTime) / duration, 1);
-                    const ease = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-                    window.scrollTo(0, start * (1 - ease));
-                    if (progress < 1) requestAnimationFrame(animate);
-                }
-
-                requestAnimationFrame(animate);
-            });
-
-            document.querySelectorAll('.contador').forEach(counter => {
-                const target = +counter.dataset.target;
-                let count = 0;
-
-                function update() {
-                    count += target / 100;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count);
-                        requestAnimationFrame(update);
-                    } else {
-                        counter.innerText = target;
-                    }
-                }
-
-                update();
-            });
-
-            const elements = document.querySelectorAll('.animacion-scroll, .aparecer-izquierda, .zoom-entrada');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2 });
-            elements.forEach(el => observer.observe(el));
-
-            document.getElementById('formulario-contacto').addEventListener('submit', function (e) {
-                e.preventDefault();
-                const msg = document.getElementById('mensaje-enviado');
-                msg.classList.remove('d-none');
-                setTimeout(() => {
-                    msg.classList.add('d-none');
-                    this.reset();
-                }, 3000);
-            });
-
-/******************SCRIPT PARA ACTUALIZAR DÍA A DÍA EL DEVOCIONAL********************************/
-            async function cargarVideoPorFecha() {
-            const API_KEY = ""; /*AIzaSyBMRAEdRr6haBFQGo-MKTqtSVykPDHdMx0*/
-            const CHANNEL_ID = "UCZRzRrdOC4vxIQYm03US9Wg";
-
-            // 📅 Obtener fecha actual en formato ddmmaa
-            const hoy = new Date();
-            const dia = String(hoy.getDate()).padStart(2, '0');
-            const mes = String(hoy.getMonth() + 1).padStart(2, '0');
-            const anio = String(hoy.getFullYear()).slice(-2);
-
-            const tituloBusqueda = `Dev ${dia}${mes}${anio}`;
-
-            const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&type=video&maxResults=1&q=${encodeURIComponent(tituloBusqueda)}`;
-
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-
-                if (data.items.length > 0) {
-                    const videoId = data.items[0].id.videoId;
-                    document.getElementById("youtubeFrame").src =
-                        `https://www.youtube.com/embed/${videoId}?rel=0`;
-                } else {
-                    console.log("No se encontró el video con ese nombre:", tituloBusqueda);
-                }
-
-            } catch (error) {
-                console.error("Error al buscar el video:", error);
-            }
-        }
-
-        cargarVideoPorFecha();
-
-        </script>
+        <script src="js/index.js"></script>
     </body>
 </html>

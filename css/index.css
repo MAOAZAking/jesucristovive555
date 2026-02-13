@@ -1,0 +1,162 @@
+             html { 
+                scroll-behavior: smooth; 
+            }
+            body { 
+                background: #f8f9fa; 
+            }
+
+            .barra-superior {
+                background: linear-gradient(90deg, rgb(65, 13, 253), rgb(41, 13, 196));
+                color: white;
+                font-size: 14px;
+                padding: 8px 0;
+                font-weight: 500;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 1100;
+                letter-spacing: 0.5px;
+            }
+
+            .navbar {
+                 transition: 0.4s; top: 35px; 
+                }
+            .navbar.barra-activa { 
+                background: #000 !important; 
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
+            }
+
+            .portada {
+                background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+                /*imagen de fondo que acopla el maximo su alto y se centra*/
+                url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-¡vive!.jpeg');
+                background-repeat: no-repeat;
+                background-size: flex 100%;
+                background-position: center;
+                color: white;
+                padding: 100px 0;
+            }
+
+            .portada h1 { 
+                animation: aparecerAbajo 1.5s ease; 
+            }
+
+            .portada p  {
+                 animation: aparecerArriba 2s ease;
+                 }
+
+            @keyframes aparecerAbajo { 
+                from { opacity: 0;
+                     transform: translateY(-40px);
+                     } to { opacity: 1; 
+                        transform: translateY(0); 
+                    } }
+            @keyframes aparecerArriba   
+            { from { opacity: 0; 
+                transform: translateY(40px); 
+            }  to { opacity: 1;
+                 transform: translateY(0); 
+                } }
+
+            .card { 
+                transition: 0.4s; 
+                border-radius: 15px; 
+            }
+
+            .card:hover { 
+                transform: translateY(-10px); 
+                box-shadow: 0 25px 45px rgba(0,0,0,0.15); 
+            }
+
+            .estadisticas {
+                 background: #0d6efd; 
+                color: white; 
+            }
+
+            .contador { 
+                font-size: 40px; font-weight: bold;
+             }
+
+            .galeria-imagenes img { 
+                height: 250px;
+                 object-fit: cover; 
+                 transition: 0.4s; 
+                 cursor: pointer; border-radius: 12px; 
+                }
+
+            .galeria-imagenes img:hover { 
+                transform: scale(1.08); 
+            }
+
+            .tarjeta-contacto { 
+                border-radius: 20px;
+                 transition: 0.4s; 
+                }
+
+            .tarjeta-contacto:hover { 
+                transform: translateY(-5px);
+                 box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+                }
+
+            .campo-icono { 
+                position: relative;
+             }
+
+            .campo-icono i {
+                 position: absolute; 
+                 top: 50%; 
+                 left: 15px; 
+                 transform: translateY(-50%); 
+                 color: #0d6efd; 
+                }
+
+            .campo-icono input,.campo-icono textarea { 
+                padding-left: 40px;
+                 border-radius: 10px;
+                 }
+
+            #boton-subir { 
+                position: fixed; 
+                bottom: 20px; 
+                right: 20px; 
+                display: none; 
+                z-index: 99; 
+            }
+
+            footer { background: #111; 
+                color: white; 
+                padding: 40px 0; 
+            }
+
+            .animacion-scroll { 
+                opacity: 0; 
+                transform: translateY(40px); 
+                transition: all 1s ease; 
+            }
+
+            .animacion-scroll.visible { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+
+            .aparecer-izquierda { 
+                opacity: 0;
+                transform: translateX(-60px); 
+                transition: all 1s ease;
+            }
+
+            .aparecer-izquierda.visible { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+
+            .zoom-entrada { 
+                opacity: 0; 
+                transform: scale(0.8); 
+                transition: all 1s ease; 
+            }
+            
+            .zoom-entrada.visible { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
