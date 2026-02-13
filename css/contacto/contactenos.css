@@ -1,0 +1,139 @@
+html { 
+    scroll-behavior: smooth; 
+}
+
+body { 
+    background: #f8f9fa; 
+}
+
+.barra-superior {
+    background: linear-gradient(90deg, rgb(65, 13, 253), rgb(41, 13, 196));
+    color: white;
+    font-size: 14px;
+    padding: 8px 0;
+    font-weight: 500;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1100;
+    letter-spacing: 0.5px;
+}
+
+.navbar {
+     transition: 0.4s; top: 35px; 
+}
+
+.navbar.barra-activa { 
+    background: #000 !important; 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
+}
+            
+.portada {
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    /*imagen de fondo que acopla el maximo su alto y se centra*/
+    url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-¡vive!.jpeg');
+    background-repeat: no-repeat;
+    background-size: flex 100%;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.portada h1 {
+    animation: fadeDown 1.5s ease;
+}
+
+.portada p {
+    animation: fadeUp 2s ease;
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* SECCION CONTACTO */
+.seccion-contacto {
+    padding: 80px 0;
+}
+
+/* CUADRITOS */
+.info-box {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    transition: 0.4s;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.info-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* FORMULARIO */
+.tarjeta-whatsapp {
+    border-radius: 20px;
+    transition: 0.4s;
+}
+
+.tarjeta-whatsapp:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.campo-mensaje textarea {
+    border-radius: 15px;
+    padding: 15px;
+    font-size: 16px;
+    resize: none;
+}
+
+.btn-whatsapp {
+    background: #25D366;
+    border: none;
+    font-size: 18px;
+    padding: 12px 30px;
+    border-radius: 30px;
+    transition: 0.3s;
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    background: #1ebe5d;
+    transform: scale(1.05);
+}
+
+/* BOTON SUBIR */
+#boton-subir {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    z-index: 99;
+}
+
+/* FOOTER */
+footer {
+    background: #111;
+    color: white;
+    padding: 40px 0;
+}
+
+/* ANIMACION SCROLL */
+.animacion-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+}
+
+.animacion-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+           
