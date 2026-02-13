@@ -1,3 +1,53 @@
 [id^="seccion"] {
   scroll-margin-top: 70px;
 }
+
+.portada {
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    /*imagen de fondo que acopla el maximo su alto y se centra*/
+    url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/portada-ministerio-de-restauracion-jesucristo-vive.png');
+    background-repeat: no-repeat;
+    background-size: flex 100%;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+}
+
+.portada h1 {
+    animation: fadeDown 1.5s ease;
+}
+
+.portada p {
+    animation: fadeUp 2s ease;
+}
+
+.estilo-jesucristo-vive{
+  -webkit-text-stroke: 0.5px white; /* borde blanco */
+}
+
+#estilo-jesucris-o{
+  font-size: xx-large;
+  font-family: 'Kalam', cursive;
+  font-weight: 700;
+  color:rgb(255, 0, 0);
+}
+
+#estilo-t-forma-cruz{
+  font-size: xx-large;
+  font-family: 'Saira', sans-serif;
+  font-weight: 700;
+  color:rgb(255, 0, 0);
+  padding-left: 1px;
+}
+
+
+#estilo-vive{
+  -webkit-text-stroke: 0.2px white; /* borde blanco */
+  font-size: 22px;
+  font-family: 'Playball', cursive;
+  transform: skewX(20deg);  /* Ajusta la inclinacion del texto entre mas alto el numero mas a la izquierda esta tirado el texto */
+  display: inline-block;
+  font-weight: 400; /* opcional */
+  color:rgb(0, 0, 138);
+  letter-spacing: 1px; /*Espaciado entre letras de 1px*/
+}

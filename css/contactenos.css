@@ -27,25 +27,6 @@ body {
     background: #000 !important; 
     box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
 }
-            
-.portada {
-    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
-    /*imagen de fondo que acopla el maximo su alto y se centra*/
-    url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-¡vive!.jpeg');
-    background-repeat: no-repeat;
-    background-size: flex 100%;
-    background-position: center;
-    color: white;
-    padding: 100px 0;
-}
-
-.portada h1 {
-    animation: fadeDown 1.5s ease;
-}
-
-.portada p {
-    animation: fadeUp 2s ease;
-}
 
 @keyframes fadeDown {
     from { opacity: 0; transform: translateY(-40px); }
