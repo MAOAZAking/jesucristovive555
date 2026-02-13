@@ -2,9 +2,9 @@ name: Actualizar Devocional Diario
 
 on:
   schedule:
-    # Se ejecuta a las 00:01 Hora Colombia (UTC-5)
-    # 00:01 Colombia = 05:01 UTC
-    - cron: '1 5 * * *'
+    # Se ejecuta a las 05:10 Hora Colombia (UTC-5)
+    # 00:01 Colombia = 010:10 UTC
+    - cron: '10 10 * * *'
   workflow_dispatch: # Permite ejecutarlo manualmente desde la pestaña Actions
 
 jobs:
