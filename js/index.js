@@ -46,41 +46,49 @@
             }, { threshold: 0.2 });
             elements.forEach(el => observer.observe(el));
 
-            document.getElementById('formulario-contacto').addEventListener('submit', function (e) {
-                e.preventDefault();
-                const msg = document.getElementById('mensaje-enviado');
-                msg.classList.remove('d-none');
-                setTimeout(() => {
-                    msg.classList.add('d-none');
-                    this.reset();
-                }, 3000);
-            });
+            const formularioContacto = document.getElementById('formulario-contacto');
+            if (formularioContacto) {
+                formularioContacto.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const msg = document.getElementById('mensaje-enviado');
+                    if (msg) {
+                        msg.classList.remove('d-none');
+                        setTimeout(() => {
+                            msg.classList.add('d-none');
+                            this.reset();
+                        }, 3000);
+                    }
+                });
+            }
 
 /******************SCRIPT PARA DESCARGAR AUDIOS********************************/
-        document.getElementById('descargar-musica').addEventListener('click', async function(e) {
-            e.preventDefault();
-            try {
-                const response = await fetch('multimedia/audio/musica-instrumental-1.mp3');
-                const blob = await response.blob();
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = 'musica-instrumental-1.mp3';
-                link.click();
-                URL.revokeObjectURL(url);
-            } catch (error) {
-                console.error('Error al descargar la música:', error);
-            }
-        });
+        const btnDescargarMusica = document.getElementById('descargar-musica');
+        if (btnDescargarMusica) {
+            btnDescargarMusica.addEventListener('click', async function(e) {
+                e.preventDefault();
+                try {
+                    const response = await fetch('multimedia/audio/musica-instrumental-1.mp3');
+                    const blob = await response.blob();
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'musica-instrumental-1.mp3';
+                    link.click();
+                    URL.revokeObjectURL(url);
+                } catch (error) {
+                    console.error('Error al descargar la música:', error);
+                }
+            });
 
-        document.getElementById('descargar-musica')
-            .addEventListener('click', function () {
+            btnDescargarMusica.addEventListener('click', function () {
                 // El atributo download ya hace todo
                 console.log("Descargando música...");
             });
+        }
 
-        document.getElementById('descargar-predica')
-            .addEventListener('click', function () {
+        const btnDescargarPredica = document.getElementById('descargar-predica');
+        if (btnDescargarPredica) {
+            btnDescargarPredica.addEventListener('click', function () {
                 console.log("Descargando prédica...");
             });
-
+        }
