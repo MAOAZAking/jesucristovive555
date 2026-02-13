@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // ⚠️ IMPORTANTE: Coloca tu API KEY aquí (la misma que en global.js)
-const API_KEY = "AIzaSyBMRAEdRr6haBFQGo-MKTqtSVykPDHdMx0"; 
+const API_KEY = "AIzaSyDyKL5_g8e-6tnsTENC1GsapctRxLfLIto"; 
 const CHANNEL_ID = "UCZRzRrdOC4vxIQYm03US9Wg";
 
 async function actualizar() {
@@ -28,11 +28,23 @@ async function actualizar() {
     console.log("--------------------------------------------------");
 
     // 2. Consultar API YouTube
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&type=video&maxResults=1&q=${encodeURIComponent(tituloBusqueda)}`;
+    // Agregamos order=date para priorizar los videos más recientes
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&type=video&maxResults=1&q=${encodeURIComponent(tituloBusqueda)}`;
 
     try {
         const response = await fetch(url);
         const data = await response.json();
+
+        // VERIFICACIÓN DE ERRORES DE LA API
+        if (data.error) {
+            console.log("--------------------------------------------------");
+            console.log("❌ ERROR CRÍTICO EN LA API DE YOUTUBE");
+            console.log(`Código: ${data.error.code}`);
+            console.log(`Mensaje: ${data.error.message}`);
+            console.log("Posible causa: API Key restringida (Referer/IP), cuota excedida o clave inválida.");
+            console.log("--------------------------------------------------");
+            return;
+        }
 
         if (data.items && data.items.length > 0) {
             const videoEncontrado = data.items[0];
@@ -70,6 +82,7 @@ async function actualizar() {
         } else {
             console.log(`❌ RESULTADO NEGATIVO`);
             console.log(`No se encontró ningún video que coincida con: "${tituloBusqueda}"`);
+            console.log("Respuesta cruda de YouTube:", JSON.stringify(data, null, 2));
             console.log(`Nota: Asegúrate de que el video ya esté público en el canal.`);
         }
     } catch (error) {
