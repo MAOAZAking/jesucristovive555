@@ -1,0 +1,37 @@
+name: Actualizar Devocional Diario
+
+on:
+  schedule:
+    # Se ejecuta a las 00:01 Hora Colombia (UTC-5)
+    # 00:01 Colombia = 05:01 UTC
+    # Respaldo de cron para 00:01 en hora colombia
+    #- cron: '1 5 * * *'
+
+    # PRUEBA: Se ejecuta a las 1:10 PM Hora Colombia (UTC-5)
+    # 13:10 Colombia = 18:10 UTC
+    - cron: '15 18 * * *'
+  workflow_dispatch: # Permite ejecutarlo manualmente desde la pestaña Actions
+
+jobs:
+  update-video:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v3
+
+    - name: Instalar Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Ejecutar script de actualización
+      run: node actualizar_devocional.js
+
+    - name: Guardar cambios (Commit & Push)
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "📹 Actualización automática: Devocional del día"
+        branch: main

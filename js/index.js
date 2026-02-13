@@ -56,40 +56,6 @@
                 }, 3000);
             });
 
-/******************SCRIPT PARA ACTUALIZAR DÍA A DÍA EL DEVOCIONAL********************************/
-            async function cargarVideoPorFecha() {
-            const API_KEY = ""; /*AIzaSyBMRAEdRr6haBFQGo-MKTqtSVykPDHdMx0*/
-            const CHANNEL_ID = "UCZRzRrdOC4vxIQYm03US9Wg";
-
-            // 📅 Obtener fecha actual en formato ddmmaa
-            const hoy = new Date();
-            const dia = String(hoy.getDate()).padStart(2, '0');
-            const mes = String(hoy.getMonth() + 1).padStart(2, '0');
-            const anio = String(hoy.getFullYear()).slice(-2);
-
-            const tituloBusqueda = `Dev ${dia}${mes}${anio}`;
-
-            const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&type=video&maxResults=1&q=${encodeURIComponent(tituloBusqueda)}`;
-
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-
-                if (data.items.length > 0) {
-                    const videoId = data.items[0].id.videoId;
-                    document.getElementById("youtubeFrame").src =
-                        `https://www.youtube.com/embed/${videoId}?rel=0`;
-                } else {
-                    console.log("No se encontró el video con ese nombre:", tituloBusqueda);
-                }
-
-            } catch (error) {
-                console.error("Error al buscar el video:", error);
-            }
-        }
-
-        cargarVideoPorFecha();
-
 /******************SCRIPT PARA DESCARGAR AUDIOS********************************/
         document.getElementById('descargar-musica').addEventListener('click', async function(e) {
             e.preventDefault();
