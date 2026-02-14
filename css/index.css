@@ -1,143 +1,117 @@
-             html { 
-                scroll-behavior: smooth; 
-            }
-            body { 
-                background: #f8f9fa; 
-            }
+html { 
+    scroll-behavior: smooth; 
+}
+body { 
+    background: #f8f9fa; 
+}
 
-            .barra-superior {
-                background: linear-gradient(90deg, rgb(24, 5, 167), rgb(22, 4, 126));
-                color: white;
-                font-size: 14px;
-                padding: 8px 0;
-                font-weight: 500;
-                position: fixed;
-                top: 0;
-                width: 100%;
-                z-index: 1100;
-                letter-spacing: 0.5px;
-            }
+@keyframes aparecerAbajo { 
+    from { opacity: 0;
+            transform: translateY(-40px);
+            } to { opacity: 1; 
+            transform: translateY(0); 
+        } }
+@keyframes aparecerArriba   
+{ from { opacity: 0; 
+    transform: translateY(40px); 
+}  to { opacity: 1;
+        transform: translateY(0); 
+    } }
 
-            .navbar {
-                 transition: 0.4s; top: 35px; 
-                }
-            .navbar.barra-activa { 
-                background: #000 !important; 
-                box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
-            }
+.card { 
+    transition: 0.4s; 
+    border-radius: 15px; 
+}
 
-            @keyframes aparecerAbajo { 
-                from { opacity: 0;
-                     transform: translateY(-40px);
-                     } to { opacity: 1; 
-                        transform: translateY(0); 
-                    } }
-            @keyframes aparecerArriba   
-            { from { opacity: 0; 
-                transform: translateY(40px); 
-            }  to { opacity: 1;
-                 transform: translateY(0); 
-                } }
+.card:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 25px 45px rgba(0,0,0,0.15); 
+}
 
-            .card { 
-                transition: 0.4s; 
-                border-radius: 15px; 
-            }
+.estadisticas {
+        background: #0d6efd; 
+    color: white; 
+}
 
-            .card:hover { 
-                transform: translateY(-10px); 
-                box-shadow: 0 25px 45px rgba(0,0,0,0.15); 
-            }
+.contador { 
+    font-size: 40px; font-weight: bold;
+    }
 
-            .estadisticas {
-                 background: #0d6efd; 
-                color: white; 
-            }
+.galeria-imagenes img { 
+    height: 250px;
+        object-fit: cover; 
+        transition: 0.4s; 
+        cursor: pointer; border-radius: 12px; 
+    }
 
-            .contador { 
-                font-size: 40px; font-weight: bold;
-             }
+.galeria-imagenes img:hover { 
+    transform: scale(1.08); 
+}
 
-            .galeria-imagenes img { 
-                height: 250px;
-                 object-fit: cover; 
-                 transition: 0.4s; 
-                 cursor: pointer; border-radius: 12px; 
-                }
+.tarjeta-contacto { 
+    border-radius: 20px;
+        transition: 0.4s; 
+    }
 
-            .galeria-imagenes img:hover { 
-                transform: scale(1.08); 
-            }
+.tarjeta-contacto:hover { 
+    transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+    }
 
-            .tarjeta-contacto { 
-                border-radius: 20px;
-                 transition: 0.4s; 
-                }
+.campo-icono { 
+    position: relative;
+    }
 
-            .tarjeta-contacto:hover { 
-                transform: translateY(-5px);
-                 box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
-                }
+.campo-icono i {
+        position: absolute; 
+        top: 50%; 
+        left: 15px; 
+        transform: translateY(-50%); 
+        color: #0d6efd; 
+    }
 
-            .campo-icono { 
-                position: relative;
-             }
+.campo-icono input,.campo-icono textarea { 
+    padding-left: 40px;
+        border-radius: 10px;
+        }
 
-            .campo-icono i {
-                 position: absolute; 
-                 top: 50%; 
-                 left: 15px; 
-                 transform: translateY(-50%); 
-                 color: #0d6efd; 
-                }
+#boton-subir { 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    display: none; 
+    z-index: 99; 
+}
 
-            .campo-icono input,.campo-icono textarea { 
-                padding-left: 40px;
-                 border-radius: 10px;
-                 }
+.animacion-scroll { 
+    opacity: 0; 
+    transform: translateY(40px); 
+    transition: all 1s ease; 
+}
 
-            #boton-subir { 
-                position: fixed; 
-                bottom: 20px; 
-                right: 20px; 
-                display: none; 
-                z-index: 99; 
-            }
+.animacion-scroll.visible { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
 
-            footer { background: #111; 
-                color: white; 
-                padding: 40px 0; 
-            }
+.aparecer-izquierda { 
+    opacity: 0;
+    transform: translateX(-60px); 
+    transition: all 1s ease;
+}
 
-            .animacion-scroll { 
-                opacity: 0; 
-                transform: translateY(40px); 
-                transition: all 1s ease; 
-            }
+.aparecer-izquierda.visible { 
+    opacity: 1; 
+    transform: translateX(0); 
+}
 
-            .animacion-scroll.visible { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+.zoom-entrada { 
+    opacity: 0; 
+    transform: scale(0.8); 
+    transition: all 1s ease; 
+}
 
-            .aparecer-izquierda { 
-                opacity: 0;
-                transform: translateX(-60px); 
-                transition: all 1s ease;
-            }
-
-            .aparecer-izquierda.visible { 
-                opacity: 1; 
-                transform: translateX(0); 
-            }
-
-            .zoom-entrada { 
-                opacity: 0; 
-                transform: scale(0.8); 
-                transition: all 1s ease; 
-            }
-            
-            .zoom-entrada.visible { 
-                opacity: 1; 
-                transform: scale(1); 
-            }
+.zoom-entrada.visible { 
+    opacity: 1; 
+    transform: scale(1); 
+}

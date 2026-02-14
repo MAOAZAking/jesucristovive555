@@ -46,34 +46,31 @@
         <br>
         <section class="portada text-center" id="section-portada-ministerio-de-restauracion-jesucristo-vive">
             <div class="container" id="contenedor-portada-ministerio-de-restauracion-jesucristo-vive">
-                <h1 class="display-3 fw-bold">Un Lugar Para Crecer En Fe</h1>
-                <p class="lead mb-4">Conectando corazones con Dios y sirviendo a nuestra comunidad</p>
-                <a href="#seccion-eventos" class="btn btn-primary btn-lg mt-3">Ver Eventos</a>
             </div>
         </section>
 
         <section id="seccion-ministerios" class="py-5 mt-5 animacion-scroll">
             <div class="container">
-                <h2 class="text-center fw-bold mb-5">Nuestros Ministerios</h2>
+                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Nuestros Ministerios</h2>
                 <div class="row g-4">
                     <div class="col-md-4">
-                        <div class="card shadow text-center p-4">
-                            <i class="bi bi-people-fill fs-1 text-primary"></i>
-                            <h5 class="mt-3">Ministerio Familiar</h5>
+                        <div class="card shadow text-center p-4" id="tarjeta">
+                            <i class="bi bi-people-fill fs-1" id="icono"></i>
+                            <h5 class="mt-3 titulos-pequenos">Ministerio Familiar</h5>
                             <p>Fortalecemos matrimonios y familias bajo principios bíblicos.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card shadow text-center p-4">
-                            <i class="bi bi-music-note-beamed fs-1 text-primary"></i>
-                            <h5 class="mt-3">Alabanza</h5>
+                        <div class="card shadow text-center p-4" id="tarjeta">
+                            <i class="bi bi-music-note-beamed fs-1 " id="icono"></i>
+                            <h5 class="mt-3 titulos-pequenos">Alabanza</h5>
                             <p>Adoramos juntos exaltando el nombre de Dios con música.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card shadow text-center p-4">
-                            <i class="bi bi-heart-fill fs-1 text-primary"></i>
-                            <h5 class="mt-3">Labor Social</h5>
+                        <div class="card shadow text-center p-4" id="tarjeta">
+                            <i class="bi bi-heart-fill fs-1" id="icono"></i>
+                            <h5 class="mt-3 titulos-pequenos">Labor Social</h5>
                             <p>Apoyamos comunidades vulnerables y hogares de ancianos.</p>
                         </div>
                     </div>
@@ -85,11 +82,11 @@
             <div id="contenedor-multimedia"class="container">
                 <div id="contenedor-video-devocional-diario" class="row g-4">
                 <div id="devocional-diario" class="col-md-7">
-                    <h4>Devocional diario</h4>
+                    <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Devocional diario</h2>
                     <div id="contenedor-video-devocional-diario" class="ratio ratio-16x9">
-                        <iframe id="youtubeFrame" class="iframde-devocional-diario" width="560" 
+                        <iframe id="youtubeFrame" class="iframde-devocional-diario" width="600" 
                                 height="315" 
-                                src="https://www.youtube.com/embed/e1cm34Ppl6Q?rel=0" 
+                                
                                 title="YouTube video player" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -100,8 +97,8 @@
 
                 <div id="contenedor-audio" class="col-md-5">
                     <div id="musica-para-orar" class="col-md-10">
-                        <h4>Música para Orar</h4>
-                        <div id="contenedor-musica-para-orar" class="card shadow p-4 text-center">
+                        <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Música para Orar</h2>
+                        <div id="contenedor-musica-para-orar" class="card shadow p-4 text-center contenedor-audio">
                             <audio controls class="w-100">
                                 <source src="multimedia/audio/musica-instrumental-1.mp3" type="audio/mpeg">
                             </audio>
@@ -114,8 +111,8 @@
                     </div>
                     <br>
                     <div id="predica-dominical" class="col-md-10">
-                        <h4>Predica Dominical</h4>
-                        <div id="contenedor-predica-dominical" class="card shadow p-4 text-center">
+                        <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Predica Dominical</h2>
+                        <div id="contenedor-predica-dominical" class="card shadow p-4 text-center contenedor-audio">
                             <audio controls class="w-100">
                                 <source src="multimedia/audio/predica-dominica-1.mp3" type="audio/mpeg">
                             </audio>
@@ -155,7 +152,7 @@
 
         <section id="seccion-eventos" class="py-5 aparecer-izquierda">
             <div class="container">
-                <h2 class="text-center fw-bold mb-5">Próximos Eventos</h2>
+                <h2 class="text-center fw-bold mb-5" class="titulos-grandes">Próximos Eventos</h2>
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="card shadow">
@@ -190,7 +187,7 @@
 
         <section id="seccion-galeria" class="py-5 bg-light zoom-entrada">
             <div class="container">
-                <h2 class="text-center fw-bold mb-5">Galería</h2>
+                <h2 class="text-center fw-bold mb-5" class="titulos-grandes">Galería</h2>
                 <div class="row g-4 galeria-imagenes">
                     <div class="col-md-4"><img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="img-fluid" alt="Imagen de galería 1"></div>
                     <div class="col-md-4"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" class="img-fluid" alt="Imagen de galería 2"></div>
@@ -198,30 +195,32 @@
                 </div>
             </div>
         </section>
+        <br>
 
         </div>
-                    <div class="row justify-content-center animacion-scroll">
-                        <div class="col-md-8">
-                            <div class="card tarjeta-whatsapp shadow p-4 text-center">
-                                <h4 class="fw-bold mb-4">
-                                <i class="bi bi-whatsapp text-success"></i> Envíanos tu mensaje
-                                </h4>
-                                    <form id="formulario-contacto">
-                                    <div class="mb-4 campo-mensaje">
-                                        <textarea id="mensaje" class="form-control" rows="5" placeholder="Escribe aquí tu mensaje..." required></textarea>
-                                    </div>  
-                                    <button type="submit" class="btn btn-whatsapp">
-                                    <i class="bi bi-whatsapp"></i> Enviar por WhatsApp
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+            <div class="row justify-content-center animacion-scroll">
+                <div class="col-md-8">
+                    <div class="card tarjeta-whatsapp shadow p-4 text-center">
+                        <h4 class="fw-bold mb-4">
+                        <i class="bi bi-whatsapp text-success"></i> Envíanos tu mensaje
+                        </h4>
+                            <form id="formulario-contacto">
+                            <div class="mb-4 campo-mensaje">
+                                <textarea id="mensaje" class="form-control" rows="5" placeholder="Escribe aquí tu mensaje..." required></textarea>
+                            </div>  
+                            <button type="submit" class="btn btn-whatsapp">
+                            <i class="bi bi-whatsapp"></i> Enviar por WhatsApp
+                            </button>
+                        </form>
                     </div>
                 </div>
+            </div>
+        </div>
         <br>
         <footer class="text-center">       
             <div class="container">
-                <p>© 2026 Ministerio de Restauración <b class="estilo-jesucristo-vive" id="estilo-jesucris-o">Jesucris</b><b class="estilo-jesucristo-vive" id="estilo-t-forma-cruz">t</b><b class="estilo-jesucristo-vive" id="estilo-jesucris-o">o</b> <b class="estilo-jesucristo-vive" id="estilo-vive">¡VIVE!</b>        - Todos los derechos reservados</p>
+                <br>
+                <p>© 2026 Ministerio de Restauración <b class="estilo-jesucristo-vive" id="estilo-jesucris-o">Jesucris</b><b class="estilo-jesucristo-vive" id="estilo-t-forma-cruz">t</b><b class="estilo-jesucristo-vive" id="estilo-jesucris-o">o</b> <b class="estilo-jesucristo-vive" id="estilo-vive">¡VIVE!</b> - Todos los derechos reservados</p>
             </div>
         </footer>
 

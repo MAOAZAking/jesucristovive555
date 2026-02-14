@@ -1,33 +1,3 @@
-html { 
-    scroll-behavior: smooth; 
-}
-
-body { 
-    background: #f8f9fa; 
-}
-
-.barra-superior {
-    background: linear-gradient(90deg, rgb(65, 13, 253), rgb(41, 13, 196));
-    color: white;
-    font-size: 14px;
-    padding: 8px 0;
-    font-weight: 500;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1100;
-    letter-spacing: 0.5px;
-}
-
-.navbar {
-     transition: 0.4s; top: 35px; 
-}
-
-.navbar.barra-activa { 
-    background: #000 !important; 
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
-}
-
 @keyframes fadeDown {
     from { opacity: 0; transform: translateY(-40px); }
     to { opacity: 1; transform: translateY(0); }
@@ -90,31 +60,15 @@ body {
     transform: scale(1.05);
 }
 
-/* BOTON SUBIR */
-#boton-subir {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    z-index: 99;
-}
-
-/* FOOTER */
-footer {
-    background: #111;
-    color: white;
-    padding: 40px 0;
-}
-
 /* ANIMACION SCROLL */
-.animacion-scroll {
+/* .animacion-scroll {
     opacity: 0;
     transform: translateY(40px);
-    transition: all 1s ease;
+    transition: all 3s ease;
 }
 
 .animacion-scroll.visible {
     opacity: 1;
     transform: translateY(0);
-}
+} */
            
