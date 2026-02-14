@@ -1,0 +1,23 @@
+<svg width="200" height="160" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Bocina -->
+  <polygon points="20,35 40,35 60,20 60,80 40,65 20,65" 
+           fill="red" stroke="white" stroke-width="2" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- Primera onda sólida, mucho más grande -->
+  <path d="M65,32 A25,25 0 0,1 65,68 L68,68 A22,22 0 0,0 68,32 Z" 
+        fill="red" stroke="white" stroke-width="2" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- Segunda onda sólida, aún más grande y separada -->
+  <path d="M78,28 A40,40 0 0,1 78,72 L82,72 A37,37 0 0,0 82,28 Z" 
+        fill="red" stroke="white" stroke-width="2" stroke-linejoin="round" filter="url(#glow)"/>
+</svg>

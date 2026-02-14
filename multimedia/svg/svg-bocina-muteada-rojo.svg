@@ -1,0 +1,19 @@
+<svg width="200" height="160" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Bocina -->
+  <polygon points="20,35 40,35 60,20 60,80 40,65 20,65"
+           fill="red" stroke="white" stroke-width="2" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- Barra inclinada de “prohibido” aún más grande -->
+  <rect x="40" y="10" width="16" height="80" fill="red" stroke="white" stroke-width="2" rx="8" ry="8"
+        transform="rotate(-45 48 50)" filter="url(#glow)"/>
+</svg>

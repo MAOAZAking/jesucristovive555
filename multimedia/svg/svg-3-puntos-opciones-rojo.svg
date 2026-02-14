@@ -1,0 +1,20 @@
+<svg width="80" height="120" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Primer punto -->
+  <circle cx="40" cy="25" r="10" fill="red" stroke="white" stroke-width="2" filter="url(#glow)"/>
+
+  <!-- Segundo punto -->
+  <circle cx="40" cy="60" r="10" fill="red" stroke="white" stroke-width="2" filter="url(#glow)"/>
+
+  <!-- Tercer punto -->
+  <circle cx="40" cy="95" r="10" fill="red" stroke="white" stroke-width="2" filter="url(#glow)"/>
+</svg>

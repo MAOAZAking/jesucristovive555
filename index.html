@@ -86,8 +86,8 @@
                     <div id="contenedor-video-devocional-diario" class="ratio ratio-16x9">
                         <iframe id="youtubeFrame" class="iframde-devocional-diario" width="600" 
                                 height="315" 
-                                
                                 title="YouTube video player" 
+                                src="https://www.youtube.com/embed/e1cm34Ppl6Q?rel=0"
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                 allowfullscreen>
@@ -99,11 +99,49 @@
                     <div id="musica-para-orar" class="col-md-10">
                         <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Música para Orar</h2>
                         <div id="contenedor-musica-para-orar" class="card shadow p-4 text-center contenedor-audio">
-                            <audio controls class="w-100">
+                            <div class="reproductor-audio-editable w-100">
+                                <audio id="audioPrincipal" src="multimedia/audio/musica-instrumental-1.mp3"></audio>
+
+                                <!-- Botón reproducir / pausar -->
+                                <button id="boton-reproducir" class="boton-svg">
+                                    <img src="multimedia/svg/svg-reproducir-rojo.svg" alt="Reproducir" id="icono-reproducir">
+                                </button>
+
+                                <!-- Botón silenciar / sonido -->
+                                <button id="boton-silenciar" class="boton-svg">
+                                    <img src="multimedia/svg/svg-bocina-con-volumen-rojo.svg" alt="Sonido" id="icono-bocina">
+                                </button>
+
+                                <!-- Barra de progreso -->
+                                <input type="range" id="barra-progreso" min="0" max="100" value="0">
+
+                                <!-- Barra de volumen -->
+                                <input type="range" id="barra-volumen" min="0" max="1" step="0.01" value="1" class="barra-volumen">
+
+                                <!-- Botón de 3 puntos para opciones -->
+                                <div class="contenedor-opciones">
+                                    <button id="boton-opciones" class="boton-svg">
+                                        <img src="multimedia/svg/svg-3-puntos-opciones-rojo.svg" alt="Opciones">
+                                    </button>
+                                    <div id="menu-opciones" class="menu-opciones">
+                                        <button class="velocidad-opcion" data-velocidad="0.25">0.25x</button>
+                                        <button class="velocidad-opcion" data-velocidad="0.5">0.5x</button>
+                                        <button class="velocidad-opcion" data-velocidad="0.75">0.75x</button>
+                                        <button class="velocidad-opcion" data-velocidad="1">1x</button>
+                                        <button class="velocidad-opcion" data-velocidad="1.25">1.25x</button>
+                                        <button class="velocidad-opcion" data-velocidad="1.5">1.5x</button>
+                                        <button class="velocidad-opcion" data-velocidad="2">2x</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <audio controls class="w-100 audio-nativo">
                                 <source src="multimedia/audio/musica-instrumental-1.mp3" type="audio/mpeg">
                             </audio>
                                 <a href="multimedia/audio/musica-instrumental-1.mp3"
-                                    class="btn btn-outline-primary mt-3"
+                                    class="btn btn-outline-primary mt-3 boton-descargar-audio"
                                     download="musica-instrumental-1.mp3">
                                     <i class="bi bi-download"></i> Descargar Música para Orar
                                 </a>
@@ -117,7 +155,7 @@
                                 <source src="multimedia/audio/predica-dominica-1.mp3" type="audio/mpeg">
                             </audio>
                             <a href="multimedia/audio/predica-dominica-1.mp3"
-                                class="btn btn-outline-primary mt-3"
+                                class="btn btn-outline-primary mt-3 boton-descargar-audio"
                                 download="predica-dominical-1.mp3">
                                 <i class="bi bi-download"></i> Descargar Predica Dominical
                             </a>

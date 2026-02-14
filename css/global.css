@@ -138,21 +138,206 @@ body {
 }
 
 #contenedor-video-devocional-diario iframe{
-  border: 4px solid rgb(179, 74, 9, 0.6);
+  border: 4px solid rgb(179, 74, 9, 0.7);
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
   url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-se-esta-cargando-el-video-del-devocional.png');
-  background-size: 100% auto;
-  background-position: center
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-#tarjeta{
+.contenedor-audio{
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
   url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
   background-size: 100% auto;
   background-position: center
 }
 
-.contenedor-audio{
+/********************** ENSAYO DE REPRODUCTOR EDITABLE **********************/
+.reproductor-audio-editable {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background: url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+/* Botones SVG */
+.reproductor-audio-editable .boton-svg {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.reproductor-audio-editable .boton-svg img {
+    width: 32px;
+    height: 32px;
+}
+
+/* Barra de progreso horizontal roja */
+.reproductor-audio-editable #barra-progreso {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 4px;
+    background: #ddd; /* color base */
+    outline: none;
+}
+
+.reproductor-audio-editable #barra-progreso::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: rgb(255,0,0);
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -4px;
+}
+
+.reproductor-audio-editable #barra-progreso::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: rgb(255,0,0);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.reproductor-audio-editable #barra-progreso::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: rgb(255,0,0);
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -4px;
+}
+
+.reproductor-audio-editable #barra-progreso::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: rgb(255,0,0);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+/* Barra de volumen vertical */
+.reproductor-audio-editable .barra-volumen {
+    position: absolute;
+    bottom: 100%; /* aparece encima del botón */
+    left: 50%;
+    transform: translateX(-50%) rotate(-90deg); /* girada para vertical */
+    display: none;
+    width: 80px;  /* ancho de la barra antes de girar */
+    height: 6px;  /* grosor de la barra */
+    -webkit-appearance: none;
+    background: rgba(255,255,255,0.3);
+}
+
+/* Thumb de volumen */
+.reproductor-audio-editable .barra-volumen::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: rgb(255,0,0);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.reproductor-audio-editable .barra-volumen::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: rgb(255,0,0);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Mostrar barra de volumen al hover (desktop) */
+.reproductor-audio-editable #boton-silenciar:hover ~ .barra-volumen,
+.reproductor-audio-editable .barra-volumen.hover-visible {
+    display: block;
+}
+
+/* Contenedor del botón de opciones */
+.reproductor-audio-editable .contenedor-opciones {
+    position: relative;
+}
+
+.reproductor-audio-editable #menu-opciones {
+    display: none;
+    position: absolute;
+    top: 40px; /* debajo del botón */
+    right: 0;
+    background-color: rgba(111,78,55,0.9); /* fondo café */
+    border-radius: 6px;
+    padding: 5px;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 10;
+}
+
+.reproductor-audio-editable #menu-opciones button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.reproductor-audio-editable #menu-opciones button:hover {
+    background-color: rgba(255,0,0,0.3);
+}
+
+
+
+/********************** FIN ENSAYO **********************/
+.audio-nativo {
+    width: 100%;
+}
+
+/* Webkit (Chrome, Safari, Edge) */
+.audio-nativo::-webkit-media-controls-panel {
+  background: url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.audio-nativo::-webkit-media-controls-play-button {
+    color: rgb(255,0,0); /* triángulo rojo */
+}
+
+.audio-nativo::-webkit-media-controls-mute-button {
+    background-color: rgb(255,0,0); /* bocina roja */
+}
+/* FIN NUEVO ENSAYO */
+
+.boton-descargar-audio{
+  background: rgb(5, 5, 111);
+  color: rgb(255, 255, 255);
+  border: 3px solid rgb(255, 255, 255);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* suaviza la animación */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* sombra inicial */
+}
+
+.boton-descargar-audio:hover{
+  background: rgb(255, 255, 255);
+  color: rgb(5, 5, 111);
+  border: 3px solid rgb(5, 5, 111);
+  transform: scale(1.05);  /* agranda el boton */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2); /* sombra más grande */
+}
+
+
+#tarjeta{
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
   url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
   background-size: 100% auto;
