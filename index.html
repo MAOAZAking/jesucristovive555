@@ -5,7 +5,7 @@
         <title>Ministerio de Restauración Jesucris✟o ¡VIVE!</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="icon" href="https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/logo-1-ministerio-de-restauracion-jesucristo-¡vive!.png" type="image/png">
+        <link rel="icon" href="multimedia/img/logo-1-ministerio-de-restauracion-jesucristo-¡vive!.png" type="image/png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 <!-------------------- GOOGLE FONTS --------------------->
@@ -107,16 +107,19 @@
                                     <img src="multimedia/svg/svg-reproducir-rojo.svg" alt="Reproducir" id="icono-reproducir">
                                 </button>
 
-                                <!-- Botón silenciar / sonido -->
-                                <button id="boton-silenciar" class="boton-svg">
-                                    <img src="multimedia/svg/svg-bocina-con-volumen-rojo.svg" alt="Sonido" id="icono-bocina">
-                                </button>
+                                <div class="contenedor-volumen">
+                                    <!-- Botón silenciar / sonido -->
+                                    <button id="boton-silenciar" class="boton-svg">
+                                        <img src="multimedia/svg/svg-bocina-con-volumen-rojo.svg" alt="Sonido" id="icono-bocina">
+                                    </button>
+                                    <!-- Barra de volumen -->
+                                                                        <div class="contenedor-barra-volumen">
+                                        <input type="range" id="barra-volumen" min="0" max="1" step="0.01" value="1" class="barra-volumen">
+                                    </div>
+                                </div>
 
                                 <!-- Barra de progreso -->
                                 <input type="range" id="barra-progreso" min="0" max="100" value="0">
-
-                                <!-- Barra de volumen -->
-                                <input type="range" id="barra-volumen" min="0" max="1" step="0.01" value="1" class="barra-volumen">
 
                                 <!-- Botón de 3 puntos para opciones -->
                                 <div class="contenedor-opciones">
@@ -145,7 +148,7 @@
                     <div id="predica-dominical" class="col-md-10">
                         <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Predica Dominical</h2>
                         <div id="contenedor-predica-dominical" class="card shadow p-4 text-center contenedor-audio">
-                            <<div class="reproductor-audio-editable w-100">
+                            <div class="reproductor-audio-editable w-100">
                                 <audio id="audioPrincipal" src="multimedia/audio/predica-dominica-1.mp3"></audio>
 
                                 <!-- Botón reproducir / pausar -->
@@ -153,16 +156,19 @@
                                     <img src="multimedia/svg/svg-reproducir-rojo.svg" alt="Reproducir" id="icono-reproducir">
                                 </button>
 
-                                <!-- Botón silenciar / sonido -->
-                                <button id="boton-silenciar" class="boton-svg">
-                                    <img src="multimedia/svg/svg-bocina-con-volumen-rojo.svg" alt="Sonido" id="icono-bocina">
-                                </button>
+                                <div class="contenedor-volumen">
+                                    <!-- Botón silenciar / sonido -->
+                                    <button id="boton-silenciar" class="boton-svg">
+                                        <img src="multimedia/svg/svg-bocina-con-volumen-rojo.svg" alt="Sonido" id="icono-bocina">
+                                    </button>
+                                    <!-- Barra de volumen -->
+                                    <div class="contenedor-barra-volumen">
+                                        <input type="range" id="barra-volumen" min="0" max="1" step="0.01" value="1" class="barra-volumen">
+                                    </div>
+                                </div>
 
                                 <!-- Barra de progreso -->
                                 <input type="range" id="barra-progreso" min="0" max="100" value="0">
-
-                                <!-- Barra de volumen -->
-                                <input type="range" id="barra-volumen" min="0" max="1" step="0.01" value="1" class="barra-volumen">
 
                                 <!-- Botón de 3 puntos para opciones -->
                                 <div class="contenedor-opciones">

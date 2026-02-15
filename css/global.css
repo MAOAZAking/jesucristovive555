@@ -4,7 +4,7 @@ html {
 
 body { 
   margin: 0;
-  background: url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  background: url('/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
   background-size: 100% auto;
   background-position: center;
 }
@@ -29,7 +29,7 @@ body {
 
 .navbar {
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  url('/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
   background-size: 100%;
   background-position: center;
   transition: 0.4s;
@@ -38,7 +38,7 @@ body {
 
 .navbar.barra-activa { 
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  url('/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
   background-size: 100% auto;
   background-position: center; 
   box-shadow: 0 5px 20px rgba(0,0,0,0.4); 
@@ -84,7 +84,7 @@ body {
 }
 
 .portada {
-  background: url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/portada-ministerio-de-restauracion-jesucristo-vive.png');
+  background: url('/multimedia/img/portada-ministerio-de-restauracion-jesucristo-vive.png');
   width: 100%;
   height: clamp(140px, 30vw, 250px);
   background-repeat: no-repeat;
@@ -140,7 +140,7 @@ body {
 #contenedor-video-devocional-diario iframe{
   border: 4px solid rgb(179, 74, 9, 0.7);
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-se-esta-cargando-el-video-del-devocional.png');
+  url('/multimedia/img/fondo-se-esta-cargando-el-video-del-devocional.png');
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -148,9 +148,17 @@ body {
 
 .contenedor-audio{
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  url('/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
   background-size: 100% auto;
-  background-position: center
+  background-position: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Al pasar el mouse, traemos todo el contenedor al frente para que los menús no queden tapados */
+.contenedor-audio:hover {
+  z-index: 1000;
+  transform: none;
 }
 
 /********************** ENSAYO DE REPRODUCTOR EDITABLE **********************/
@@ -160,7 +168,7 @@ body {
     gap: 10px;
     padding: 10px;
     border-radius: 10px;
-    background: url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png') no-repeat center center;
+    background: url('/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png') no-repeat center center;
     background-size: cover;
     position: relative;
 }
@@ -226,18 +234,33 @@ body {
     cursor: pointer;
 }
 
+/* Contenedor para el botón de volumen y su barra deslizante */
+.contenedor-volumen {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
 /* Barra de volumen vertical */
 .reproductor-audio-editable .barra-volumen {
     position: absolute;
-    bottom: 100%; /* aparece encima del botón */
+    bottom: 70px; /* Ajustado para que aparezca más arriba */
     left: 50%;
     transform: translateX(-50%) rotate(-90deg); /* girada para vertical */
     display: none;
     width: 80px;  /* ancho de la barra antes de girar */
     height: 6px;  /* grosor de la barra */
     -webkit-appearance: none;
-    background: rgba(255,255,255,0.3);
+    background: rgba(179, 9, 9, 0.5);
+    border: 0px solid rgb(255, 255, 255); /* Contorno blanco fuerte */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.8); /* Sombra para resaltar */
+      filter: 
+    drop-shadow(0px 0px 12px rgb(255, 255, 255))
+    drop-shadow(0px 0px 12px rgb(255, 255, 255))
+    drop-shadow(0px 0px 12px rgb(255, 255, 255))
+    drop-shadow(0px 0px 12px rgb(255, 255, 255));
+    z-index: 1000; /* Asegura que la barra quede encima */
 }
 
 /* Thumb de volumen */
@@ -280,7 +303,7 @@ body {
     display: none;
     flex-direction: column;
     gap: 5px;
-    z-index: 10;
+    z-index: 1000; /* Aumentamos el z-index del menú también */
 }
 
 .reproductor-audio-editable #menu-opciones button {
@@ -299,26 +322,6 @@ body {
 
 
 /********************** FIN ENSAYO **********************/
-.audio-nativo {
-    width: 100%;
-}
-
-/* Webkit (Chrome, Safari, Edge) */
-.audio-nativo::-webkit-media-controls-panel {
-  background: url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.audio-nativo::-webkit-media-controls-play-button {
-    color: rgb(255,0,0); /* triángulo rojo */
-}
-
-.audio-nativo::-webkit-media-controls-mute-button {
-    background-color: rgb(255,0,0); /* bocina roja */
-}
-/* FIN NUEVO ENSAYO */
 
 .boton-descargar-audio{
   background: rgb(5, 5, 111);
@@ -339,7 +342,7 @@ body {
 
 #tarjeta{
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  url('/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
   background-size: 100% auto;
   background-position: center
 }
@@ -348,7 +351,7 @@ body {
 #boton-subir {
     border: 3px solid rgb(255, 255, 255);
     background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-    url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+    url('/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
     background-size: 100% auto;
     background-position: center;
     position: fixed;
@@ -360,7 +363,7 @@ body {
 
 footer {
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('https://raw.githubusercontent.com/MAOAZAking/jesucristovive555/main/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  url('/multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
   background-size: 100% 100%;
   background-position: center;
   height: 80px;
