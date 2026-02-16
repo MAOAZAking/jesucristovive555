@@ -31,21 +31,21 @@ document.addEventListener('DOMContentLoaded', function() {
         "Salmos 139:23-24"
     ];
 
-    // Mapeo de libros de español a inglés para la API bible-api.com
+    // Mapeo de libros de español a INGLÉS para bible-api.com (la API pública más estable)
     const bookMap = {
-        "Génesis": "genesis", "Éxodo": "exodus", "Levítico": "leviticus", "Números": "numbers", "Deuteronomio": "deuteronomy",
-        "Josué": "joshua", "Jueces": "judges", "Rut": "ruth", "1 Samuel": "1 samuel", "2 Samuel": "2 samuel", "1 Reyes": "1 kings",
-        "2 Reyes": "2 kings", "1 Crónicas": "1 chronicles", "2 Crónicas": "2 chronicles", "Esdras": "ezra", "Nehemías": "nehemiah",
-        "Ester": "esther", "Job": "job", "Salmos": "psalms", "Proverbios": "proverbs", "Eclesiastés": "ecclesiastes",
-        "Cantares": "song of solomon", "Isaías": "isaiah", "Jeremías": "jeremiah", "Lamentaciones": "lamentations",
-        "Ezequiel": "ezekiel", "Daniel": "daniel", "Oseas": "hosea", "Joel": "joel", "Amós": "amos", "Abdías": "obadiah",
-        "Jonás": "jonah", "Miqueas": "micah", "Nahúm": "nahum", "Habacuc": "habakkuk", "Sofonías": "zephaniah", "Hageo": "haggai",
-        "Zacarías": "zechariah", "Malaquías": "malachi", "Mateo": "matthew", "Marcos": "mark", "Lucas": "luke", "Juan": "john",
-        "Hechos": "acts", "Romanos": "romans", "1 Corintios": "1 corinthians", "2 Corintios": "2 corinthians", "Gálatas": "galatians",
-        "Efesios": "ephesians", "Filipenses": "philippians", "Colosenses": "colossians", "1 Tesalonicenses": "1 thessalonians",
-        "2 Tesalonicenses": "2 thessalonians", "1 Timoteo": "1 timothy", "2 Timoteo": "2 timothy", "Tito": "titus",
-        "Filemón": "philemon", "Hebreos": "hebrews", "Santiago": "james", "1 Pedro": "1 peter", "2 Pedro": "2 peter",
-        "1 Juan": "1 john", "2 Juan": "2 john", "3 Juan": "3 john", "Judas": "jude", "Apocalipsis": "revelation"
+        "Génesis": "Genesis", "Éxodo": "Exodus", "Levítico": "Leviticus", "Números": "Numbers", "Deuteronomio": "Deuteronomy",
+        "Josué": "Joshua", "Jueces": "Judges", "Rut": "Ruth", "1 Samuel": "1 Samuel", "2 Samuel": "2 Samuel", "1 Reyes": "1 Kings",
+        "2 Reyes": "2 Kings", "1 Crónicas": "1 Chronicles", "2 Crónicas": "2 Chronicles", "Esdras": "Ezra", "Nehemías": "Nehemiah",
+        "Ester": "Esther", "Job": "Job", "Salmos": "Psalms", "Proverbios": "Proverbs", "Eclesiastés": "Ecclesiastes",
+        "Cantares": "Song of Solomon", "Isaías": "Isaiah", "Jeremías": "Jeremiah", "Lamentaciones": "Lamentations",
+        "Ezequiel": "Ezekiel", "Daniel": "Daniel", "Oseas": "Hosea", "Joel": "Joel", "Amós": "Amos", "Abdías": "Obadiah",
+        "Jonás": "Jonah", "Miqueas": "Micah", "Nahúm": "Nahum", "Habacuc": "Habakkuk", "Sofonías": "Zephaniah", "Hageo": "Haggai",
+        "Zacarías": "Zechariah", "Malaquías": "Malachi", "Mateo": "Matthew", "Marcos": "Mark", "Lucas": "Luke", "Juan": "John",
+        "Hechos": "Acts", "Romanos": "Romans", "1 Corintios": "1 Corinthians", "2 Corintios": "2 Corinthians", "Gálatas": "Galatians",
+        "Efesios": "Ephesians", "Filipenses": "Philippians", "Colosenses": "Colossians", "1 Tesalonicenses": "1 Thessalonians",
+        "2 Tesalonicenses": "2 Thessalonians", "1 Timoteo": "1 Timothy", "2 Timoteo": "2 Timothy", "Tito": "Titus",
+        "Filemón": "Philemon", "Hebreos": "Hebrews", "Santiago": "James", "1 Pedro": "1 Peter", "2 Pedro": "2 Peter",
+        "1 Juan": "1 John", "2 Juan": "2 John", "3 Juan": "3 John", "Judas": "Jude", "Apocalipsis": "Revelation"
     };
 
     // Obtener el día actual del mes (1-31)
@@ -85,41 +85,70 @@ document.addEventListener('DOMContentLoaded', function() {
             gatewayUrl += "&version=RVR1960";
             elementoLink.href = gatewayUrl;
 
-            // --- URL y Fetch para bible-api.com (texto del pasaje) ---
+            // --- SOLUCIÓN ESTABLE: bible-api.com (RVR 1909) vía Proxy ---
             const libroApi = bookMap[libro.trim()];
             if (libroApi) {
+                console.log(`Consultando bible-api.com para: ${libroApi}`);
+                
+                // Usamos + en lugar de %20 para evitar problemas con algunos proxies
                 let apiUrl = `https://bible-api.com/${encodeURIComponent(libroApi)}+${capitulo}:${versiculoInicio}`;
                 if (versiculoFin) {
                     apiUrl += `-${versiculoFin}`;
                 }
                 apiUrl += "?translation=rvr";
-
-                // Función asíncrona para obtener y mostrar el texto
+                
                 const fetchVerseText = async () => {
                     try {
-                        const response = await fetch(apiUrl);
-                        if (!response.ok) {
-                            // Si la respuesta no es OK (ej. 404, 500), lanza un error con el status
-                            throw new Error(`Error de red o del servidor: ${response.status}`);
+                        // INTENTO 1: AllOrigins (JSON Wrapper)
+                        // Usamos /get para obtener un JSON que contiene el texto en .contents
+                        // Esto suele ser lo más robusto contra CORS y tipos MIME
+                        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
+                        
+                        const response = await fetch(proxyUrl);
+                        if (!response.ok) throw new Error(`AllOrigins status: ${response.status}`);
+                        
+                        const dataWrapper = await response.json();
+                        // allorigins devuelve el contenido como string en 'contents'
+                        if (dataWrapper.contents) {
+                            const data = JSON.parse(dataWrapper.contents);
+                            if (data.text) {
+                                elementoTexto.textContent = data.text.replace(/(\r\n|\n|\r)/gm, " ").trim();
+                                return; 
+                            }
                         }
-                        const data = await response.json();
-
-                        // La API puede devolver un JSON con un mensaje de error, hay que verificarlo
-                        if (data.error) {
-                            throw new Error(`Error de la API: ${data.error}`);
-                        }
-
-                        // También verificamos que la propiedad 'text' exista antes de usarla
-                        if (!data.text) {
-                            throw new Error('La respuesta de la API no contenía el texto del versículo.');
-                        }
-
-                        // Limpiamos saltos de línea y espacios extra del texto recibido
-                        const textoLimpio = data.text.replace(/(\r\n|\n|\r)/gm, " ").trim();
-                        elementoTexto.textContent = textoLimpio;
                     } catch (error) {
-                        console.error("Error al extraer la cita desde bible-api.com:", error);
-                        elementoTexto.innerHTML = 'No se pudo cargar el texto. Por favor, haz clic en el enlace de abajo para leer el pasaje.';
+                        console.warn("AllOrigins falló, intentando CorsProxy...", error);
+                        
+                        try {
+                            // INTENTO 2: CorsProxy.io
+                            const proxyUrl2 = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
+                            const response2 = await fetch(proxyUrl2);
+                            if (!response2.ok) throw new Error(`CorsProxy status: ${response2.status}`);
+                            
+                            const data2 = await response2.json();
+                            if (data2.text) {
+                                elementoTexto.textContent = data2.text.replace(/(\r\n|\n|\r)/gm, " ").trim();
+                                return; // Éxito
+                            }
+                        } catch (error2) {
+                            console.warn("CorsProxy falló, intentando conexión directa...", error2);
+                        }
+                    }
+
+                    // INTENTO 3: Conexión Directa (Fallback final)
+                    try {
+                        const responseDirect = await fetch(apiUrl);
+                        if (!responseDirect.ok) throw new Error(`Direct error: ${responseDirect.status}`);
+                        const dataDirect = await responseDirect.json();
+                        
+                        if (dataDirect.text) {
+                            elementoTexto.textContent = dataDirect.text.replace(/(\r\n|\n|\r)/gm, " ").trim();
+                        } else {
+                            throw new Error('Texto no encontrado en la respuesta');
+                        }
+                    } catch (errorDirect) {
+                        console.error("Error definitivo al extraer la cita:", errorDirect);
+                        elementoTexto.textContent = 'No se pudo cargar el texto. Por favor, haz clic en el enlace de abajo para leer el pasaje.';
                     }
                 };
 
@@ -129,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error(`El libro "${libro}" no se encontró en el mapa de traducción.`);
                 elementoTexto.textContent = 'Error de configuración: libro no encontrado.';
             }
+
         } else {
             console.error("El formato de la cita no es válido:", citaDelDia);
             elementoTitulo.textContent = "Error en cita";
