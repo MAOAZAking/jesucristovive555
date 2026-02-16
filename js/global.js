@@ -30,16 +30,14 @@ document.querySelectorAll('.reproductor-audio-editable').forEach(contenedor => {
     // --- Lógica de Reproducción ---
     botonReproducir.addEventListener("click", () => {
         if(audio.paused){
-            // Opcional: Pausar otros audios para que no suenen al tiempo
+            // Pausar otros audios para que no suenen al tiempo
             document.querySelectorAll('audio').forEach(a => {
                 if(a !== audio) a.pause();
             });
             
             audio.play();
-            iconoReproducir.src = "multimedia/svg/svg-pausar-rojo.svg";
         } else {
             audio.pause();
-            iconoReproducir.src = "multimedia/svg/svg-reproducir-rojo.svg";
         }
     });
 
@@ -49,7 +47,14 @@ document.querySelectorAll('.reproductor-audio-editable').forEach(contenedor => {
 
     // --- Lógica de Silencio ---
     botonSilenciar.addEventListener("click", () => {
-        audio.muted = !audio.muted;
+        if (audio.muted || audio.volume === 0) {
+            // Si está silenciado o en 0, restablecer al 50%
+            audio.muted = false;
+            audio.volume = 0.5;
+            barraVolumen.value = 0.5;
+        } else {
+            audio.muted = true;
+        }
         actualizarIconoVolumen();
     });
 
@@ -83,6 +88,15 @@ document.querySelectorAll('.reproductor-audio-editable').forEach(contenedor => {
         audio.volume = barraVolumen.value;
         audio.muted = (parseFloat(barraVolumen.value) === 0);
         actualizarIconoVolumen();
+    });
+
+    // Bloquear scroll de la página al deslizar volumen en móviles
+    barraVolumen.addEventListener('touchstart', () => {
+        document.body.style.overflow = 'hidden';
+    }, { passive: true });
+
+    barraVolumen.addEventListener('touchend', () => {
+        document.body.style.overflow = '';
     });
 
     // Mostrar barra volumen (Desktop) con retardo para mejor UX
