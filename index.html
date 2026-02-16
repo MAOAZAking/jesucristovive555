@@ -11,6 +11,8 @@
 <!-------------------- GOOGLE FONTS --------------------->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- Tipo letra para "Ministerio de Restauración" -->
+        <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap" rel="stylesheet">
         <!-- Tipo letra para "Jesucris o" -->
         <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap" rel="stylesheet">
         <!-- Tipo letra para "t" en forma de cruz -->
@@ -26,18 +28,32 @@
         <div class="barra-superior text-center">Servicios: Domingos 9:30 AM | Miércoles 6:30 PM | Vienes 6:30 PM</div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="index.html">Ministerio de Restauración <b class="estilo-jesucristo-vive" id="estilo-jesucris-o">Jesucris</b><b class="estilo-jesucristo-vive" id="estilo-t-forma-cruz">t</b><b class="estilo-jesucristo-vive" id="estilo-jesucris-o">o</b> <b class="estilo-jesucristo-vive" id="estilo-vive">¡VIVE!</b>       </a>
+                <a class="navbar-brand fw-bold" href="index.html">
+                    <div class="contenedor-texto-ministerio-de-restauracion-jesucristo-vive">
+                        <span class="col-left">
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-ministerio">Ministerio de</b>
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-de-restauracion">Restauración </b>
+                        </span>
+                        <span class="col-right">
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-jesucris-o">Jesucris</b>
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-t-forma-cruz">t</b>
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-jesucris-o">o </b>
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-vive"> ¡VIVE!</b>
+                        </span>
+                    </div>
+                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="menu-principal">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#seccion-ministerios">Ministerios</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#seccion-eventos">Eventos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#seccion-multimedia">Multimedia</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#seccion-galeria">Galería</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="#seccion-ministerios">Ministerios</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="#seccion-eventos">Eventos</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="#seccion-multimedia">Multimedia</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="#seccion-galeria">Galería</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="contacto.html">Contacto</a></li>
                     </ul>
                 </div>
             </div>
@@ -113,7 +129,7 @@
                                         <img src="multimedia/svg/svg-bocina-con-volumen-rojo.svg" alt="Sonido" id="icono-bocina">
                                     </button>
                                     <!-- Barra de volumen -->
-                                                                        <div class="contenedor-barra-volumen">
+                                    <div class="contenedor-barra-volumen">
                                         <input type="range" id="barra-volumen" min="0" max="1" step="0.01" value="1" class="barra-volumen">
                                     </div>
                                 </div>
@@ -138,18 +154,18 @@
                                 </div>
                             </div>
                             <a href="multimedia/audio/musica-instrumental-1.mp3"
-                                class="btn btn-outline-primary mt-3 boton-descargar-audio"
+                                class="btn-outline-primary mt-3 boton-descargar-audio"
                                 download="musica-instrumental-1.mp3">
                                 <i class="bi bi-download"></i> Descargar Música para Orar
                             </a>
                         </div>
                     </div>
                     <br>
-                    <div id="predica-dominical" class="col-md-10">
-                        <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Predica Dominical</h2>
-                        <div id="contenedor-predica-dominical" class="card shadow p-4 text-center contenedor-audio">
+                    <div id="ultima-predica" class="col-md-10">
+                        <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Ultima Predica</h2>
+                        <div id="contenedor-ultima-predica" class="card shadow p-4 text-center contenedor-audio">
                             <div class="reproductor-audio-editable w-100">
-                                <audio id="audioPrincipal" src="multimedia/audio/predica-dominica-1.mp3"></audio>
+                                <audio id="audioPrincipal" src="multimedia/audio/ultima-predica.mp3"></audio>
 
                                 <!-- Botón reproducir / pausar -->
                                 <button id="boton-reproducir" class="boton-svg">
@@ -186,10 +202,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="multimedia/audio/predica-dominica-1.mp3"
-                                class="btn btn-outline-primary mt-3 boton-descargar-audio"
-                                download="predica-dominical-1.mp3">
-                                <i class="bi bi-download"></i> Descargar Predica Dominical
+                            <a href="multimedia/audio/ultima-predica.mp3"
+                                class="btn-outline-primary mt-3 boton-descargar-audio"
+                                download="ultima-predica-1.mp3">
+                                <i class="bi bi-download"></i> Descargar Ultima Predica
                             </a>
                         </div>
                     </div>
@@ -222,7 +238,7 @@
 
         <section id="seccion-eventos" class="py-5 aparecer-izquierda">
             <div class="container">
-                <h2 class="text-center fw-bold mb-5" class="titulos-grandes">Próximos Eventos</h2>
+                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Próximos Eventos</h2>
                 <div class="row g-4">
                     <div class="col-md-4">
                         <div class="card shadow">
@@ -255,9 +271,9 @@
             </div>
         </section>
 
-        <section id="seccion-galeria" class="py-5 bg-light zoom-entrada">
+        <section class="py-5 zoom-entrada">
             <div class="container">
-                <h2 class="text-center fw-bold mb-5" class="titulos-grandes">Galería</h2>
+                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Galería</h2>
                 <div class="row g-4 galeria-imagenes">
                     <div class="col-md-4"><img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="img-fluid" alt="Imagen de galería 1"></div>
                     <div class="col-md-4"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" class="img-fluid" alt="Imagen de galería 2"></div>
@@ -270,7 +286,7 @@
         </div>
             <div class="row justify-content-center animacion-scroll">
                 <div class="col-md-8">
-                    <div class="card tarjeta-whatsapp shadow p-4 text-center">
+                    <div class="card tarjeta-whatsapp shadow p-4 text-center bg-transparent border-0 tarjeta-enviar-mensaje-por-whatsapp">
                         <h4 class="fw-bold mb-4">
                         <i class="bi bi-whatsapp text-success"></i> Envíanos tu mensaje
                         </h4>
@@ -290,7 +306,20 @@
         <footer class="text-center">       
             <div class="container">
                 <br>
-                <p>© 2026 Ministerio de Restauración <b class="estilo-jesucristo-vive" id="estilo-jesucris-o">Jesucris</b><b class="estilo-jesucristo-vive" id="estilo-t-forma-cruz">t</b><b class="estilo-jesucristo-vive" id="estilo-jesucris-o">o</b> <b class="estilo-jesucristo-vive" id="estilo-vive">¡VIVE!</b> - Todos los derechos reservados</p>
+                <div class="contenedor-texto-ministerio-de-restauracion-jesucristo-vive">
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive copyright" id="estilo-ministerio">© 2026 </b>
+                        <span class="col-left">
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-ministerio">Ministerio de</b>
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-de-restauracion">Restauración </b>
+                        </span>
+                        <span class="col-right">
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-jesucris-o">Jesucris</b>
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-t-forma-cruz">t</b>
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-jesucris-o">o </b>
+                            <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-vive"> ¡VIVE!</b>
+                        </span>
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive copyright" id="estilo-ministerio"> - Todos los derechos reservados</b>
+                    </div>
             </div>
         </footer>
 
