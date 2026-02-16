@@ -94,8 +94,7 @@ body {
 }
 
 /* Estilo para "Ministerio de" y "Restauración" */
-#estilo-ministerio,
-#estilo-de-restauracion {
+#estilo-ministerio-de-restauracion {
   font-family: 'Charm', cursive;
   color: rgb(0, 0, 0);
 }
@@ -121,24 +120,11 @@ body {
 #estilo-vive {
   font-size: 30px;
   font-family: 'Playball', cursive;
-  transform: skewX(20deg);
   display: inline-block;
-  font-weight: 400;
   color: rgb(0, 0, 138);
-  letter-spacing: 1px;
-  padding-left: 5px;
-}
-
-
-
-#estilo-vive{
-  padding-left: 10px;
-  font-size: 27px;
-  font-family: 'Playball', cursive;
+    padding-left: 10px;
   transform: skewX(20deg);  /* Ajusta la inclinacion del texto entre mas alto el numero mas a la izquierda esta tirado el texto */
-  display: inline-block;
   font-weight: 700; /* opcional */
-  color:rgb(0, 0, 138);
   letter-spacing: 1px; /*Espaciado entre letras de 1px*/
 }
 
@@ -588,6 +574,10 @@ body {
 
 .cerrar-lightbox:hover {
   color: #bbb;
+}
+
+.texto-contactenos-whatsapp{
+  font-size: 28px;
 }
 
 /* BOTON SUBIR */
