@@ -51,15 +51,16 @@ body {
 }
 
 .opciones-barra-de-navegacion{
-  font-size: 22px;
+  font-size: 30px;
   font-family: 'Charm', cursive;
   color: rgb(0, 0, 0);
-  text-shadow: 0 0 0.3px white;
+  font-weight: 700; /* hace mas anchas la letras */
+  text-shadow: 0 0 0.6px white;
   filter: 
-      drop-shadow(0px 0px 0.3px rgb(255, 255, 255))
-      drop-shadow(0px 0px 0.3px rgb(255, 255, 255))
-      drop-shadow(0px 0px 0.3px rgb(255, 255, 255))
-      drop-shadow(0px 0px 0.3px rgb(255, 255, 255));
+      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.6px rgb(255, 255, 255));
 }
 
 /* Contenedor principal */
@@ -124,7 +125,7 @@ body {
   color: rgb(0, 0, 138);
     padding-left: 10px;
   transform: skewX(20deg);  /* Ajusta la inclinacion del texto entre mas alto el numero mas a la izquierda esta tirado el texto */
-  font-weight: 700; /* opcional */
+  font-weight: 700; /* hace mas anchas la letras */
   letter-spacing: 1px; /*Espaciado entre letras de 1px*/
 }
 
