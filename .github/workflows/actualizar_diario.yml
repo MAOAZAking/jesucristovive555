@@ -27,6 +27,11 @@ jobs:
         API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
       run: node actualizar_devocional.js
+    
+    - name: Inyectar API Key de YouVersion
+      env:
+        YOUVERSION_KEY: ${{ secrets.YOUVERSION_API_KEY }}
+      run: sed -i "s/TU_API_KEY_AQUI/$YOUVERSION_KEY/g" js/citas.js
 
     - name: Guardar cambios (Commit & Push)
       uses: stefanzweifel/git-auto-commit-action@v4

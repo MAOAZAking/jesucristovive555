@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // -----------------------------------------------------------------------
+    // CONFIGURACIÓN DE YOUVERSION
+    // -----------------------------------------------------------------------
+    // IMPORTANTE: Si usas GitHub Actions, asegúrate de que tu workflow reemplace
+    // el texto 'TU_API_KEY_AQUI' con el valor de tu secreto.
+    const YOUVERSION_API_KEY = 'TU_API_KEY_AQUI';
+
     // Lista de 31 citas bíblicas para cada día del mes
     const citas = [
         "Éxodo 28:36-38",
@@ -31,21 +38,21 @@ document.addEventListener('DOMContentLoaded', function() {
         "Salmos 139:23-24"
     ];
 
-    // Mapeo de libros de español a INGLÉS para bible-api.com (la API pública más estable)
+    // Mapeo de libros de español a códigos USFM para YouVersion API
     const bookMap = {
-        "Génesis": "Genesis", "Éxodo": "Exodus", "Levítico": "Leviticus", "Números": "Numbers", "Deuteronomio": "Deuteronomy",
-        "Josué": "Joshua", "Jueces": "Judges", "Rut": "Ruth", "1 Samuel": "1 Samuel", "2 Samuel": "2 Samuel", "1 Reyes": "1 Kings",
-        "2 Reyes": "2 Kings", "1 Crónicas": "1 Chronicles", "2 Crónicas": "2 Chronicles", "Esdras": "Ezra", "Nehemías": "Nehemiah",
-        "Ester": "Esther", "Job": "Job", "Salmos": "Psalms", "Proverbios": "Proverbs", "Eclesiastés": "Ecclesiastes",
-        "Cantares": "Song of Solomon", "Isaías": "Isaiah", "Jeremías": "Jeremiah", "Lamentaciones": "Lamentations",
-        "Ezequiel": "Ezekiel", "Daniel": "Daniel", "Oseas": "Hosea", "Joel": "Joel", "Amós": "Amos", "Abdías": "Obadiah",
-        "Jonás": "Jonah", "Miqueas": "Micah", "Nahúm": "Nahum", "Habacuc": "Habakkuk", "Sofonías": "Zephaniah", "Hageo": "Haggai",
-        "Zacarías": "Zechariah", "Malaquías": "Malachi", "Mateo": "Matthew", "Marcos": "Mark", "Lucas": "Luke", "Juan": "John",
-        "Hechos": "Acts", "Romanos": "Romans", "1 Corintios": "1 Corinthians", "2 Corintios": "2 Corinthians", "Gálatas": "Galatians",
-        "Efesios": "Ephesians", "Filipenses": "Philippians", "Colosenses": "Colossians", "1 Tesalonicenses": "1 Thessalonians",
-        "2 Tesalonicenses": "2 Thessalonians", "1 Timoteo": "1 Timothy", "2 Timoteo": "2 Timothy", "Tito": "Titus",
-        "Filemón": "Philemon", "Hebreos": "Hebrews", "Santiago": "James", "1 Pedro": "1 Peter", "2 Pedro": "2 Peter",
-        "1 Juan": "1 John", "2 Juan": "2 John", "3 Juan": "3 John", "Judas": "Jude", "Apocalipsis": "Revelation"
+        "Génesis": "GEN", "Éxodo": "EXO", "Levítico": "LEV", "Números": "NUM", "Deuteronomio": "DEU",
+        "Josué": "JOS", "Jueces": "JDG", "Rut": "RUT", "1 Samuel": "1SA", "2 Samuel": "2SA", "1 Reyes": "1KI",
+        "2 Reyes": "2KI", "1 Crónicas": "1CH", "2 Crónicas": "2CH", "Esdras": "EZR", "Nehemías": "NEH",
+        "Ester": "EST", "Job": "JOB", "Salmos": "PSA", "Proverbios": "PRO", "Eclesiastés": "ECC",
+        "Cantares": "SNG", "Isaías": "ISA", "Jeremías": "JER", "Lamentaciones": "LAM",
+        "Ezequiel": "EZK", "Daniel": "DAN", "Oseas": "HOS", "Joel": "JOE", "Amós": "AMO", "Abdías": "OBA",
+        "Jonás": "JON", "Miqueas": "MIC", "Nahúm": "NAM", "Habacuc": "HAB", "Sofonías": "ZEP", "Hageo": "HAG",
+        "Zacarías": "ZEC", "Malaquías": "MAL", "Mateo": "MAT", "Marcos": "MRK", "Lucas": "LUK", "Juan": "JHN",
+        "Hechos": "ACT", "Romanos": "ROM", "1 Corintios": "1CO", "2 Corintios": "2CO", "Gálatas": "GAL",
+        "Efesios": "EPH", "Filipenses": "PHP", "Colosenses": "COL", "1 Tesalonicenses": "1TH",
+        "2 Tesalonicenses": "2TH", "1 Timoteo": "1TI", "2 Timoteo": "2TI", "Tito": "TIT",
+        "Filemón": "PHM", "Hebreos": "HEB", "Santiago": "JAS", "1 Pedro": "1PE", "2 Pedro": "2PE",
+        "1 Juan": "1JN", "2 Juan": "2JN", "3 Juan": "3JN", "Judas": "JUD", "Apocalipsis": "REV"
     };
 
     // Obtener el día actual del mes (1-31)
@@ -85,70 +92,43 @@ document.addEventListener('DOMContentLoaded', function() {
             gatewayUrl += "&version=RVR1960";
             elementoLink.href = gatewayUrl;
 
-            // --- SOLUCIÓN ESTABLE: bible-api.com (RVR 1909) vía Proxy ---
+            // --- URL y Fetch para YouVersion API (RVR1960) ---
             const libroApi = bookMap[libro.trim()];
             if (libroApi) {
-                console.log(`Consultando bible-api.com para: ${libroApi}`);
+                console.log(`Consultando YouVersion API para: ${libroApi}`);
                 
-                // Usamos + en lugar de %20 para evitar problemas con algunos proxies
-                let apiUrl = `https://bible-api.com/${encodeURIComponent(libroApi)}+${capitulo}:${versiculoInicio}`;
+                // ID 149 = RVR1960
+                // Formato de pasaje: GEN.1.1
+                let passageId = `${libroApi}.${capitulo}.${versiculoInicio}`;
                 if (versiculoFin) {
-                    apiUrl += `-${versiculoFin}`;
+                    passageId += `-${versiculoFin}`;
                 }
-                apiUrl += "?translation=rvr";
                 
+                let apiUrl = `https://api.youversion.com/v1/bibles/149/passages/${passageId}?version=rvr1960`;
+
                 const fetchVerseText = async () => {
                     try {
-                        // INTENTO 1: AllOrigins (JSON Wrapper)
-                        // Usamos /get para obtener un JSON que contiene el texto en .contents
-                        // Esto suele ser lo más robusto contra CORS y tipos MIME
-                        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
-                        
-                        const response = await fetch(proxyUrl);
-                        if (!response.ok) throw new Error(`AllOrigins status: ${response.status}`);
-                        
-                        const dataWrapper = await response.json();
-                        // allorigins devuelve el contenido como string en 'contents'
-                        if (dataWrapper.contents) {
-                            const data = JSON.parse(dataWrapper.contents);
-                            if (data.text) {
-                                elementoTexto.textContent = data.text.replace(/(\r\n|\n|\r)/gm, " ").trim();
-                                return; 
+                        const response = await fetch(apiUrl, {
+                            method: 'GET',
+                            headers: {
+                                "X-YVP-App-Key": YOUVERSION_API_KEY,
+                                "Accept": "application/json"
                             }
-                        }
-                    } catch (error) {
-                        console.warn("AllOrigins falló, intentando CorsProxy...", error);
-                        
-                        try {
-                            // INTENTO 2: CorsProxy.io
-                            const proxyUrl2 = `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`;
-                            const response2 = await fetch(proxyUrl2);
-                            if (!response2.ok) throw new Error(`CorsProxy status: ${response2.status}`);
-                            
-                            const data2 = await response2.json();
-                            if (data2.text) {
-                                elementoTexto.textContent = data2.text.replace(/(\r\n|\n|\r)/gm, " ").trim();
-                                return; // Éxito
-                            }
-                        } catch (error2) {
-                            console.warn("CorsProxy falló, intentando conexión directa...", error2);
-                        }
-                    }
+                        });
 
-                    // INTENTO 3: Conexión Directa (Fallback final)
-                    try {
-                        const responseDirect = await fetch(apiUrl);
-                        if (!responseDirect.ok) throw new Error(`Direct error: ${responseDirect.status}`);
-                        const dataDirect = await responseDirect.json();
+                        if (!response.ok) throw new Error(`API error: ${response.status}`);
+                        const data = await response.json();
                         
-                        if (dataDirect.text) {
-                            elementoTexto.textContent = dataDirect.text.replace(/(\r\n|\n|\r)/gm, " ").trim();
+                        if (data.content) {
+                            // Limpiamos etiquetas HTML si las hay
+                            let texto = data.content.replace(/<[^>]*>?/gm, ''); 
+                            elementoTexto.textContent = texto.replace(/(\r\n|\n|\r)/gm, " ").trim();
                         } else {
                             throw new Error('Texto no encontrado en la respuesta');
                         }
-                    } catch (errorDirect) {
-                        console.error("Error definitivo al extraer la cita:", errorDirect);
-                        elementoTexto.textContent = 'No se pudo cargar el texto. Por favor, haz clic en el enlace de abajo para leer el pasaje.';
+                    } catch (error) {
+                        console.error("Error con YouVersion API:", error);
+                        elementoTexto.innerHTML = 'No se pudo cargar el texto.<br><span style="font-size:0.8em">Verifica tu API Key.</span>';
                     }
                 };
 
