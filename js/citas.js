@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // -----------------------------------------------------------------------
     // IMPORTANTE: Si usas GitHub Actions, asegúrate de que tu workflow reemplace
     // el texto 'TU_API_KEY_AQUI' con el valor de tu secreto.
-    const YOUVERSION_API_KEY = 'TU_API_KEY_AQUI';
+    const YOUVERSION_API_KEY = '67zapbtZefeJeN9ugqkAjBYg5nHufxWBku9bsj18UKfnz0c9';
 
     // Lista de 31 citas bíblicas para cada día del mes
     const citas = [
