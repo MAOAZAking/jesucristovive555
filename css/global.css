@@ -1,9 +1,12 @@
 html { 
   scroll-behavior: smooth; 
+  overflow-x: hidden;
 }
 
 body { 
   margin: 0;
+  padding-top: 140px; /* Empuja el contenido hacia abajo para no quedar oculto por la barra fija */
+  overflow-x: hidden;
   background: url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
   background-size: 100% auto;
   background-position: center;
@@ -34,6 +37,9 @@ body {
   background-position: center;
   transition: 0.4s;
   top: 35px; 
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
 }
 
 .navbar.barra-activa { 
@@ -137,21 +143,18 @@ body {
 }
 
 .portada {
-  background: url('../multimedia/img/portada-ministerio-de-restauracion-jesucristo-vive.png');
+  background: url('../multimedia/img/devocional-del-mes.jpeg');
   width: 100%;
-  height: clamp(140px, 30vw, 250px);
+  height: clamp(260px, 30vw, 450px);
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: auto 100%;
   background-position: center;
   color: white;
+  padding-top: auto;
 }
 
 .portada h1 {
   animation: fadeDown 1.5s ease;
-}
-
-.portada p {
-  animation: fadeUp 2s ease;
 }
 
 .titulos-grandes{
@@ -432,6 +435,159 @@ body {
 .tarjeta-con-filtro {
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5));
   border: none;
+}
+
+/* =========================================
+   RESPONSIVIDAD (TAMAÑOS DE LETRA ADAPTABLES)
+   ========================================= */
+
+/* 1. MÓVILES (Pantallas pequeñas: menos de 576px) */
+@media (max-width: 576px) {
+    body {
+        padding-top: 100px;
+    }
+
+    .barra-superior {
+        font-size: 10px; /* Texto superior más pequeño */
+    }
+
+    /* Ajuste del Logo Principal */
+    .contenedor-texto-ministerio-de-restauracion-jesucristo-vive {
+        gap: 5px; /* Menos separación entre textos */
+    }
+
+    #estilo-ministerio,
+    #estilo-de-restauracion {
+        font-size: 12px; /* "Ministerio de Restauración" */
+    }
+
+    #estilo-jesucris-o {
+        font-size: 24px; /* "Jesucristo" */
+    }
+
+    #estilo-t-forma-cruz {
+        font-size: 22px; /* La Cruz */
+    }
+
+    #estilo-vive {
+        font-size: 18px; /* "¡VIVE!" */
+        padding-left: 2px;
+    }
+
+    /* Títulos de las secciones */
+    #titulos-grandes-centrados,
+    #titulos-grandes-sin-alinear {
+        font-size: 32px;
+    }
+}
+
+/* 2. TABLETS (Pantallas medianas: entre 577px y 991px) */
+@media (min-width: 577px) and (max-width: 991px) {
+    body {
+        padding-top: 120px;
+    }
+
+    #estilo-ministerio,
+    #estilo-de-restauracion {
+        font-size: 14px;
+    }
+
+    #estilo-jesucris-o {
+        font-size: 35px;
+    }
+
+    #estilo-t-forma-cruz {
+        font-size: 32px;
+    }
+
+    #estilo-vive {
+        font-size: 25px;
+    }
+
+    #titulos-grandes-centrados,
+    #titulos-grandes-sin-alinear {
+        font-size: 45px;
+    }
+}
+
+/* 3. PANTALLAS GIGANTES / TV (Más de 1400px) */
+@media (min-width: 1400px) {
+    body {
+        padding-top: 180px;
+    }
+
+    #estilo-jesucris-o {
+        font-size: 70px;
+    }
+
+    #estilo-t-forma-cruz {
+        font-size: 65px;
+    }
+
+    #estilo-vive {
+        font-size: 50px;
+    }
+
+    #titulos-grandes-centrados,
+    #titulos-grandes-sin-alinear {
+        font-size: 80px;
+    }
+    
+    .barra-superior {
+        font-size: 18px;
+    }
+}
+
+.imagenes-seccion-galeria{
+  width: 100%;
+  height: 100%;
+  object-fit: fill !important;
+  cursor: pointer;
+  transition: opacity 1s;
+}
+
+.imagenes-seccion-galeria:hover {
+  opacity: 2;
+}
+
+/* =========================================
+   LIGHTBOX (VISOR DE IMÁGENES)
+   ========================================= */
+.lightbox {
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  z-index: 10000; /* Por encima de todo */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro transparente */
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-contenido {
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  object-fit: contain; /* Mantiene la proporción original en el visor */
+}
+
+.cerrar-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  line-height: 1;
+}
+
+.cerrar-lightbox:hover {
+  color: #bbb;
 }
 
 /* BOTON SUBIR */

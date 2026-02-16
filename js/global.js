@@ -144,3 +144,25 @@ document.addEventListener("click", () => {
         menu.style.display = "none";
     });
 });
+
+/* =========================================
+   LÓGICA DEL LIGHTBOX (GALERÍA)
+   ========================================= */
+const lightbox = document.getElementById('lightbox');
+const imgLightbox = document.getElementById('img-lightbox');
+const imagenesGaleria = document.querySelectorAll('.imagenes-seccion-galeria');
+const botonCerrarLightbox = document.querySelector('.cerrar-lightbox');
+
+imagenesGaleria.forEach(imagen => {
+    imagen.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        imgLightbox.src = imagen.src;
+    });
+});
+
+// Cerrar al hacer clic en la X o fuera de la imagen (en el fondo oscuro)
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === botonCerrarLightbox) {
+        lightbox.style.display = 'none';
+    }
+});
