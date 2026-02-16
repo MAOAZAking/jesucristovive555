@@ -437,8 +437,7 @@ body {
 /* BOTON SUBIR */
 #boton-subir {
     border: 3px solid rgb(255, 255, 255);
-    background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-    url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+    background: #000080;
     background-size: 100% auto;
     background-position: center;
     position: fixed;
