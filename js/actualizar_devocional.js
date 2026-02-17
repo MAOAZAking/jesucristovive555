@@ -1,17 +1,17 @@
 const fs = require('fs');
 const path = require('path');
 
+// Importamos la base de datos de citas para evitar errores
+const citasBiblicas = require('./citas_del_mes');
+
 // Leemos las credenciales desde las variables de entorno (GitHub Secrets)
 const API_KEY = process.env.API_KEY;
 const CHANNEL_ID = process.env.CHANNEL_ID;
+let skipYoutube = false;
 
-if (!API_KEY) {
-    console.error("❌ Error: No se encontro la variable de entorno API_KEY. Asegúrate de configurar los GitHub Secrets.");
-    process.exit(1);
-}
-if (!CHANNEL_ID) {
-    console.error("❌ Error: No se encontro la variable de entorno CHANNEL_ID. Asegúrate de configurar los GitHub Secrets.");
-    process.exit(1);
+if (!API_KEY || !CHANNEL_ID) {
+    console.warn("⚠️ Advertencia: No se encontraron las credenciales de YouTube. Se omitirá la actualización del video, pero se actualizarán la cita y la galería.");
+    skipYoutube = true;
 }
 
 async function actualizar() {
@@ -41,8 +41,8 @@ async function actualizar() {
     const indice = (diaInt - 1) % citasBiblicas.length;
     const citaDelDia = citasBiblicas[indice];
     console.log(`📖 Cita del día seleccionada: ${citaDelDia.ref}`);
-
-    let textoPasaje = citaDelDia.texto;
+    // Reemplazamos los números de los versículos para poder darles estilo.
+    let textoPasaje = citaDelDia.texto.replace(/(\d+)/g, '<span class="numero-versiculo-rojo">$1</span>');
     let linkBibleGateway = "https://www.biblegateway.com/";
 
     const regexCita = /^(.*)\s+(\d+):(\d+)(?:-(\d+))?$/;
@@ -61,55 +61,80 @@ async function actualizar() {
         linkBibleGateway += "&version=RVR1960";
     }
 
+    // --- LÓGICA DE LA GALERÍA LABOR SOCIAL ---
+    const galeriaPath = path.join(__dirname, '../multimedia', 'img', 'labor_social');
+    let listaDeImagenes = [];
+    try {
+        const archivosGaleria = fs.readdirSync(galeriaPath);
+        const imagenes = archivosGaleria
+            .filter(file => /\.(jpe?g|png)$/i.test(file))
+            .sort();
+        
+        console.log(`🖼️  Encontradas ${imagenes.length} imágenes para la galería de labor social.`);
+        listaDeImagenes = imagenes.map(img => `multimedia/img/labor_social/${img}`);
+
+    } catch (error) {
+        console.error("❌ Error al leer la carpeta de la galería de labor social:", error);
+    }
+
     // 2. Consultar API YouTube
     // Agregamos order=date para priorizar los videos más recientes
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&type=video&maxResults=1&q=${encodeURIComponent(tituloBusqueda)}`;
-
     let nuevoLink = null;
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
 
-        // VERIFICACIÓN DE ERRORES DE LA API
-        if (data.error) {
-            console.log("--------------------------------------------------");
-            console.log("❌ ERROR CRÍTICO EN LA API DE YOUTUBE");
-            console.log(`Código: ${data.error.code}`);
-            console.log(`Mensaje: ${data.error.message}`);
-            console.log("Posible causa: API Key restringida (Referer/IP), cuota excedida o clave inválida.");
-            console.log("--------------------------------------------------");
-            return;
+    if (!skipYoutube) {
+        const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&type=video&maxResults=1&q=${encodeURIComponent(tituloBusqueda)}`;
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            // VERIFICACIÓN DE ERRORES DE LA API
+            if (data.error) {
+                console.log("--------------------------------------------------");
+                console.log("❌ ERROR CRÍTICO EN LA API DE YOUTUBE");
+                console.log(`Código: ${data.error.code}`);
+                console.log(`Mensaje: ${data.error.message}`);
+                console.log("Posible causa: API Key restringida (Referer/IP), cuota excedida o clave inválida.");
+                console.log("--------------------------------------------------");
+                // No hacemos return para permitir que se actualice la galería
+            } else if (data.items && data.items.length > 0) {
+                const videoEncontrado = data.items[0];
+                const videoId = videoEncontrado.id.videoId;
+                const tituloEncontrado = videoEncontrado.snippet.title;
+
+                console.log(`✅ ¡VIDEO ENCONTRADO!`);
+                console.log(`📺 Título real del video: "${tituloEncontrado}"`);
+                console.log(`🆔 ID del video: ${videoId}`);
+                
+                nuevoLink = `https://www.youtube.com/embed/${videoId}?rel=0`;
+            } else {
+                console.log(`❌ RESULTADO NEGATIVO`);
+                console.log(`No se encontró ningún video que coincida con: "${tituloBusqueda}"`);
+                console.log("Respuesta cruda de YouTube:", JSON.stringify(data, null, 2));
+                console.log(`Nota: Asegúrate de que el video ya esté público en el canal.`);
+            }
+        } catch (error) {
+            console.error("❌ Error en la consulta:", error);
         }
-
-        if (data.items && data.items.length > 0) {
-            const videoEncontrado = data.items[0];
-            const videoId = videoEncontrado.id.videoId;
-            const tituloEncontrado = videoEncontrado.snippet.title;
-
-            console.log(`✅ ¡VIDEO ENCONTRADO!`);
-            console.log(`📺 Título real del video: "${tituloEncontrado}"`);
-            console.log(`🆔 ID del video: ${videoId}`);
-            
-            nuevoLink = `https://www.youtube.com/embed/${videoId}?rel=0`;
-        } else {
-            console.log(`❌ RESULTADO NEGATIVO`);
-            console.log(`No se encontró ningún video que coincida con: "${tituloBusqueda}"`);
-            console.log("Respuesta cruda de YouTube:", JSON.stringify(data, null, 2));
-            console.log(`Nota: Asegúrate de que el video ya esté público en el canal.`);
-        }
-    } catch (error) {
-        console.error("❌ Error en la consulta:", error);
+    } else {
+        console.log("⏭️ Saltando consulta a YouTube (sin credenciales).");
     }
 
     // 3. Buscar todos los archivos .html en la carpeta raíz
-    const archivos = fs.readdirSync(__dirname);
+    const rootPath = path.join(__dirname, '..');
+    const archivos = fs.readdirSync(rootPath);
     const archivosHtml = archivos.filter(archivo => path.extname(archivo).toLowerCase() === '.html');
+
+    // 4. Generar archivo de configuración para la galería
+    const configGaleriasPath = path.join(__dirname, 'config_galeria.js');
+    const contenidoConfig = `// Archivo generado automáticamente. No editar manualmente.\nconst imagenesLaborSocial = ${JSON.stringify(listaDeImagenes, null, 2)};`;
+    fs.writeFileSync(configGaleriasPath, contenidoConfig, 'utf8');
+    console.log(`✅ Generado archivo de configuración para la galería en 'js/config_galeria.js'`);
 
     console.log(`📂 Analizando ${archivosHtml.length} archivos HTML...`);
 
     // 4. Recorrer cada archivo y actualizar
     archivosHtml.forEach(archivo => {
-        const rutaArchivo = path.join(__dirname, archivo);
+        const rutaArchivo = path.join(rootPath, archivo);
         let contenidoHtml = fs.readFileSync(rutaArchivo, 'utf8');
         let modificado = false;
 

@@ -170,10 +170,15 @@ body {
   font-family: 'Playball', cursive;
   transform: skewX(20deg);  /* Ajusta la inclinacion del texto entre mas alto el numero mas a la izquierda esta tirado el texto */
   display: inline-block;
-  font-weight: 400; /* opcional */
   color:rgb(0, 0, 138);
+  padding-left: 10px;
   letter-spacing: 1px; /*Espaciado entre letras de 1px*/
   font-weight: 700; /*Grozor de las letras*/
+}
+
+.numero-versiculo-rojo {
+  color: red;
+  font-weight: 700; /* Números en negrita */
 }
 
 #icono {

@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const elementoTexto = document.getElementById('texto-cita');
     const elementoTitulo = document.getElementById('titulo-cita');
     const elementoLink = document.getElementById('link-cita');
+    
+    // Verificación de la galería para depuración
+    const galeria = document.querySelector('.galeria-imagenes');
+    if (galeria && galeria.children.length === 0) {
+        console.warn("⚠️ AVISO: El contenedor de la galería (.galeria-imagenes) está vacío. El script de actualización (node) no ha inyectado las imágenes todavía.");
+    }
 
     // 1. VERIFICACIÓN DE CARGA ESTÁTICA
     // Si el servidor (GitHub Actions) ya actualizó el HTML, el texto no dirá "Cargando...".
@@ -54,11 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (elementoTitulo) {
         elementoTitulo.textContent = citaDelDia.ref;
-        elementoTitulo.style.color = "red"; // Título en rojo
     }
     
     if (elementoTexto) {
-        elementoTexto.textContent = citaDelDia.texto; // Texto en negro (por defecto CSS)
+        // Reemplazamos los números de los versículos para poder darles estilo y usamos innerHTML.
+        const textoConEstilo = citaDelDia.texto.replace(/(\d+)/g, '<span class="numero-versiculo-rojo">$1</span>');
+        elementoTexto.innerHTML = textoConEstilo;
     }
 
     // Generar link a BibleGateway solo como referencia
