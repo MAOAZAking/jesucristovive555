@@ -7,9 +7,12 @@ body {
   margin: 0;
   padding-top: 140px; /* Empuja el contenido hacia abajo para no quedar oculto por la barra fija */
   overflow-x: hidden;
-  background: url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
-  background-size: 100% auto;
+  background: url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive-horizontal.png');
+  background-size: 100% 100%;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
 }
 
 [id^="seccion"],
@@ -33,9 +36,10 @@ body {
 
 .navbar {
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
-  background-size: 100%;
+  url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive-horizontal.png');
+  background-size: 100% 100%;
   background-position: center;
+  background-repeat: no-repeat;
   transition: 0.4s;
   top: 35px; 
   position: fixed;
@@ -45,9 +49,11 @@ body {
 
 .navbar.barra-activa { 
   background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
-  background-size: 100% auto;
-  background-position: center; 
+  url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive-horizontal.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: 0.4s;
   box-shadow: 0 5px 20px rgba(0,0,0,0.4); 
 }
 
@@ -253,8 +259,7 @@ body {
 }
 
 .contenedor-audio{
-  background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  background-color: rgba(179, 74, 9, 0.5);
   background-size: 100% auto;
   background-position: center;
   position: relative;
@@ -274,8 +279,7 @@ body {
     gap: 10px;
     padding: 10px;
     border-radius: 10px;
-    background: url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png') no-repeat center center;
-    background-size: cover;
+    background-color: transparent;
     position: relative;
 }
 
@@ -461,8 +465,7 @@ body {
 
 
 #tarjeta{
-  background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  background-color: rgba(179, 74, 9, 0.5);
   background-size: 100% auto;
   background-position: center
 }
@@ -731,8 +734,7 @@ body {
 }
 
 footer {
-  background: linear-gradient(rgba(179, 74, 9, 0.5), rgba(179, 74, 9, 0.5)),
-  url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive.png');
+  background-color: rgba(179, 74, 9, 0.5);
   background-size: 100% 100%;
   background-position: center;
   height: 111px;
