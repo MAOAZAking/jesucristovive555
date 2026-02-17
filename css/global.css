@@ -5,7 +5,7 @@ html {
 
 body { 
   margin: 0;
-  padding-top: 140px; /* Empuja el contenido hacia abajo para no quedar oculto por la barra fija */
+  padding-top: 10vw; /* Aumentado para evitar que la barra tape el contenido */
   overflow-x: hidden;
   background: url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive-horizontal.png');
   background-size: 100% 100%;
@@ -23,15 +23,20 @@ body {
 .barra-superior {
   background: rgb(5, 5, 111);
   color: rgb(255, 255, 255);
-  font-size: 14px;
-  padding: 8px 0;
+  font-size: 2vw; /* 14px en 1920px */
+  padding: 0;
+  height: 2.82vw; /* Igual al top de .navbar para que queden pegadas */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 500;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1100;
   letter-spacing: 0.5px;
-  letter-spacing: 3px;
+  letter-spacing: 0.15vw; /* 3px en 1920px */
+  white-space: nowrap;
 }
 
 .navbar {
@@ -41,7 +46,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   transition: 0.4s;
-  top: 35px; 
+  top: 1.82vw; /* 35px en 1920px */
   position: fixed;
   width: 100%;
   z-index: 1000;
@@ -58,23 +63,23 @@ body {
 }
 
 .opciones-barra-de-navegacion{
-  font-size: 30px;
+  font-size: 1.56vw; /* 30px en 1920px */
   font-family: 'Charm', cursive;
   color: rgb(0, 0, 0);
   font-weight: 700; /* hace mas anchas la letras */
-  text-shadow: 0 0 0.6px white;
+  text-shadow: 0 0 0.03vw white;
   filter: 
-      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
-      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
-      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
-      drop-shadow(0px 0px 0.6px rgb(255, 255, 255));
+      drop-shadow(0px 0px 0.03vw rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.03vw rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.03vw rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.03vw rgb(255, 255, 255));
 }
 
 /* Contenedor principal */
 .contenedor-texto-ministerio-de-restauracion-jesucristo-vive {
     display: flex;          /* pone izquierda y derecha en fila */
     align-items: center;    /* centra verticalmente las columnas */
-    gap: 20px;              /* espacio horizontal entre izquierda y derecha */
+    gap: 1.04vw;              /* 20px en 1920px */
 }
 
 /* Columna izquierda: dos líneas */
@@ -92,12 +97,12 @@ body {
 
 /* Estilos comunes para todo el texto */
 .estilo-ministerio-de-restauracion-jesucristo-vive {
-    text-shadow: 0 0 0.6px white;
+    text-shadow: 0 0 0.03vw white;
     filter: 
-        drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
-        drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
-        drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
-        drop-shadow(0px 0px 0.6px rgb(255, 255, 255));
+        drop-shadow(0px 0px 0.03vw rgb(255, 255, 255))
+        drop-shadow(0px 0px 0.03vw rgb(255, 255, 255))
+        drop-shadow(0px 0px 0.03vw rgb(255, 255, 255))
+        drop-shadow(0px 0px 0.03vw rgb(255, 255, 255));
     display: inline-block; /* para que se comporte bien dentro de flex */
 }
 
@@ -109,7 +114,7 @@ body {
 
 /* Estilo para "Jesucris o" */
 #estilo-jesucris-o {
-    font-size: 50px;
+    font-size: 2.6vw; /* 50px en 1920px */
     font-family: 'Kalam', cursive;
     font-weight: 700;
     color: rgb(255, 0, 0);
@@ -117,16 +122,16 @@ body {
 
 /* Estilo para la "t" de la cruz */
 #estilo-t-forma-cruz {
-    font-size: 45px;
+    font-size: 2.34vw; /* 45px en 1920px */
     font-family: 'Saira', sans-serif;
     font-weight: 700;
     color: rgb(255, 0, 0);
-    padding-left: 1px;
+    padding-left: 0.05vw;
 }
 
 /* Estilo para "¡VIVE!" */
 #estilo-vive {
-  font-size: 30px;
+  font-size: 1.56vw; /* 30px en 1920px */
   font-family: 'Playball', cursive;
   display: inline-block;
   color: rgb(0, 0, 138);
@@ -138,7 +143,7 @@ body {
 
 .portada {
   width: 100%;
-  height: clamp(260px, 30vw, 450px);
+  height: 23.4vw; /* 450px en 1920px. Mantiene la proporción exacta de tu pantalla */
   color: white;
   padding: 0;
   display: flex;
@@ -154,31 +159,54 @@ body {
 }
 
 .barra-lateral-portada {
-    flex: 0 0 250px;
+    flex: 0 0 17vw; /* Ancho aumentado */
     background: rgba(179, 74, 9, 0.5);
-    padding: 20px;
+    padding: 1.04vw; /* 20px en 1920px */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
 .barra-lateral-portada a {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 0, 0); /* Azul para enlaces normales */
     text-decoration: none;
     font-family: 'Charm', cursive;
-    font-size: 22px;
+    font-size: 1.15vw; /* 22px en 1920px */
     font-weight: 700;
-    padding: 10px 15px;
+    padding: 0.52vw 0.78vw; /* 10px 15px en 1920px */
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.3s;
     text-align: left;
     border-left: 3px solid transparent;
-    text-shadow: 0 0 0.6px white;
+    text-shadow: 0 0 0.03vw white;
     filter: 
-      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
-      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
-      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
-      drop-shadow(0px 0px 0.6px rgb(255, 255, 255));
+      drop-shadow(0px 0px 0.03vw rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.03vw rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.03vw rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.03vw rgb(255, 255, 255));
+}
+
+/* Estilo para sub-enlaces (como Labor Social) */
+.barra-lateral-portada a.sub-enlace {
+    color: rgb(5, 5, 111);
+    padding-left: clamp(20px, 2.08vw, 50px); /* Indentación proporcional */
+    font-size: clamp(16px, 1.04vw, 22px); /* Tamaño proporcional */
+}
+
+/* Clase para enlaces principales ocultos en escritorio */
+.enlace-movil-principal {
+    display: none;
+}
+
+/* Título de navegación solo para móviles */
+.titulo-navegacion-movil {
+    display: none;
+    font-family: 'Kalam', cursive;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px black;
 }
 
 .barra-lateral-portada a:hover {
@@ -204,33 +232,33 @@ body {
 }
 
 #titulos-grandes-centrados{
-  font-size: 60px;
-  text-shadow: 0 0 3px rgb(255, 255, 255);
+  font-size: 3.125vw; /* 60px en 1920px */
+  text-shadow: 0 0 0.15vw rgb(255, 255, 255);
   filter: 
     drop-shadow(4px 4px 2px rgb(0, 0, 0, 0.7));
-  -webkit-text-stroke: 2px rgb(255, 255, 255); /* borde blanco */
+  -webkit-text-stroke: 0.1vw rgb(255, 255, 255); /* borde blanco */
 }
 
 #titulos-grandes-sin-alinear{
-  font-size: 40px;
-  text-shadow: 0 0 1.5px rgb(255, 255, 255);
+  font-size: 2.08vw; /* 40px en 1920px */
+  text-shadow: 0 0 0.08vw rgb(255, 255, 255);
   filter: 
     drop-shadow(2px 2px 1.5px rgb(0, 0, 0, 0.7));
-  -webkit-text-stroke: 1.5px rgb(255, 255, 255); /* borde blanco */
+  -webkit-text-stroke: 0.08vw rgb(255, 255, 255); /* borde blanco */
 }
 
 .titulo-subseccion {
   font-family: 'Kalam', cursive;
   color: red;
-  font-size: 35px;
-  text-shadow: 0 0 1.5px rgb(255, 255, 255);
+  font-size: 1.82vw; /* 35px en 1920px */
+  text-shadow: 0 0 0.08vw rgb(255, 255, 255);
   filter: drop-shadow(2px 2px 1.5px rgba(0, 0, 0, 0.7));
-  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
+  -webkit-text-stroke: 0.08vw rgb(255, 255, 255);
   text-align: center;
 }
 
 .titulos-pequenos{
-  font-size: 25px;
+  font-size: 1.3vw; /* 25px en 1920px */
   font-family: 'Playball', cursive;
   transform: skewX(20deg);  /* Ajusta la inclinacion del texto entre mas alto el numero mas a la izquierda esta tirado el texto */
   display: inline-block;
@@ -364,12 +392,12 @@ body {
     background: rgba(179, 9, 9, 0.5);
     border: 0px solid rgb(255, 255, 255); /* Contorno blanco fuerte */
     border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.8); /* Sombra para resaltar */
+    box-shadow: 0px 0px 0.6vw rgba(255, 255, 255, 0.8); /* Sombra para resaltar */
       filter: 
-    drop-shadow(0px 0px 12px rgb(255, 255, 255))
-    drop-shadow(0px 0px 12px rgb(255, 255, 255))
-    drop-shadow(0px 0px 12px rgb(255, 255, 255))
-    drop-shadow(0px 0px 12px rgb(255, 255, 255));
+    drop-shadow(0px 0px 0.6vw rgb(255, 255, 255))
+    drop-shadow(0px 0px 0.6vw rgb(255, 255, 255))
+    drop-shadow(0px 0px 0.6vw rgb(255, 255, 255))
+    drop-shadow(0px 0px 0.6vw rgb(255, 255, 255));
     z-index: 1000; /* Asegura que la barra quede encima */
 }
 
@@ -495,149 +523,254 @@ body {
    ========================================= */
 
 /* 1. MÓVILES (Pantallas pequeñas: menos de 576px) */
-@media (max-width: 576px) {
+@media (max-width: 767px) {
     body {
-        padding-top: 100px;
+        padding-top: 0; /* Eliminamos padding porque usamos sticky en ambas barras */
     }
 
     .barra-superior {
-        font-size: 10px; /* Texto superior más pequeño */
+        position: sticky; /* Sticky para que ocupe espacio real y se pegue al navbar */
+        font-size: 2.5vw; /* Ajuste proporcional para que quepa en una línea */
+        padding: 0;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0;
+    }
+    
+    .navbar {
+        position: sticky; /* Sticky para que empuje el contenido al abrirse */
+        top: 30px; /* Ajuste para móvil (igual a altura barra-superior) */
+        height: auto;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-top: 0;
+    }
+
+    /* Forzar que Logo y Botón estén siempre en la misma línea */
+    .navbar .container-fluid {
+        flex-wrap: wrap; /* Permite que el menú baje, pero controlamos logo/botón */
+        justify-content: space-between;
     }
 
     /* Ajuste del Logo Principal */
+    .navbar-brand {
+        flex-grow: 1;
+        max-width: 85%; /* Deja espacio para el botón */
+        margin-right: 0;
+    }
+
     .contenedor-texto-ministerio-de-restauracion-jesucristo-vive {
-        gap: 5px; /* Menos separación entre textos */
+        gap: 2px; /* Mínima separación */
+        width: 100%;
     }
 
     #estilo-ministerio,
     #estilo-de-restauracion {
-        font-size: 12px; /* "Ministerio de Restauración" */
+        font-size: 10px !important; /* Texto pequeño para que quepa */
     }
 
     #estilo-jesucris-o {
-        font-size: 24px; /* "Jesucristo" */
+        font-size: 18px !important; 
     }
 
     #estilo-t-forma-cruz {
-        font-size: 22px; /* La Cruz */
+        font-size: 16px !important; 
     }
 
     #estilo-vive {
-        font-size: 18px; /* "¡VIVE!" */
+        font-size: 14px !important; 
         padding-left: 2px;
+    }
+
+    /* Botón Hamburguesa */
+    .navbar-toggler {
+        display: none !important; /* Ocultar botón hamburguesa en móvil */
+    }
+
+    /* Menú Desplegable Horizontal */
+    .navbar-collapse {
+        display: none !important; /* Ocultar menú desplegable en móvil */
+    }
+
+    .navbar-nav {
+        flex-direction: row; /* Horizontal */
+        flex-wrap: nowrap; /* Una sola fila siempre */
+        justify-content: space-between; /* Distribución equitativa */
+        padding-top: 10px;
+        width: 100%;
+    }
+
+    .nav-item {
+        flex: 1;
+        text-align: center;
+    }
+
+    .opciones-barra-de-navegacion {
+        font-size: 11px !important; /* Fuente pequeña para que quepan los 4 */
+        padding: 5px 0 !important;
+        white-space: nowrap;
     }
 
     /* Títulos de las secciones */
     #titulos-grandes-centrados,
     #titulos-grandes-sin-alinear {
-        font-size: 32px;
+        font-size: 36px;
+    }
+    
+    .titulos-pequenos {
+        font-size: 24px;
+    }
+    
+    .portada {
+        height: auto; /* Altura flexible en móvil */
+        min-height: 300px;
     }
 }
 
 /* 2. TABLETS (Pantallas medianas: entre 577px y 991px) */
-@media (min-width: 577px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     body {
-        padding-top: 120px;
+        padding-top: 140px;
+    }
+
+    .barra-superior {
+        font-size: 12px;
+        height: 30px;
+    }
+    
+    .navbar {
+        top: 30px;
     }
 
     #estilo-ministerio,
     #estilo-de-restauracion {
-        font-size: 14px;
+        font-size: 1.5vw;
     }
 
     #estilo-jesucris-o {
-        font-size: 35px;
+        font-size: 4vw;
     }
 
     #estilo-t-forma-cruz {
-        font-size: 32px;
+        font-size: 3.8vw;
     }
 
     #estilo-vive {
-        font-size: 25px;
+        font-size: 2.5vw;
     }
-}
-
-/* 2. TABLETS (Pantallas medianas: entre 577px y 991px) */
-@media (min-width: 577px) and (max-width: 991px) {
-    body {
-        padding-top: 120px;
-    }
-
-    #estilo-ministerio,
-    #estilo-de-restauracion {
-        font-size: 14px;
-    }
-
-    #estilo-jesucris-o {
-        font-size: 35px;
-    }
-
-    #estilo-t-forma-cruz {
-        font-size: 32px;
-    }
-
-    #estilo-vive {
-        font-size: 25px;
-    }
-
+    
     #titulos-grandes-centrados,
     #titulos-grandes-sin-alinear {
-        font-size: 45px;
+        font-size: 5vw;
+    }
+    
+    .opciones-barra-de-navegacion {
+        font-size: 2.5vw;
+    }
+    
+    .portada {
+        height: 35vw;
     }
 }
 
 /* 3. PANTALLAS GIGANTES / TV (Más de 1400px) */
-@media (min-width: 1400px) {
-    body {
-        padding-top: 180px;
-    }
-
-    #estilo-jesucris-o {
-        font-size: 70px;
-    }
-
-    #estilo-t-forma-cruz {
-        font-size: 65px;
-    }
-
-    #estilo-vive {
-        font-size: 50px;
-    }
-
-    #titulos-grandes-centrados,
-    #titulos-grandes-sin-alinear {
-        font-size: 80px;
-    }
-    
-    .barra-superior {
-        font-size: 18px;
-    }
+@media (min-width: 1921px) {
+   /* Como usamos VW, esto escalará automáticamente, pero podemos poner topes si es necesario */
 }
 
 /* Responsive para la nueva barra lateral */
-@media (max-width: 768px) {
+@media (max-width: 991px) {
     .portada .container {
-        flex-direction: column;
+        flex-direction: column-reverse; /* Imagen arriba, barra abajo */
     }
 
     .barra-lateral-portada {
         flex: 0 0 auto;
-        width: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px;
+        width: 85%; /* No ocupa todo el ancho */
+        margin: 20px auto; /* Centrado */
+        flex-direction: column; /* Lista vertical como en PC */
+        border-radius: 15px;
         gap: 10px;
     }
 
+    .titulo-navegacion-movil {
+        display: block; /* Visible solo en móvil */
+    }
+
     .barra-lateral-portada a {
-        font-size: 16px;
+        font-size: 18px; /* Tamaño fijo para toque fácil */
         padding: 5px 10px;
     }
 
     .contenido-principal-portada {
-        height: 100%;
+        height: 300px; /* Altura fija en tablet/móvil para la imagen */
+        width: 100%;
+    }
+}
+
+/* NUEVA BARRA DE ACCESOS RÁPIDOS MÓVIL (Debajo del navbar) */
+.menu-accesos-movil {
+    display: none;
+}
+
+@media (max-width: 991px) {
+    .menu-accesos-movil {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: rgb(5, 5, 111); /* Azul oscuro del tema */
+        padding: 8px 0;
+        width: 100%;
+        z-index: 990;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    .menu-accesos-movil a {
+        color: white;
+        text-decoration: none;
+        font-family: 'Charm', cursive;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        transition: transform 0.2s;
+    }
+    
+    .menu-accesos-movil a:hover {
+        transform: scale(1.1);
+        color: #ffcc00; /* Color de realce al tocar */
+    }
+
+    .menu-accesos-movil a i {
+        font-size: 20px;
+        margin-bottom: 2px;
+    }
+}
+
+/* AJUSTES POR ORIENTACIÓN (Landscape en móviles) */
+@media (max-height: 500px) and (orientation: landscape) {
+    body {
+        padding-top: 80px; /* Menos espacio arriba */
+    }
+    
+    .barra-superior {
+        display: none; /* Ocultar barra superior para ganar espacio */
+    }
+    
+    .navbar {
+        top: 0;
+    }
+    
+    .portada {
+        height: auto;
+    }
+    
+    .contenido-principal-portada {
+        height: 200px;
     }
 }
 
@@ -737,12 +870,13 @@ footer {
   background-color: rgba(179, 74, 9, 0.5);
   background-size: 100% 100%;
   background-position: center;
-  height: 111px;
+  height: auto; /* Altura automática para adaptarse al contenido */
+  padding: 2vw 0;
   text-align: center;
   align-items: center;
   align-content: center;
 }
 
 .copyright{
-  font-size: 40px;
+  font-size: 2.08vw; /* 40px en 1920px */
 }

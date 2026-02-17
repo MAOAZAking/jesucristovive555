@@ -3,6 +3,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!galeriaContenedor) return;
 
+    // --- PREVENIR SALTO DE POSICIÓN AL CARGAR IMÁGENES ---
+    // Si el usuario está viendo contenido más abajo, ajustamos el scroll cuando la galería cambia de tamaño.
+    let alturaPrevia = galeriaContenedor.offsetHeight;
+    
+    const observadorAltura = new ResizeObserver(() => {
+        const alturaActual = galeriaContenedor.offsetHeight;
+        const diferencia = alturaActual - alturaPrevia;
+        
+        // Si hubo cambio de tamaño
+        if (diferencia !== 0) {
+            const rect = galeriaContenedor.getBoundingClientRect();
+            
+            // Si la parte inferior de la galería está por encima del viewport (el usuario scrolleó hacia abajo)
+            if (rect.bottom < 0) {
+                window.scrollBy(0, diferencia);
+            }
+            
+            alturaPrevia = alturaActual;
+        }
+    });
+    
+    observadorAltura.observe(galeriaContenedor);
+
     // Configuración del repositorio para leer la carpeta automáticamente
     const owner = 'MAOAZAking';
     const repo = 'jesucristovive555';
