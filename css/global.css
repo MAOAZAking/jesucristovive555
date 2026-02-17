@@ -12,7 +12,8 @@ body {
   background-position: center;
 }
 
-[id^="seccion"] {
+[id^="seccion"],
+[id^="subseccion"] {
   scroll-margin-top: 100px;
 }
 
@@ -130,14 +131,61 @@ body {
 }
 
 .portada {
-  background: url('../multimedia/img/devocional-del-mes.jpeg');
   width: 100%;
   height: clamp(260px, 30vw, 450px);
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  background-position: center;
   color: white;
-  padding-top: auto;
+  padding: 0;
+  display: flex;
+}
+
+.portada .container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.barra-lateral-portada {
+    flex: 0 0 250px;
+    background: rgba(179, 74, 9, 0.5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.barra-lateral-portada a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-family: 'Charm', cursive;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    text-align: left;
+    border-left: 3px solid transparent;
+    text-shadow: 0 0 0.6px white;
+    filter: 
+      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.6px rgb(255, 255, 255))
+      drop-shadow(0px 0px 0.6px rgb(255, 255, 255));
+}
+
+.barra-lateral-portada a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #b34a09;
+    transform: translateX(5px);
+}
+
+.contenido-principal-portada {
+    flex-grow: 1;
+    background: url('../multimedia/img/devocional-del-mes.jpeg') no-repeat center center;
+    background-size: cover;
+    background-size: auto 100%;
 }
 
 .portada h1 {
@@ -163,6 +211,16 @@ body {
   filter: 
     drop-shadow(2px 2px 1.5px rgb(0, 0, 0, 0.7));
   -webkit-text-stroke: 1.5px rgb(255, 255, 255); /* borde blanco */
+}
+
+.titulo-subseccion {
+  font-family: 'Kalam', cursive;
+  color: red;
+  font-size: 35px;
+  text-shadow: 0 0 1.5px rgb(255, 255, 255);
+  filter: drop-shadow(2px 2px 1.5px rgba(0, 0, 0, 0.7));
+  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
+  text-align: center;
 }
 
 .titulos-pequenos{
@@ -495,6 +553,30 @@ body {
     #estilo-vive {
         font-size: 25px;
     }
+}
+
+/* 2. TABLETS (Pantallas medianas: entre 577px y 991px) */
+@media (min-width: 577px) and (max-width: 991px) {
+    body {
+        padding-top: 120px;
+    }
+
+    #estilo-ministerio,
+    #estilo-de-restauracion {
+        font-size: 14px;
+    }
+
+    #estilo-jesucris-o {
+        font-size: 35px;
+    }
+
+    #estilo-t-forma-cruz {
+        font-size: 32px;
+    }
+
+    #estilo-vive {
+        font-size: 25px;
+    }
 
     #titulos-grandes-centrados,
     #titulos-grandes-sin-alinear {
@@ -527,6 +609,32 @@ body {
     
     .barra-superior {
         font-size: 18px;
+    }
+}
+
+/* Responsive para la nueva barra lateral */
+@media (max-width: 768px) {
+    .portada .container {
+        flex-direction: column;
+    }
+
+    .barra-lateral-portada {
+        flex: 0 0 auto;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .barra-lateral-portada a {
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+
+    .contenido-principal-portada {
+        height: 100%;
     }
 }
 
@@ -581,6 +689,29 @@ body {
 .cerrar-lightbox:hover {
   color: #bbb;
 }
+
+.flecha-lightbox {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 40px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.0);
+  border: none;
+  z-index: 10001;
+}
+
+.flecha-siguiente { right: 0; border-radius: 3px 0 0 3px; }
+.flecha-anterior { left: 0; border-radius: 0 3px 3px 0; }
+
+.flecha-lightbox:hover { background-color: rgba(0, 0, 0, 0.8); }
 
 .texto-contactenos-whatsapp{
   font-size: 28px;

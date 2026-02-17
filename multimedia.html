@@ -59,6 +59,16 @@
 
         <section class="portada text-center" id="section-portada-ministerio-de-restauracion-jesucristo-vive">
             <div class="container" id="contenedor-portada-ministerio-de-restauracion-jesucristo-vive">
+                <div class="barra-lateral-portada">
+                    <a href="#seccion-devocional">Devocional Diario</a>
+                    <a href="#seccion-galeria">Galería</a>
+                    <a href="#subseccion-labor-social" style="padding-left: 40px; font-size: 20px;">↳ Labor Social</a>
+                    <a href="#seccion-audios">Audios</a>
+                    <a href="#seccion-eventos">Próximos Eventos</a>
+                </div>
+                <div class="contenido-principal-portada">
+                    <!-- El fondo de esta área es la imagen -->
+                </div>
             </div>
         </section>
 
@@ -83,43 +93,35 @@
                             <i class="bi bi-book-half fs-1" id="icono"></i>
                             <h5 class="mt-3 titulos-pequenos" id="titulo-cita">Cargando cita...</h5>
                             <p id="texto-cita" class="flex-grow-1 p-2" style="text-align: justify;">Cargando texto del pasaje...</p>
-                            <a id="link-cita" href="https://www.biblegateway.com/" target="_blank" class="btn btn-sm btn-outline-primary mt-auto">Ver contexto en Bible Gateway</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="seccion-labor-social" class="py-5">
+        <section id="seccion-galeria" class="py-5">
             <div class="container">
-                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Labor Social</h2>
-                <div class="row g-4 galeria-imagenes">
-                    <!-- Las imágenes de la labor social se cargarán aquí dinámicamente -->
+                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Galería</h2>
+                
+                <!-- Subsección Labor Social -->
+                <div id="subseccion-labor-social">
+                    <h3 class="text-center fw-bold mb-4 titulo-subseccion">Labor Social</h3>
+                    <div class="row g-4 galeria-imagenes">
+                        <!-- Las imágenes de la labor social se cargarán aquí dinámicamente -->
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="seccion-multimedia" class="py-5">
-            <div id="contenedor-multimedia"class="container">
-                <div id="contenedor-video-devocional-diario" class="row g-4">
-                    <div id="devocional-diario" class="col-md-7">
-                        <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Devocional diario</h2>
-                        <div id="contenedor-video-devocional-diario" class="ratio ratio-16x9">
-                            <iframe id="youtubeFrame" class="iframde-devocional-diario" width="600" 
-                                    height="315" 
-                                    title="YouTube video player" 
-                                    src="https://www.youtube.com/embed/R7fcTFYHkGA?rel=0"
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-
-                    <div id="contenedor-audio" class="col-md-5">
-                        <div id="musica-para-orar" class="col-md-10">
-                            <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Música para Orar</h2>
-                            <div id="contenedor-musica-para-orar" class="card shadow p-4 text-center contenedor-audio">
+        <section id="seccion-audios" class="py-5">
+            <div id="contenedor-multimedia" class="container">
+                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Nuestros Audios</h2>
+                <div class="row g-4">
+                    <!-- Audio 1 -->
+                    <div class="col-md-6">
+                        <div class="w-100">
+                            <h2 class="titulos-grandes text-center" id="titulos-grandes-sin-alinear">Música para Orar</h2>
+                            <div class="card shadow p-4 text-center contenedor-audio">
                                 <div class="reproductor-audio-editable w-100">
                                     <audio id="audioPrincipal" src="multimedia/audio/musica-instrumental-1.mp3"></audio>
 
@@ -165,10 +167,13 @@
                                 </a>
                             </div>
                         </div>
-                        <br>
-                        <div id="ultima-predica" class="col-md-10">
-                            <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Ultima Predica</h2>
-                            <div id="contenedor-ultima-predica" class="card shadow p-4 text-center contenedor-audio">
+                    </div>
+
+                    <!-- Audio 2 -->
+                    <div class="col-md-6">
+                        <div class="w-100">
+                            <h2 class="titulos-grandes text-center" id="titulos-grandes-sin-alinear">Ultima Predica</h2>
+                            <div class="card shadow p-4 text-center contenedor-audio">
                                 <div class="reproductor-audio-editable w-100">
                                     <audio id="audioPrincipal" src="multimedia/audio/ultima-predica.mp3"></audio>
 
@@ -276,17 +281,6 @@
                 </div>
             </div>
         </section>
-
-        <section class="py-5 zoom-entrada" id="seccion-galeria">
-            <div class="container">
-                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Galería</h2>
-                <div class="row g-4 galeria-imagenes">
-                    <div class="col-md-4"><img src="multimedia/img/graduacion-gran-aventura.jpeg" class="img-fluid imagenes-seccion-galeria" alt="Imagen de galería 1"></div>
-                    <div class="col-md-4"><img src="multimedia/img/equipo-capellanes.jpeg" class="img-fluid imagenes-seccion-galeria" alt="Imagen de galería 2"></div>
-                    <div class="col-md-4"><img src="multimedia/img/clase-dominical.jpeg" class="img-fluid imagenes-seccion-galeria" alt="Imagen de galería 3"></div>
-                </div>
-            </div>
-        </section>
         <br>
 
         <div class="container">
@@ -332,7 +326,9 @@
         <!-- Lightbox (Visor de Imágenes) -->
         <div id="lightbox" class="lightbox">
             <span class="cerrar-lightbox">&times;</span>
+            <button class="flecha-lightbox flecha-anterior" id="anterior">&#10094;</button>
             <img class="lightbox-contenido" id="img-lightbox">
+            <button class="flecha-lightbox flecha-siguiente" id="siguiente">&#10095;</button>
         </div>
 
         <button id="boton-subir" class="btn btn-primary rounded-circle" aria-label="Subir"><i class="bi bi-arrow-up"></i></button>

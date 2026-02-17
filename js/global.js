@@ -164,14 +164,31 @@ document.addEventListener("click", () => {
    ========================================= */
 const lightbox = document.getElementById('lightbox');
 const imgLightbox = document.getElementById('img-lightbox');
-const imagenesGaleria = document.querySelectorAll('.imagenes-seccion-galeria');
 const botonCerrarLightbox = document.querySelector('.cerrar-lightbox');
+const btnAnterior = document.getElementById('anterior');
+const btnSiguiente = document.getElementById('siguiente');
 
-imagenesGaleria.forEach(imagen => {
-    imagen.addEventListener('click', () => {
-        lightbox.style.display = 'flex';
-        imgLightbox.src = imagen.src;
-    });
+let imagenesActuales = [];
+let indiceActual = 0;
+
+function actualizarImagenLightbox() {
+    if (imagenesActuales.length > 0) {
+        imgLightbox.src = imagenesActuales[indiceActual].src;
+    }
+}
+
+// Event Delegation para detectar clic en imágenes (incluso las dinámicas)
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('imagenes-seccion-galeria')) {
+        // Recopilamos todas las imágenes de la galería actual
+        imagenesActuales = Array.from(document.querySelectorAll('.imagenes-seccion-galeria'));
+        indiceActual = imagenesActuales.indexOf(e.target);
+        
+        if (indiceActual !== -1) {
+            actualizarImagenLightbox();
+            lightbox.style.display = 'flex';
+        }
+    }
 });
 
 // Cerrar al hacer clic en la X o fuera de la imagen (en el fondo oscuro)
@@ -179,4 +196,17 @@ lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox || e.target === botonCerrarLightbox) {
         lightbox.style.display = 'none';
     }
+});
+
+// Navegación (Bucle infinito)
+if (btnSiguiente) btnSiguiente.addEventListener('click', (e) => {
+    e.stopPropagation(); // Evita que se cierre el lightbox
+    indiceActual = (indiceActual + 1) % imagenesActuales.length;
+    actualizarImagenLightbox();
+});
+
+if (btnAnterior) btnAnterior.addEventListener('click', (e) => {
+    e.stopPropagation(); // Evita que se cierre el lightbox
+    indiceActual = (indiceActual - 1 + imagenesActuales.length) % imagenesActuales.length;
+    actualizarImagenLightbox();
 });

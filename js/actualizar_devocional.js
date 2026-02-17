@@ -43,39 +43,6 @@ async function actualizar() {
     console.log(`📖 Cita del día seleccionada: ${citaDelDia.ref}`);
     // Reemplazamos los números de los versículos para poder darles estilo.
     let textoPasaje = citaDelDia.texto.replace(/(\d+)/g, '<span class="numero-versiculo-rojo">$1</span>');
-    let linkBibleGateway = "https://www.biblegateway.com/";
-
-    const regexCita = /^(.*)\s+(\d+):(\d+)(?:-(\d+))?$/;
-    const matchCita = citaDelDia.ref.match(regexCita);
-
-    if (matchCita) {
-        const libro = matchCita[1];
-        const capitulo = matchCita[2];
-        const versiculoInicio = matchCita[3];
-        const versiculoFin = matchCita[4];
-
-        // Construir Link Bible Gateway
-        const libroEncoded = encodeURIComponent(libro);
-        linkBibleGateway = `https://www.biblegateway.com/passage/?search=${libroEncoded}%20${capitulo}%3A${versiculoInicio}`;
-        if (versiculoFin) linkBibleGateway += `-${versiculoFin}`;
-        linkBibleGateway += "&version=RVR1960";
-    }
-
-    // --- LÓGICA DE LA GALERÍA LABOR SOCIAL ---
-    const galeriaPath = path.join(__dirname, '../multimedia', 'img', 'labor_social');
-    let listaDeImagenes = [];
-    try {
-        const archivosGaleria = fs.readdirSync(galeriaPath);
-        const imagenes = archivosGaleria
-            .filter(file => /\.(jpe?g|png)$/i.test(file))
-            .sort();
-        
-        console.log(`🖼️  Encontradas ${imagenes.length} imágenes para la galería de labor social.`);
-        listaDeImagenes = imagenes.map(img => `multimedia/img/labor_social/${img}`);
-
-    } catch (error) {
-        console.error("❌ Error al leer la carpeta de la galería de labor social:", error);
-    }
 
     // 2. Consultar API YouTube
     // Agregamos order=date para priorizar los videos más recientes
@@ -124,12 +91,6 @@ async function actualizar() {
     const archivos = fs.readdirSync(rootPath);
     const archivosHtml = archivos.filter(archivo => path.extname(archivo).toLowerCase() === '.html');
 
-    // 4. Generar archivo de configuración para la galería
-    const configGaleriasPath = path.join(__dirname, 'config_galeria.js');
-    const contenidoConfig = `// Archivo generado automáticamente. No editar manualmente.\nconst imagenesLaborSocial = ${JSON.stringify(listaDeImagenes, null, 2)};`;
-    fs.writeFileSync(configGaleriasPath, contenidoConfig, 'utf8');
-    console.log(`✅ Generado archivo de configuración para la galería en 'js/config_galeria.js'`);
-
     console.log(`📂 Analizando ${archivosHtml.length} archivos HTML...`);
 
     // 4. Recorrer cada archivo y actualizar
@@ -150,12 +111,10 @@ async function actualizar() {
         // Actualizar Cita Bíblica (SIEMPRE, independientemente del video)
         const regexTitulo = /(<h5[^>]*id="titulo-cita"[^>]*>)(.*?)(<\/h5>)/;
         const regexTexto = /(<p[^>]*id="texto-cita"[^>]*>)(.*?)(<\/p>)/s;
-        const regexLink = /(<a[^>]*id="link-cita"[^>]*href=")([^"]*)("[^>]*>)/;
 
         if (regexTitulo.test(contenidoHtml)) {
             contenidoHtml = contenidoHtml.replace(regexTitulo, `$1${citaDelDia.ref}$3`);
             contenidoHtml = contenidoHtml.replace(regexTexto, `$1${textoPasaje}$3`);
-            contenidoHtml = contenidoHtml.replace(regexLink, `$1${linkBibleGateway}$3`);
             modificado = true;
         }
 

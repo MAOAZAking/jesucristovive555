@@ -2,14 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Elementos del DOM
     const elementoTexto = document.getElementById('texto-cita');
     const elementoTitulo = document.getElementById('titulo-cita');
-    const elementoLink = document.getElementById('link-cita');
-    
-    // Verificación de la galería para depuración
-    const galeria = document.querySelector('.galeria-imagenes');
-    if (galeria && galeria.children.length === 0) {
-        console.warn("⚠️ AVISO: El contenedor de la galería (.galeria-imagenes) está vacío. El script de actualización (node) no ha inyectado las imágenes todavía.");
-    }
-
+   
     // 1. VERIFICACIÓN DE CARGA ESTÁTICA
     // Si el servidor (GitHub Actions) ya actualizó el HTML, el texto no dirá "Cargando...".
     // En ese caso, no hacemos nada para ahorrar recursos y evitar parpadeos.
@@ -66,23 +59,5 @@ document.addEventListener('DOMContentLoaded', function() {
         // Reemplazamos los números de los versículos para poder darles estilo y usamos innerHTML.
         const textoConEstilo = citaDelDia.texto.replace(/(\d+)/g, '<span class="numero-versiculo-rojo">$1</span>');
         elementoTexto.innerHTML = textoConEstilo;
-    }
-
-    // Generar link a BibleGateway solo como referencia
-    const regex = /^(.*)\s+(\d+):(\d+)(?:-(\d+))?$/;
-    const match = citaDelDia.ref.match(regex);
-
-    if (match) {
-        const libro = match[1];
-        const capitulo = match[2];
-        const versiculoInicio = match[3];
-        const versiculoFin = match[4];
-
-        // Link Bible Gateway
-        const libroEncoded = encodeURIComponent(libro);
-        let gatewayUrl = `https://www.biblegateway.com/passage/?search=${libroEncoded}%20${capitulo}%3A${versiculoInicio}`;
-        if (versiculoFin) gatewayUrl += `-${versiculoFin}`;
-        gatewayUrl += "&version=RVR1960";
-        if (elementoLink) elementoLink.href = gatewayUrl;
     }
 });

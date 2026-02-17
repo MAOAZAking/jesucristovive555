@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const galeriaContenedor = document.querySelector('#seccion-labor-social .galeria-imagenes');
+    const galeriaContenedor = document.querySelector('#subseccion-labor-social .galeria-imagenes');
 
     if (!galeriaContenedor) return;
 
@@ -10,6 +10,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
     console.log("Cargando galería desde GitHub...");
+
+    // Mostrar mensaje de carga antes de iniciar la petición
+    galeriaContenedor.innerHTML = `
+        <div class="col-12 text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-2" style="font-family: 'Playball', cursive; color: rgb(0, 0, 138); transform: skewX(20deg); font-weight: 700; letter-spacing: 1px; font-size: 30px; display: inline-block;">Cargando imágenes, por favor espere...</p>
+        </div>`;
 
     fetch(apiUrl)
         .then(response => {
@@ -44,6 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error cargando galería:', error);
-            galeriaContenedor.innerHTML = '<p class="text-center col-12">Cargando imágenes...</p>';
+            galeriaContenedor.innerHTML = '<p class="text-center col-12 text-danger">No se pudieron cargar las imágenes. Verifique su conexión.</p>';
         });
 });
