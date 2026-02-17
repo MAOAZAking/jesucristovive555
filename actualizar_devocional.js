@@ -36,10 +36,36 @@ async function actualizar() {
     console.log(`🔎 Buscando en YouTube: "${tituloBusqueda}"`);
     console.log("--------------------------------------------------");
 
+    // --- LÓGICA DE LA CITA BÍBLICA ---
+    const diaInt = parseInt(dia, 10);
+    const indice = (diaInt - 1) % citasBiblicas.length;
+    const citaDelDia = citasBiblicas[indice];
+    console.log(`📖 Cita del día seleccionada: ${citaDelDia.ref}`);
+
+    let textoPasaje = citaDelDia.texto;
+    let linkBibleGateway = "https://www.biblegateway.com/";
+
+    const regexCita = /^(.*)\s+(\d+):(\d+)(?:-(\d+))?$/;
+    const matchCita = citaDelDia.ref.match(regexCita);
+
+    if (matchCita) {
+        const libro = matchCita[1];
+        const capitulo = matchCita[2];
+        const versiculoInicio = matchCita[3];
+        const versiculoFin = matchCita[4];
+
+        // Construir Link Bible Gateway
+        const libroEncoded = encodeURIComponent(libro);
+        linkBibleGateway = `https://www.biblegateway.com/passage/?search=${libroEncoded}%20${capitulo}%3A${versiculoInicio}`;
+        if (versiculoFin) linkBibleGateway += `-${versiculoFin}`;
+        linkBibleGateway += "&version=RVR1960";
+    }
+
     // 2. Consultar API YouTube
     // Agregamos order=date para priorizar los videos más recientes
     const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&type=video&maxResults=1&q=${encodeURIComponent(tituloBusqueda)}`;
 
+    let nuevoLink = null;
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -64,30 +90,7 @@ async function actualizar() {
             console.log(`📺 Título real del video: "${tituloEncontrado}"`);
             console.log(`🆔 ID del video: ${videoId}`);
             
-            // 3. Buscar todos los archivos .html en la carpeta raíz
-            const archivos = fs.readdirSync(__dirname);
-            const archivosHtml = archivos.filter(archivo => path.extname(archivo).toLowerCase() === '.html');
-
-            console.log(`📂 Analizando ${archivosHtml.length} archivos HTML...`);
-
-            const nuevoLink = `https://www.youtube.com/embed/${videoId}?rel=0`;
-            
-            // 4. Recorrer cada archivo y actualizar si tiene el iframe
-            archivosHtml.forEach(archivo => {
-                const rutaArchivo = path.join(__dirname, archivo);
-                let contenidoHtml = fs.readFileSync(rutaArchivo, 'utf8');
-
-                // Regex para encontrar el iframe con la clase específica
-                const regex = /(<iframe[^>]*class="[^"]*iframde-devocional-diario[^"]*"[^>]*src=")([^"]*)(")/g;
-
-                if (regex.test(contenidoHtml)) {
-                    const htmlActualizado = contenidoHtml.replace(regex, `$1${nuevoLink}$3`);
-                    fs.writeFileSync(rutaArchivo, htmlActualizado, 'utf8');
-                    console.log(`✅ Actualizado: ${archivo}`);
-                }
-            });
-            
-            console.log(`🎉 Proceso terminado. Video ID: ${videoId}`);
+            nuevoLink = `https://www.youtube.com/embed/${videoId}?rel=0`;
         } else {
             console.log(`❌ RESULTADO NEGATIVO`);
             console.log(`No se encontró ningún video que coincida con: "${tituloBusqueda}"`);
@@ -97,6 +100,47 @@ async function actualizar() {
     } catch (error) {
         console.error("❌ Error en la consulta:", error);
     }
+
+    // 3. Buscar todos los archivos .html en la carpeta raíz
+    const archivos = fs.readdirSync(__dirname);
+    const archivosHtml = archivos.filter(archivo => path.extname(archivo).toLowerCase() === '.html');
+
+    console.log(`📂 Analizando ${archivosHtml.length} archivos HTML...`);
+
+    // 4. Recorrer cada archivo y actualizar
+    archivosHtml.forEach(archivo => {
+        const rutaArchivo = path.join(__dirname, archivo);
+        let contenidoHtml = fs.readFileSync(rutaArchivo, 'utf8');
+        let modificado = false;
+
+        // Actualizar Video (solo si se encontró uno nuevo)
+        if (nuevoLink) {
+            const regexVideo = /(<iframe[^>]*class="[^"]*iframde-devocional-diario[^"]*"[^>]*src=")([^"]*)(")/g;
+            if (regexVideo.test(contenidoHtml)) {
+                contenidoHtml = contenidoHtml.replace(regexVideo, `$1${nuevoLink}$3`);
+                modificado = true;
+            }
+        }
+
+        // Actualizar Cita Bíblica (SIEMPRE, independientemente del video)
+        const regexTitulo = /(<h5[^>]*id="titulo-cita"[^>]*>)(.*?)(<\/h5>)/;
+        const regexTexto = /(<p[^>]*id="texto-cita"[^>]*>)(.*?)(<\/p>)/s;
+        const regexLink = /(<a[^>]*id="link-cita"[^>]*href=")([^"]*)("[^>]*>)/;
+
+        if (regexTitulo.test(contenidoHtml)) {
+            contenidoHtml = contenidoHtml.replace(regexTitulo, `$1${citaDelDia.ref}$3`);
+            contenidoHtml = contenidoHtml.replace(regexTexto, `$1${textoPasaje}$3`);
+            contenidoHtml = contenidoHtml.replace(regexLink, `$1${linkBibleGateway}$3`);
+            modificado = true;
+        }
+
+        if (modificado) {
+            fs.writeFileSync(rutaArchivo, contenidoHtml, 'utf8');
+            console.log(`✅ Actualizado: ${archivo}`);
+        }
+    });
+    
+    console.log(`🎉 Proceso terminado.`);
 }
 
 actualizar();
