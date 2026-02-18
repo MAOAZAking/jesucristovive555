@@ -778,6 +778,45 @@ body {
     .contenido-principal-portada {
         height: 200px;
     }
+
+    /* Mostrar menú de navegación principal en horizontal (como en PC) */
+    .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+        gap: 10px;
+        padding-top: 0;
+    }
+
+    .opciones-barra-de-navegacion {
+        font-size: 14px !important;
+        padding: 0 !important;
+    }
+
+    /* Ocultar la barra de accesos rápidos móvil en horizontal */
+    .menu-accesos-movil {
+        display: none !important;
+    }
+    
+    /* Asegurar que el logo y el menú estén en la misma línea */
+    .navbar .container-fluid {
+        flex-wrap: nowrap;
+    }
+
+    .navbar-brand {
+        flex-grow: 0;
+        max-width: none;
+        margin-right: 10px;
+    }
+
+    /* Ajustar tamaño de logo para que quepan los botones */
+    #estilo-jesucris-o { font-size: 20px !important; }
+    #estilo-t-forma-cruz { font-size: 18px !important; }
+    #estilo-vive { font-size: 16px !important; }
+    #estilo-ministerio, #estilo-de-restauracion { font-size: 12px !important; }
 }
 
 .imagenes-seccion-galeria{
