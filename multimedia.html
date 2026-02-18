@@ -26,7 +26,7 @@
     </head>
     <body>
         <div class="barra-superior text-center">Servicios: Domingos 9:30 AM | Miércoles 7:00 PM | Vienes 6:00 PM</div>
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold" href="index.html">
                     <div class="contenedor-texto-ministerio-de-restauracion-jesucristo-vive">
@@ -48,32 +48,23 @@
                 </button>
                 <div class="collapse navbar-collapse" id="menu-principal">
                     <ul class="navbar-nav flex-grow-1 justify-content-evenly ms-lg-5">
-                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="index.html"><i class="bi bi-house-door-fill"></i> Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="ministerio.html"><i class="bi bi-people-fill"></i> Ministerios</a></li>
-                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="multimedia.html"><i class="bi bi-play-circle-fill"></i> Multimedia</a></li>
-                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="contacto.html"><i class="bi bi-envelope-fill"></i> Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="ministerio.html">Ministerios</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="multimedia.html">Multimedia</a></li>
+                        <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="contacto.html">Contacto</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Barra de accesos rápidos solo para móvil (Pegada al navbar) -->
-        <div class="menu-accesos-movil">
-            <a href="index.html"><i class="bi bi-house-door-fill"></i> Inicio</a>
-            <a href="ministerio.html"><i class="bi bi-people-fill"></i> Ministerios</a>
-            <a href="multimedia.html"><i class="bi bi-play-circle-fill"></i> Multimedia</a>
-            <a href="contacto.html"><i class="bi bi-envelope-fill"></i> Contacto</a>
-        </div>
-
         <section class="portada text-center" id="section-portada-ministerio-de-restauracion-jesucristo-vive">
             <div class="container" id="contenedor-portada-ministerio-de-restauracion-jesucristo-vive">
                 <div class="barra-lateral-portada">
-                    <h3 class="titulo-navegacion-movil">Contenido Página</h3>
                     <a href="#seccion-devocional">Devocional Diario</a>
-                    <a href="#seccion-audios">Audios</a>
-                    <a href="#seccion-galeria">Galería</a>
-                    <a href="#subseccion-labor-social" class="sub-enlace">↳ Labor Social</a>
+                    <a href="#seccion-labor-social">Labor Social</a>
+                    <a href="#seccion-multimedia">Audios</a>
                     <a href="#seccion-eventos">Próximos Eventos</a>
+                    <a href="#seccion-galeria">Galería</a>
                 </div>
                 <div class="contenido-principal-portada">
                     <!-- El fondo de esta área es la imagen -->
@@ -108,15 +99,36 @@
             </div>
         </section>
 
-                <section id="seccion-audios" class="py-5">
-            <div id="contenedor-multimedia" class="container">
-                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Nuestros Audios</h2>
-                <div class="row g-4">
-                    <!-- Audio 1 -->
-                    <div class="col-md-6">
-                        <div class="w-100">
-                            <h2 class="titulos-grandes text-center" id="titulos-grandes-sin-alinear">Música para Orar</h2>
-                            <div class="card shadow p-4 text-center contenedor-audio">
+        <section id="seccion-labor-social" class="py-5">
+            <div class="container">
+                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Labor Social</h2>
+                <div class="row g-4 galeria-imagenes">
+                    <!-- Las imágenes de la labor social se cargarán aquí dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <section id="seccion-multimedia" class="py-5">
+            <div id="contenedor-multimedia"class="container">
+                <div id="contenedor-video-devocional-diario" class="row g-4">
+                    <div id="devocional-diario" class="col-md-7">
+                        <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Devocional diario</h2>
+                        <div id="contenedor-video-devocional-diario" class="ratio ratio-16x9">
+                            <iframe id="youtubeFrame" class="iframde-devocional-diario" width="600" 
+                                    height="315" 
+                                    title="YouTube video player" 
+                                    src="https://www.youtube.com/embed/R7fcTFYHkGA?rel=0"
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <div id="contenedor-audio" class="col-md-5">
+                        <div id="musica-para-orar" class="col-md-10">
+                            <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Música para Orar</h2>
+                            <div id="contenedor-musica-para-orar" class="card shadow p-4 text-center contenedor-audio">
                                 <div class="reproductor-audio-editable w-100">
                                     <audio id="audioPrincipal" src="multimedia/audio/musica-instrumental-1.mp3"></audio>
 
@@ -162,13 +174,10 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Audio 2 -->
-                    <div class="col-md-6">
-                        <div class="w-100">
-                            <h2 class="titulos-grandes text-center" id="titulos-grandes-sin-alinear">Ultima Predica</h2>
-                            <div class="card shadow p-4 text-center contenedor-audio">
+                        <br>
+                        <div id="ultima-predica" class="col-md-10">
+                            <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Ultima Predica</h2>
+                            <div id="contenedor-ultima-predica" class="card shadow p-4 text-center contenedor-audio">
                                 <div class="reproductor-audio-editable w-100">
                                     <audio id="audioPrincipal" src="multimedia/audio/ultima-predica.mp3"></audio>
 
@@ -219,36 +228,22 @@
             </div>    
         </section>
 
-        <section id="seccion-galeria" class="py-5">
-            <div class="container">
-                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Galería</h2>
-                
-                <!-- Subsección Labor Social -->
-                <div id="subseccion-labor-social">
-                    <h3 class="text-center fw-bold mb-4 titulo-subseccion">Labor Social</h3>
-                    <div class="row g-4 galeria-imagenes">
-                        <!-- Las imágenes de la labor social se cargarán aquí dinámicamente -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="estadisticas py-5 text-center animacion-scroll">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-sm-3 col-md-3">
                         <div class="contador" data-target="559">0</div>
                         <p>Miembros</p>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-sm-3 col-md-3">
                         <div class="contador" data-target="14">0</div>
                         <p>Años de Servicio</p>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-sm-3 col-md-3">
                         <div class="contador" data-target="1000">0</div>
                         <p>Eventos</p>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-sm-3 col-md-3">
                         <div class="contador" data-target="26">0</div>
                         <p>Voluntarios</p>
                     </div>
@@ -260,7 +255,7 @@
             <div class="container">
                 <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Próximos Eventos</h2>
                 <div class="row g-4">
-                    <div class="col-md-4">
+                    <div class="col-sm-6 col-md-4">
                         <div class="card shadow tarjeta-con-filtro">
                             <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" class="card-img-top" alt="Conferencia Juvenil">
                             <div class="card-body">
@@ -269,7 +264,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-6 col-md-4">
                         <div class="card shadow tarjeta-con-filtro">
                             <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="card-img-top" alt="Retiro Espiritual">
                             <div class="card-body">
@@ -278,7 +273,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-6 col-md-4">
                         <div class="card shadow tarjeta-con-filtro">
                             <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="card-img-top" alt="Jornada Social">
                             <div class="card-body">
@@ -287,6 +282,17 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5 zoom-entrada" id="seccion-galeria">
+            <div class="container">
+                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Galería</h2>
+                <div class="row g-4 galeria-imagenes">
+                    <div class="col-sm-6 col-md-4"><img src="multimedia/img/graduacion-gran-aventura.jpeg" class="img-fluid imagenes-seccion-galeria" alt="Imagen de galería 1"></div>
+                    <div class="col-sm-6 col-md-4"><img src="multimedia/img/equipo-capellanes.jpeg" class="img-fluid imagenes-seccion-galeria" alt="Imagen de galería 2"></div>
+                    <div class="col-sm-6 col-md-4"><img src="multimedia/img/clase-dominical.jpeg" class="img-fluid imagenes-seccion-galeria" alt="Imagen de galería 3"></div>
                 </div>
             </div>
         </section>
@@ -335,9 +341,7 @@
         <!-- Lightbox (Visor de Imágenes) -->
         <div id="lightbox" class="lightbox">
             <span class="cerrar-lightbox">&times;</span>
-            <button class="flecha-lightbox flecha-anterior" id="anterior">&#10094;</button>
             <img class="lightbox-contenido" id="img-lightbox">
-            <button class="flecha-lightbox flecha-siguiente" id="siguiente">&#10095;</button>
         </div>
 
         <button id="boton-subir" class="btn btn-primary rounded-circle" aria-label="Subir"><i class="bi bi-arrow-up"></i></button>

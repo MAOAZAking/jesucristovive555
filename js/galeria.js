@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Construimos la ruta relativa para usar la imagen del sitio web
                 const rutaImagen = `multimedia/img/labor_social/${imagen.name}`;
                 galeriaHtml += `
-                    <div class="col-md-4">
+                    <div class="col-sm-6 col-md-4">
                         <img src="${rutaImagen}" class="img-fluid imagenes-seccion-galeria" alt="Foto de labor social ${index + 1}">
                     </div>`;
             });

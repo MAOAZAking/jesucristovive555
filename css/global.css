@@ -688,7 +688,8 @@ body {
 
     .barra-lateral-portada {
         flex: 0 0 auto;
-        width: 85%; /* No ocupa todo el ancho */
+        width: 300px; /* Ancho fijo para celular */
+        max-width: 90%; /* Por si la pantalla es muy pequeña */
         margin: 20px auto; /* Centrado */
         flex-direction: column; /* Lista vertical como en PC */
         border-radius: 15px;
@@ -754,15 +755,20 @@ body {
 /* AJUSTES POR ORIENTACIÓN (Landscape en móviles) */
 @media (max-height: 500px) and (orientation: landscape) {
     body {
-        padding-top: 80px; /* Menos espacio arriba */
+        padding-top: 0; /* Sin padding porque usamos sticky */
     }
     
     .barra-superior {
-        display: none; /* Ocultar barra superior para ganar espacio */
+        display: flex; /* Mostrar barra superior */
+        position: sticky;
+        top: 0;
+        height: 30px;
+        font-size: 12px;
     }
     
     .navbar {
-        top: 0;
+        position: sticky;
+        top: 30px; /* Pegada debajo de la barra superior */
     }
     
     .portada {
