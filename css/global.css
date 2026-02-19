@@ -7,11 +7,31 @@ body {
   margin: 0;
   padding-top: 10vw; /* Aumentado para evitar que la barra tape el contenido */
   overflow-x: hidden;
-  background: url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive-horizontal.png');
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  
+  /* 1. Color base de seguridad (mientras carga todo) */
+  background-color: rgb(255, 254, 173);
+
+  /* 2. Imagen principal Y Gradiente de simulación (se muestra mientras carga la imagen) */
+  background-image: 
+    url('../multimedia/img/fondo-ministerio-de-restauracion-jesucristo-vive-horizontal.png'),
+    linear-gradient(180deg, 
+      rgb(255, 254, 173) 0%, 
+      rgb(255, 254, 173) 4%, rgb(252, 174, 111) 4.2%, rgb(255, 254, 173) 4.4%, /* Veta muy fina */
+      rgb(255, 254, 173) 12%, rgb(252, 174, 111) 13%, rgb(255, 254, 173) 14%, /* Veta gruesa y suave */
+      rgb(255, 254, 173) 22%, rgb(252, 174, 111) 22.3%, rgb(255, 254, 173) 22.6%, /* Veta media */
+      rgb(255, 254, 173) 35%, rgb(252, 174, 111) 35.2%, rgb(255, 254, 173) 35.4%, /* Veta fina */
+      rgb(255, 254, 173) 48%, rgb(252, 174, 111) 49.5%, rgb(255, 254, 173) 51%, /* Veta muy ancha */
+      rgb(255, 254, 173) 62%, rgb(252, 174, 111) 62.4%, rgb(255, 254, 173) 62.8%, /* Veta media */
+      rgb(255, 254, 173) 75%, rgb(252, 174, 111) 75.2%, rgb(255, 254, 173) 75.4%, /* Veta fina */
+      rgb(255, 254, 173) 88%, rgb(252, 174, 111) 89%, rgb(255, 254, 173) 90%, /* Veta gruesa */
+      rgb(255, 254, 173) 100%
+    );
+
+  /* Configuración para ambas capas (Imagen y Gradiente) */
+  background-size: 100% 100%, 100% 100%;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
 
 }
 
