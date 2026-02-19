@@ -1,0 +1,35 @@
+name: Actualizar Devocional Diario
+
+on:
+  workflow_dispatch: # Permite la ejecución manual desde la pestaña "Actions"
+  schedule:
+    # Se ejecuta todos los días a las 6:00 AM UTC (1:00 AM en Colombia).
+    # Esto le da tiempo al pastor de subir el video del día.
+    - cron: '0 6 * * *'
+
+jobs:
+  actualizar-devocional:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout del Repositorio
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Usar una versión de Node que soporte fetch de forma nativa
+
+      - name: 3. Ejecutar script de actualización
+        env:
+          API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
+        run: node js/actualizar_devocional.js
+
+      - name: 4. Confirmar y Empujar cambios
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'github-actions-bot@users.noreply.github.com'
+          git add *.html
+          # Solo commitea y empuja si hay cambios en los archivos HTML
+          git diff --staged --quiet || (git commit -m "BOT: ✨ Actualizar video del devocional y cita del día" && git push)
