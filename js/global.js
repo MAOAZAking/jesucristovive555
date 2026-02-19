@@ -3,6 +3,13 @@
 // El HTML ya contiene el enlace correcto.
 console.log("Devocional cargado estáticamente.");
 
+
+//CREA ANIMAICON DE CAMBIO DE FONDO DE COLORES A IMAGEN
+  window.addEventListener("load", function () {
+    document.querySelector(".bg-real").classList.add("visible");
+  });
+
+
 //////////////////////////////////////////CONTROLES DE AUDIO CON SVG//////////////////////////////////////////
 
 // Iteramos sobre todos los reproductores de audio en la página para manejar múltiples instancias
