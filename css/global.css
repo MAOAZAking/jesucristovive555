@@ -3,6 +3,7 @@ html {
   overflow-x: hidden;
 }
 
+/* colores simples de fondo mientras se carga la imagen */
 body { 
   margin: 0;
   padding-top: 10vw;
@@ -42,7 +43,7 @@ body {
   background-attachment: fixed;
 }
 
-
+/* ajuste de la imagen real con animacion de enfocado paso de color plano a imagen */
 .bg-real {
   position: fixed;
   inset: 0;
