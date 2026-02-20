@@ -3,9 +3,9 @@ name: Actualizar Devocional Diario
 on:
   workflow_dispatch: # Permite la ejecución manual desde la pestaña "Actions"
   schedule:
-    # Se ejecuta todos los días a las 6:00 AM UTC (1:00 AM en Colombia).
+    # Se ejecuta todos los días a las 10:15 AM UTC (5:15 AM en Colombia).
     # Esto le da tiempo al pastor de subir el video del día.
-    - cron: '0 6 * * *'
+    - cron: '15 10 * * *'
 
 permissions:
   contents: write
