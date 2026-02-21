@@ -1,7 +1,7 @@
 [
     {
         "nombredeusuario": "MAOAZAking",
-        "nombrecompleto":"Miguel Angel Ortega Ayala",
+        "nombrecompleto": "Miguel Angel Ortega Ayala",
         "contrasena": "ENV:ADMIN_PASS_MAOAZAKING",
         "roles": "ministro-de-alabanza",
         "credenciales": "all",
@@ -10,12 +10,12 @@
         "fotodeperfil": "MAOAZAKING_FOTO_DE_PERFIL"
     },
     {
-        "nombredeusuario": "Sebitas",
+        "nombredeusuario": "Sebis",
         "nombrecompleto": "Sebastian David Muñoz Rodriguez",
-        "contrasena": "",
+        "contrasena": "sebis123+",
         "roles": "ministro-de-alabanza",
         "credenciales": "ministerio-de-alabanza",
-        "urlderedireccion": "crear-usuario.html",
+        "urlderedireccion": "contribucion-ministerio-alabanza.html",
         "datosfaciales": "SEBITAS_DATOS_FACIALES_JSON",
         "fotodeperfil": "SEBITAS_FOTO_DE_PERFIL"
     },
