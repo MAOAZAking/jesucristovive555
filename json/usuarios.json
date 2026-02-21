@@ -1,0 +1,42 @@
+[
+    {
+        "nombredeusuario": "MAOAZAking",
+        "nombrecompleto":"Miguel Angel Ortega Ayala",
+        "contrasena": "ENV:ADMIN_PASS_MAOAZAKING",
+        "roles": "ministro-de-alabanza",
+        "credenciales": "all",
+        "urlderedireccion": "contribucion-ministerio-alabanza.html",
+        "datosfaciales": "MAOAZAKING_DATOS_FACIALES_JSON",
+        "fotodeperfil": "MAOAZAKING_FOTO_DE_PERFIL"
+    },
+    {
+        "nombredeusuario": "Sebitas",
+        "nombrecompleto": "Sebastian David Muñoz Rodriguez",
+        "contrasena": "",
+        "roles": "ministro-de-alabanza",
+        "credenciales": "ministerio-de-alabanza",
+        "urlderedireccion": "crear-usuario.html",
+        "datosfaciales": "SEBITAS_DATOS_FACIALES_JSON",
+        "fotodeperfil": "SEBITAS_FOTO_DE_PERFIL"
+    },
+    {
+        "nombredeusuario": "Santy",
+        "nombrecompleto": "Daniel Santiago Muñoz Rodriguez",
+        "contrasena": "",
+        "roles": "ministro-de-alabanza",
+        "credenciales": "ministerio-de-alabanza",
+        "urlderedireccion": "crear-usuario.html",
+        "datosfaciales": "SANTY_DATOS_FACIALES_JSON",
+        "fotodeperfil": "SANTY_FOTO_DE_PERFIL"
+    },
+    {
+        "nombredeusuario": "equipo-alabanza",
+        "nombrecompleto": "",
+        "contrasena": "ministerio-de-alabanza-jesucristovive555",
+        "roles": "ministro-de-alabanza",
+        "credenciales": "ministerio-de-alabanza",
+        "urlderedireccion": "contribucion-ministerio-alabanza.html",
+        "datosfaciales": "EQUIPO_DE_ALABANZA_DATOS_FACIALES_JSON",
+        "fotodeperfil": "EQUIPO_DE_ALABANZA_FOTO_DE_PERFIL"
+    }
+]

@@ -1,0 +1,15 @@
+{
+  "name": "jesucristovive555",
+  "version": "1.0.0",
+  "description": "Sistema de validacion facial ministerio",
+  "main": "js/server.js",
+  "scripts": {
+    "start": "node js/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
