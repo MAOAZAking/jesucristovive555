@@ -10,12 +10,12 @@
         "fotodeperfil": "MAOAZAKING_FOTO_DE_PERFIL"
     },
     {
-        "nombredeusuario": "Sebis",
+        "nombredeusuario": "Sebitas",
         "nombrecompleto": "Sebastian David Muñoz Rodriguez",
-        "contrasena": "sebis123+",
+        "contrasena": "",
         "roles": "ministro-de-alabanza",
         "credenciales": "ministerio-de-alabanza",
-        "urlderedireccion": "contribucion-ministerio-alabanza.html",
+        "urlderedireccion": "crear-usuario.html",
         "datosfaciales": "SEBITAS_DATOS_FACIALES_JSON",
         "fotodeperfil": "SEBITAS_FOTO_DE_PERFIL"
     },
