@@ -89,13 +89,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
     <script src="js/datos_faciales.js"></script>
+    <script src="js/config_github.js"></script> <!-- Cargar Configuración Centralizada -->
     <script>
-        // CONFIGURACIÓN GITHUB (¡CUIDADO! NO SUBIR EL TOKEN REAL A UN REPO PÚBLICO SI ES POSIBLE EVITARLO)
-        const GITHUB_OWNER = 'MAOAZAking';
-        const GITHUB_REPO = 'jesucristovive555';
-        const GITHUB_PATH = 'json/usuarios.json';
-        const GITHUB_TOKEN = 'TU_TOKEN_DE_GITHUB_AQUI'; // <--- PEGA TU TOKEN AQUÍ
-
         document.addEventListener('DOMContentLoaded', async () => {
             const usuarioSesion = JSON.parse(sessionStorage.getItem('usuario_actual'));
             
@@ -203,12 +198,12 @@
         });
 
         async function actualizarGitHub(nuevoUsuario, nuevaPass) {
-            const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+            const url = `https://api.github.com/repos/${CONFIG_GITHUB.OWNER}/${CONFIG_GITHUB.REPO}/contents/${CONFIG_GITHUB.PATH_USUARIOS}`;
             
             try {
                 // A. Obtener el archivo actual (necesitamos el SHA)
                 const getResponse = await fetch(url, {
-                    headers: { 'Authorization': `Bearer ${GITHUB_TOKEN}` }
+                    headers: { 'Authorization': `Bearer ${CONFIG_GITHUB.TOKEN}` }
                 });
                 const getData = await getResponse.json();
                 const sha = getData.sha;
@@ -236,7 +231,7 @@
                 const putResponse = await fetch(url, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                        'Authorization': `Bearer ${CONFIG_GITHUB.TOKEN}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({

@@ -81,3 +81,27 @@ if (fs.existsSync(rutaUsuariosJson)) {
         console.error("❌ Error procesando usuarios.json:", error);
     }
 }
+
+// ==========================================
+// PARTE 3: CONFIGURACIÓN GITHUB CENTRALIZADA
+// ==========================================
+const rutaConfigGithub = path.join(__dirname, 'config_github.js');
+const githubToken = process.env.GITHUB_TOKEN;
+
+if (githubToken) {
+    const configContent = `const CONFIG_GITHUB = {
+    OWNER: '${process.env.GITHUB_OWNER}',
+    REPO: '${process.env.GITHUB_REPO}',
+    PATH_CANCIONES: 'json/canciones.json',
+    PATH_USUARIOS: 'json/usuarios.json',
+    TOKEN: '${githubToken}'
+};`;
+    try {
+        fs.writeFileSync(rutaConfigGithub, configContent, 'utf8');
+        console.log("✅ Archivo 'js/config_github.js' generado con token seguro.");
+    } catch (err) {
+        console.error("❌ Error generando config_github.js:", err);
+    }
+} else {
+    console.log("⚠️ No se detectó GITHUB_TOKEN. Se usará js/config_github.js local.");
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Canción - Ministerio Jesucristo ¡VIVE!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Kalam:wght@700&family=Playball&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <style>
+        body { color: white; }
+        .contenedor-cancion {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 100px;
+            margin-bottom: 50px;
+            color: black;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            min-height: 600px;
+        }
+        .titulo-cancion {
+            font-family: 'Kalam', cursive;
+            color: rgb(179, 74, 9);
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .tipo-cancion {
+            text-align: center;
+            font-family: 'Playball', cursive;
+            font-size: 1.5rem;
+            color: rgb(5, 5, 111);
+            margin-bottom: 30px;
+        }
+        .contenido-cancion {
+            font-family: 'Roboto Mono', monospace;
+            white-space: pre-wrap;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .linea-acordes { color: rgb(0, 0, 139); font-weight: bold; height: 1.5em; }
+        .linea-letra { color: black; margin-bottom: 15px; }
+        .acorde-link { 
+            color: rgb(0, 0, 139); 
+            cursor: pointer; 
+            border-bottom: 1px dotted blue; 
+            text-decoration: none;
+        }
+        .acorde-link:hover { color: red; }
+
+        /* Botones flotantes para instrumentos */
+        .botones-flotantes-derecha {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+        .btn-instrumento {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background-color: rgba(5, 5, 111, 0.9);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-instrumento:hover {
+            transform: scale(1.1);
+            background-color: rgb(179, 74, 9);
+        }
+        .btn-instrumento.activo {
+            background-color: rgb(179, 74, 9);
+            box-shadow: 0 0 15px #ffcc00;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-real visible"></div>
+
+    <!-- Botones Flotantes Instrumentos -->
+    <div class="botones-flotantes-derecha">
+        <button class="btn-instrumento activo" id="btn-guitarra" onclick="cambiarInstrumento('guitarra')" title="Guitarra">
+            🎸
+        </button>
+        <button class="btn-instrumento" id="btn-piano" onclick="cambiarInstrumento('piano')" title="Piano">
+            🎹
+        </button>
+    </div>
+
+    <div class="barra-superior">MINISTERIO DE RESTAURACIÓN JESUCRISTO ¡VIVE!</div>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="contribucion-ministerio-alabanza.html"><i class="bi bi-arrow-left-circle"></i> Volver al Listado</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="contenedor-cancion">
+                    <h1 id="titulo" class="titulo-cancion">Cargando...</h1>
+                    <div id="tipo" class="tipo-cancion"></div>
+                    <hr>
+                    <div id="contenido" class="contenido-cancion"></div>
+                    
+                    <!-- Sección de Metadatos -->
+                    <div class="mt-5 pt-3 border-top text-center text-muted small fst-italic">
+                        <p id="info-implementacion" class="mb-1"></p>
+                        <p id="info-edicion" class="mb-0"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Acordes (Igual que en el editor) -->
+    <div class="modal fade" id="modalAcorde" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="titulo-acorde-modal">Acorde</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" id="imagen-acorde-modal" alt="Diagrama" style="max-width:100%;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Obtener ID de la URL
+            const params = new URLSearchParams(window.location.search);
+            const idCancion = params.get('id');
+
+            if (!idCancion) {
+                document.getElementById('titulo').innerText = "Canción no especificada";
+                return;
+            }
+
+            // 2. Buscar la canción (Primero en LocalStorage para inmediatez, luego GitHub si hiciera falta)
+            // Usamos la misma clave 'canciones_local' que definiremos en la página de administración
+            const cancionesLocal = localStorage.getItem('canciones_local');
+            let cancion = null;
+
+            if (cancionesLocal) {
+                const lista = JSON.parse(cancionesLocal);
+                cancion = lista.find(c => c.id === idCancion);
+            }
+
+            if (cancion) {
+                renderizarCancion(cancion);
+            } else {
+                // Si no está en local, intentar cargar de GitHub (fallback)
+                // Aquí podrías poner tu fetch a GitHub si quisieras robustez extra
+                document.getElementById('titulo').innerText = "Canción no encontrada (o sincronizando...)";
+            }
+        });
+
+        function renderizarCancion(c) {
+            document.title = `${c.titulo} - Ministerio Jesucristo ¡VIVE!`;
+            document.getElementById('titulo').innerText = c.titulo;
+            document.getElementById('tipo').innerText = c.tipo;
+            document.getElementById('contenido').innerHTML = procesarTextoCancion(c.contenido);
+            
+            // Mostrar Metadatos
+            const infoImpl = document.getElementById('info-implementacion');
+            const infoEdic = document.getElementById('info-edicion');
+            
+            if (c.creadoPor) {
+                infoImpl.innerHTML = `Implementado por: <strong>${c.creadoPor}</strong> el ${c.fechaCreacion}`;
+            }
+            if (c.editadoPor) {
+                infoEdic.innerHTML = `Última revisión por: <strong>${c.editadoPor}</strong> el ${c.fechaEdicion}`;
+            }
+        }
+
+        // Misma lógica de procesamiento que en el editor
+        function procesarTextoCancion(texto) {
+            if (!texto) return '';
+            const lineas = texto.split('\n');
+            let html = '';
+            lineas.forEach(linea => {
+                if (esLineaDeAcordes(linea)) {
+                    const lineaProcesada = linea.replace(/([A-G][#b]?(?:m|maj|min|dim|aug|sus|add|7|9|11|13|5|6)?(?:\/[A-G][#b]?)?)/g, 
+                        '<a class="acorde-link" onclick="verAcorde(\'$1\')">$1</a>');
+                    html += `<div class="linea-acordes">${lineaProcesada}</div>`;
+                } else {
+                    html += `<div class="linea-letra">${linea}</div>`;
+                }
+            });
+            return html;
+        }
+
+        function esLineaDeAcordes(linea) {
+            const lineaTrim = linea.trim();
+            if (lineaTrim.length === 0) return false;
+            const palabras = lineaTrim.split(/\s+/);
+            const regexAcorde = /^[A-G][#b]?(?:m|maj|min|dim|aug|sus|add|7|9|11|13|5|6)?(?:\/[A-G][#b]?)?$/;
+            const conteoAcordes = palabras.filter(p => regexAcorde.test(p)).length;
+            return (conteoAcordes / palabras.length) > 0.8;
+        }
+
+        let instrumentoActual = 'guitarra'; // Instrumento por defecto
+
+        function cambiarInstrumento(instrumento) {
+            instrumentoActual = instrumento;
+            // Actualizar estilo de botones
+            document.querySelectorAll('.btn-instrumento').forEach(btn => btn.classList.remove('activo'));
+            document.getElementById(`btn-${instrumento}`).classList.add('activo');
+        }
+
+        function verAcorde(nombreAcorde) {
+            const nombreArchivo = nombreAcorde.replace('#', 's').replace('/', '_'); 
+            document.getElementById('titulo-acorde-modal').innerText = `Acorde (${instrumentoActual}): ${nombreAcorde}`;
+            // Ruta actualizada con la carpeta del instrumento seleccionado
+            document.getElementById('imagen-acorde-modal').src = `multimedia/img/ministerio-de-alabanza/acordes/${instrumentoActual}/${nombreArchivo}.png`; 
+            document.getElementById('imagen-acorde-modal').onerror = function() {
+                this.src = 'multimedia/img/logo-1-ministerio-de-restauracion-jesucristo-¡vive!.png';
+            };
+            new bootstrap.Modal(document.getElementById('modalAcorde')).show();
+        }
+    </script>
+</body>
+</html>
