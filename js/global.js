@@ -265,7 +265,7 @@ function verAcorde(nombreAcorde) {
 
     if(tituloModal && imgModal && modalEl) {
         tituloModal.innerText = `Acorde (${instrumentoActual}): ${nombreAcorde}`;
-        imgModal.src = `multimedia/img/ministerio-de-alabanza/acordes/${instrumentoActual}/${nombreArchivo}.png`; 
+        imgModal.src = `multimedia/svg/ministerio-de-alabanza/acordes/${instrumentoActual}/${nombreArchivo}.svg`; 
         imgModal.onerror = function() {
             this.src = 'multimedia/img/logo-1-ministerio-de-restauracion-jesucristo-¡vive!.png';
         };
