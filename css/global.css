@@ -984,3 +984,52 @@ footer {
 .copyright{
   font-size: 2.08vw; /* 40px en 1920px */
 }
+
+/* =========================================
+   ESTILOS COMPARTIDOS (MÚSICA Y ACORDES)
+   ========================================= */
+.linea-acordes { color: rgb(0, 0, 139); font-weight: bold; min-height: 1.5em; }
+.linea-letra { color: black; margin-bottom: 15px; }
+.acorde-link { 
+    color: rgb(0, 0, 139); 
+    cursor: pointer; 
+    border-bottom: 1px dotted blue; 
+    text-decoration: none;
+}
+.acorde-link:hover { color: red; background-color: rgba(0,0,255,0.1); }
+
+/* Botones flotantes para instrumentos */
+.botones-flotantes-derecha {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+}
+.btn-instrumento {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background-color: rgba(5, 5, 111, 0.9);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-instrumento:hover {
+    transform: scale(1.1);
+    background-color: rgb(179, 74, 9);
+}
+.btn-instrumento.activo {
+    background-color: rgb(179, 74, 9);
+    box-shadow: 0 0 15px #ffcc00;
+    transform: scale(1.1);
+}

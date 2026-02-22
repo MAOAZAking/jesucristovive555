@@ -1,0 +1,46 @@
+/* Estilos específicos para la validación facial */
+#contenedor-validacion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(5, 5, 111);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+#video-input {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+    border: 4px solid red;
+    margin-bottom: 20px;
+    /* Espejo para que se sienta natural */
+    transform: scaleX(-1); 
+}
+
+.mensaje-estado {
+    font-family: 'Playball', cursive;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.spinner-facial {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: red;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

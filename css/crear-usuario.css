@@ -1,0 +1,31 @@
+body { color: white; }
+.card-registro {
+    background: rgba(5, 5, 111, 0.9);
+    border: 2px solid red;
+    border-radius: 15px;
+    margin-top: 50px;
+}
+.titulo-bienvenida {
+    font-family: 'Kalam', cursive;
+    color: #ffcc00;
+    text-shadow: 2px 2px 4px black;
+}
+#video-validacion {
+    width: 100%;
+    border-radius: 10px;
+    display: none; /* Oculto hasta que se valide */
+    transform: scaleX(-1);
+}
+.mensaje-flotante {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 128, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 10000;
+    display: none;
+    font-family: 'Playball', cursive;
+    font-size: 1.5rem;
+}

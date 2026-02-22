@@ -217,3 +217,58 @@ if (btnAnterior) btnAnterior.addEventListener('click', (e) => {
     indiceActual = (indiceActual - 1 + imagenesActuales.length) % imagenesActuales.length;
     actualizarImagenLightbox();
 });
+
+/* =========================================
+   LÓGICA COMPARTIDA DE MÚSICA Y ACORDES
+   ========================================= */
+let instrumentoActual = 'guitarra'; // Instrumento por defecto
+
+function procesarTextoCancion(texto) {
+    if (!texto) return '';
+    const lineas = texto.split('\n');
+    let html = '';
+    lineas.forEach(linea => {
+        if (esLineaDeAcordes(linea)) {
+            const lineaProcesada = linea.replace(/([A-G][#b]?(?:m|maj|min|dim|aug|sus|add|7|9|11|13|5|6)?(?:\/[A-G][#b]?)?)/g, 
+                '<a class="acorde-link" onclick="verAcorde(\'$1\')">$1</a>');
+            html += `<div class="linea-acordes">${lineaProcesada}</div>`;
+        } else {
+            html += `<div class="linea-letra">${linea}</div>`;
+        }
+    });
+    return html;
+}
+
+function esLineaDeAcordes(linea) {
+    const lineaTrim = linea.trim();
+    if (lineaTrim.length === 0) return false;
+    const palabras = lineaTrim.split(/\s+/);
+    const regexAcorde = /^[A-G][#b]?(?:m|maj|min|dim|aug|sus|add|7|9|11|13|5|6)?(?:\/[A-G][#b]?)?$/;
+    const conteoAcordes = palabras.filter(p => regexAcorde.test(p)).length;
+    return (conteoAcordes / palabras.length) > 0.8;
+}
+
+function cambiarInstrumento(instrumento) {
+    instrumentoActual = instrumento;
+    // Actualizar estilo de botones
+    document.querySelectorAll('.btn-instrumento').forEach(btn => btn.classList.remove('activo'));
+    const btn = document.getElementById(`btn-${instrumento}`);
+    if(btn) btn.classList.add('activo');
+}
+
+// La función verAcorde depende del modal en el HTML, se mantiene genérica aquí pero requiere el modal en el DOM
+function verAcorde(nombreAcorde) {
+    const nombreArchivo = nombreAcorde.replace('#', 's').replace('/', '_'); 
+    const tituloModal = document.getElementById('titulo-acorde-modal');
+    const imgModal = document.getElementById('imagen-acorde-modal');
+    const modalEl = document.getElementById('modalAcorde');
+
+    if(tituloModal && imgModal && modalEl) {
+        tituloModal.innerText = `Acorde (${instrumentoActual}): ${nombreAcorde}`;
+        imgModal.src = `multimedia/img/ministerio-de-alabanza/acordes/${instrumentoActual}/${nombreArchivo}.png`; 
+        imgModal.onerror = function() {
+            this.src = 'multimedia/img/logo-1-ministerio-de-restauracion-jesucristo-¡vive!.png';
+        };
+        new bootstrap.Modal(modalEl).show();
+    }
+}
