@@ -5,9 +5,23 @@ console.log("Devocional cargado estáticamente.");
 
 
 //CREA ANIMAICON DE CAMBIO DE FONDO DE COLORES A IMAGEN
-  window.addEventListener("load", function () {
+window.addEventListener("load", function () {
     document.querySelector(".bg-real").classList.add("visible");
-  });
+});
+
+
+/****************** PRECARGA DE MODELOS RF ******************/
+// Esto descarga los modelos en la caché del navegador para que el login sea instantáneo
+window.addEventListener('load', () => {
+    if (typeof faceapi !== 'undefined') {
+        console.log("Precargando modelos de reconocimiento facial...");
+        Promise.all([
+            faceapi.nets.ssdMobilenetv1.loadFromUri('modelos_rf'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('modelos_rf'),
+            faceapi.nets.faceRecognitionNet.loadFromUri('modelos_rf')
+        ]).then(() => console.log("Modelos precargados en caché.")).catch(e => console.log("Nota: Precarga fallida (normal si es primera vez u offline)", e));
+    }
+});
 
 
 //////////////////////////////////////////CONTROLES DE AUDIO CON SVG//////////////////////////////////////////
@@ -191,7 +205,7 @@ document.addEventListener('click', (e) => {
         imagenesActuales = Array.from(document.querySelectorAll('.imagenes-seccion-galeria'));
         indiceActual = imagenesActuales.indexOf(e.target);
         
-        if (indiceActual !== -1) {
+        if (indiceActual !== -1 && lightbox) {
             actualizarImagenLightbox();
             lightbox.style.display = 'flex';
         }
@@ -199,11 +213,13 @@ document.addEventListener('click', (e) => {
 });
 
 // Cerrar al hacer clic en la X o fuera de la imagen (en el fondo oscuro)
-lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox || e.target === botonCerrarLightbox) {
-        lightbox.style.display = 'none';
-    }
-});
+if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox || e.target === botonCerrarLightbox) {
+            lightbox.style.display = 'none';
+        }
+    });
+}
 
 // Navegación (Bucle infinito)
 if (btnSiguiente) btnSiguiente.addEventListener('click', (e) => {
@@ -259,16 +275,25 @@ function cambiarInstrumento(instrumento) {
 // La función verAcorde depende del modal en el HTML, se mantiene genérica aquí pero requiere el modal en el DOM
 function verAcorde(nombreAcorde) {
     const nombreArchivo = nombreAcorde.replace('#', 's').replace('/', '_'); 
-    const tituloModal = document.getElementById('titulo-acorde-modal');
-    const imgModal = document.getElementById('imagen-acorde-modal');
-    const modalEl = document.getElementById('modalAcorde');
+    
+    // 1. Intentar usar el nuevo visor en línea (si existe en la página)
+    const contenedorVisor = document.getElementById('contenedor-visor-acorde');
+    const nombreVisor = document.getElementById('nombre-acorde-visor');
+    const imgVisor = document.getElementById('imagen-acorde-visor');
 
-    if(tituloModal && imgModal && modalEl) {
-        tituloModal.innerText = `Acorde (${instrumentoActual}): ${nombreAcorde}`;
-        imgModal.src = `multimedia/svg/ministerio-de-alabanza/acordes/${instrumentoActual}/${nombreArchivo}.svg`; 
-        imgModal.onerror = function() {
+    if (contenedorVisor && nombreVisor && imgVisor) {
+        nombreVisor.innerText = `${nombreAcorde}`;
+        imgVisor.src = `multimedia/svg/ministerio-de-alabanza/acordes/${instrumentoActual}/${nombreArchivo}.svg`;
+        imgVisor.onerror = function() {
             this.src = 'multimedia/img/logo-1-ministerio-de-restauracion-jesucristo-¡vive!.png';
         };
-        new bootstrap.Modal(modalEl).show();
+        contenedorVisor.style.display = 'block';
+    } else {
+        // 2. Fallback: Si no existe el visor, intentar con el modal antiguo (por compatibilidad)
+        const modalEl = document.getElementById('modalAcorde');
+        if(modalEl) {
+            // Lógica antigua omitida, priorizamos el visor
+            console.warn("No se encontró el contenedor del visor de acordes.");
+        }
     }
 }

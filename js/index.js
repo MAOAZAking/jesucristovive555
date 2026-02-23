@@ -92,3 +92,16 @@
                 console.log("Descargando prédica...");
             });
         }
+
+/****************** PRECARGA DE MODELOS FACE-API ******************/
+// Esto descarga los modelos en la caché del navegador para que el login sea instantáneo
+window.addEventListener('load', () => {
+    if (typeof faceapi !== 'undefined') {
+        console.log("Precargando modelos de reconocimiento facial...");
+        Promise.all([
+            faceapi.nets.ssdMobilenetv1.loadFromUri('/modelos_rf'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('/modelos_rf'),
+            faceapi.nets.faceRecognitionNet.loadFromUri('/modelos_rf')
+        ]).then(() => console.log("Modelos precargados en caché.")).catch(e => console.log("Nota: Precarga fallida (normal si es primera vez u offline)", e));
+    }
+});

@@ -1,21 +1,25 @@
 body { color: white; }
         
 .contenedor-gestion {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.95); /* Fondo blanco para leer texto negro */
     border-radius: 15px;
     padding: 30px;
     margin-top: 100px;
     margin-bottom: 50px;
-    color: black;
+    color: black; /* Texto negro */
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: none;
 }
 
 .titulo-gestion {
     font-family: 'Kalam', cursive;
-    color: rgb(179, 74, 9);
+    color: red; /* Rojo ministerio */
     text-align: center;
     margin-bottom: 30px;
     font-size: 2.5rem;
+    text-shadow: 0 0 1px white;
+    -webkit-text-stroke: 1px white;
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
 }
 
 .btn-opcion-grande {
@@ -23,20 +27,27 @@ body { color: white; }
     font-size: 1.5rem;
     font-family: 'Playball', cursive;
     border-radius: 15px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
     width: 100%;
     margin-bottom: 20px;
-    border: 3px solid transparent;
+    border: 3px solid;
 }
 
-.btn-agregar { background-color: rgb(5, 5, 111); color: white; }
-.btn-editar { background-color: rgb(179, 74, 9); color: white; }
+.btn-agregar { background-color: rgb(5, 5, 111); color: white; border-color: rgb(5, 5, 111); }
+.btn-editar { background-color: rgb(179, 74, 9); color: white; border-color: rgb(179, 74, 9); }
 
-.btn-opcion-grande:hover {
+.btn-agregar:hover {
+    background-color: white;
+    color: rgb(5, 5, 111);
     transform: scale(1.02);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    color: white;
-    border-color: #ffcc00;
+}
+
+.btn-editar:hover {
+    background-color: white;
+    color: rgb(179, 74, 9);
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .editor-container { display: none; animation: fadeIn 0.5s; }
@@ -46,26 +57,97 @@ body { color: white; }
     white-space: pre;
     min-height: 300px;
     font-size: 14px;
-    background-color: #f8f9fa;
+    background-color: white;
     border: 2px solid #ccc;
 }
 
 #vista-previa-cancion {
-    background-color: white;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 10px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 0;
     font-family: 'Roboto Mono', monospace;
     white-space: pre; /* Mantiene la alineación exacta */
     overflow-x: auto; /* Permite scroll horizontal en la vista previa */
     margin-top: 20px;
-    min-height: 200px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    font-size: 16px; /* Coincide con el tamaño de la vista final */
+    line-height: 1.6; /* Coincide con el interlineado de la vista final */
+    min-height: auto;
+    box-shadow: none;
 }
 
+#imagen-acorde-modal { max-width: 100%; height: auto; }
+
+/* Estilos para el nuevo listado de canciones */
+.item-lista-cancion {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+.item-lista-cancion:hover {
+    background-color: #f8f9fa;
+    border-color: #ffcc00; /* Borde dorado al hover */
+}
+.titulo-cancion-lista {
+    font-weight: 500;
+    color: black;
+    flex-grow: 1;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.1rem;
+}
+.btn-editar-lista {
+    color: #ffcc00; /* Color dorado para el botón */
+    background: none;
+    border: none;
+    padding: 5px;
+    transition: transform 0.2s;
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+.btn-editar-lista:hover {
+    transform: scale(1.2);
+    color: rgb(5, 5, 111);
+}
 .buscador-container { display: none; margin-bottom: 20px; }
 .item-cancion { cursor: pointer; transition: background 0.2s; }
 .item-cancion:hover { background-color: #f0f0f0; }
+
+/* Estilos para el buscador en modo oscuro */
+#input-busqueda {
+    background-color: white;
+    border: 1px solid #ced4da;
+    color: black;
+}
+#input-busqueda::placeholder {
+    color: #6c757d;
+}
+.input-group-text {
+    background-color: white !important;
+    border: 1px solid #ced4da !important;
+    color: #6c757d !important;
+}
+
+/* Estilos para títulos dentro del editor (Nueva Canción, Vista Previa) */
+#titulo-editor, h4 {
+    font-family: 'Kalam', cursive;
+    color: red;
+    text-shadow: 0 0 1px white;
+    -webkit-text-stroke: 1px white;
+    filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
+}
+
+.form-label {
+    color: black;
+    font-weight: bold;
+}
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }

@@ -26,7 +26,44 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     </head>
 <body>
-    <div class="bg-real visible"></div>
+    <!-- Carga la imagen real de fondo para transicion de colores a imagen -->
+    <div class="bg-real"></div>
+
+    
+    <div class="barra-superior text-center">Servicios: Domingos 9:30 AM | Miércoles 7:00 PM | Vienes 6:00 PM</div>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <div class="contenedor-texto-ministerio-de-restauracion-jesucristo-vive">
+                    <span class="col-left">
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-ministerio-de-restauracion">Ministerio de</b>
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-ministerio-de-restauracion">Restauración </b>
+                    </span>
+                    <span class="col-right">
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-jesucris-o">Jesucris</b>
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-t-forma-cruz">t</b>
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-jesucris-o">o </b>
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-vive"> ¡VIVE!</b>
+                    </span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu-principal">
+                <ul class="navbar-nav flex-grow-1 justify-content-evenly ms-lg-5">
+                    <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="index.html"><i class="bi bi-house-door-fill"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="ministerio.html"><i class="bi bi-people-fill"></i> Ministerios</a></li>
+                    <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="multimedia.html"><i class="bi bi-play-circle-fill"></i> Multimedia</a></li>
+                    <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="contacto.html"><i class="bi bi-envelope-fill"></i> Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <a class="navbar-brand opciones-barra-de-navegacion " href="###" onclick="history.back(); return false;"><i class="bi bi-arrow-left-circle"></i> Volver al Listado</a>
+    </div>
 
     <!-- Botones Flotantes Instrumentos -->
     <div class="botones-flotantes-derecha">
@@ -38,19 +75,23 @@
         </button>
     </div>
 
-    <div class="barra-superior">MINISTERIO DE RESTAURACIÓN JESUCRISTO ¡VIVE!</div>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="contribucion-ministerio-alabanza.html"><i class="bi bi-arrow-left-circle"></i> Volver al Listado</a>
-        </div>
-    </nav>
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="contenedor-cancion">
-                    <h1 id="titulo" class="titulo-cancion">Cargando...</h1>
-                    <div id="tipo" class="tipo-cancion"></div>
+                    <div class="row align-items-center">
+                        <div class="col-md-3 d-flex justify-content-center">
+                            <!-- Nuevo Visor de Acordes (Inicialmente oculto) -->
+                            <div id="contenedor-visor-acorde" style="display: none; width: 100%; max-width: 180px; background: #fff; padding: 10px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #eee; text-align: center;">
+                                <h5 id="nombre-acorde-visor" style="font-family: 'Roboto Mono', monospace; font-weight: bold; color: rgb(179, 74, 9); margin-bottom: 5px;"></h5>
+                                <img id="imagen-acorde-visor" src="" class="img-fluid" alt="Acorde" style="max-height: 150px;">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h1 id="titulo" class="titulo-cancion">Cargando...</h1>
+                            <div id="tipo" class="tipo-cancion"></div>
+                        </div>
+                    </div>
                     <hr>
                     <div id="contenido" class="contenido-cancion"></div>
                     
@@ -59,21 +100,6 @@
                         <p id="info-implementacion" class="mb-1"></p>
                         <p id="info-edicion" class="mb-0"></p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Acordes (Igual que en el editor) -->
-    <div class="modal fade" id="modalAcorde" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="titulo-acorde-modal">Acorde</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <img src="" id="imagen-acorde-modal" alt="Diagrama" style="max-width:100%;">
                 </div>
             </div>
         </div>

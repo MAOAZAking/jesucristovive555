@@ -1,17 +1,62 @@
-/* Estilos específicos para la validación facial */
-#contenedor-validacion {
+/* Fondo Simulado */
+#fondo-simulado {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(5, 5, 111);
+    z-index: 0;
+    overflow-y: auto; /* Permite interactuar/scrollear */
+}
+
+/* Clase para aplicar la "tela negra transparentosa" */
+.fondo-con-overlay::after {
+    content: "";
+    position: fixed; /* Cambiado a fixed para cubrir toda la pantalla al hacer scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Negro transparentoso */
+    z-index: 9998; /* Debajo de las alertas pero encima del contenido */
+    pointer-events: none; /* Permite interactuar con lo que hay debajo */
+    transition: background-color 0.5s ease;
+}
+
+/* Contenedor de Alertas */
+#contenedor-alertas {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 9999;
+    width: 90%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 15px;
+}
+
+.alerta-flotante {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Playball', cursive;
+    font-size: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    animation: slideDown 0.5s ease-out;
+}
+
+.alerta-carga {
+    background: rgba(5, 5, 111, 0.95);
     color: white;
+    border: 2px solid white;
+}
+
+.alerta-error {
+    background: rgba(179, 9, 9, 0.95);
+    color: white;
+    border: 2px solid #ffcc00;
 }
 
 #video-input {
@@ -24,11 +69,20 @@
     transform: scaleX(-1); 
 }
 
+/* Clase para ocultar el video sin detener su renderizado (necesario para face-api) */
+.video-oculto {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+}
+
 .mensaje-estado {
     font-family: 'Playball', cursive;
     font-size: 2rem;
     text-align: center;
     margin-top: 20px;
+    color: rgb(5, 5, 111);
 }
 
 .spinner-facial {
@@ -43,4 +97,41 @@
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Estilos para la alerta de éxito a pantalla completa */
+#alerta-exito-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 5, 111, 0.95); /* Fondo azul oscuro sólido */
+    z-index: 10001; /* Por encima de todo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+#alerta-exito-fullscreen h1 {
+    font-family: 'Kalam', cursive;
+    font-size: 4rem;
+    color: #ffcc00;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px black;
+}
+
+#alerta-exito-fullscreen p {
+    font-family: 'Playball', cursive;
+    font-size: 2.5rem;
 }

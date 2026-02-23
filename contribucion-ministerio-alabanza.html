@@ -21,12 +21,49 @@
         <link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
         
         <link rel="stylesheet" href="css/global.css">
-        <link rel="stylesheet" href="css/contribucion-ministerio-alabanza.css">
-        <!-- Fuente adicional para editor -->
+        <link rel="stylesheet" href="css/visualizar-cancion.css">
+        <!-- Fuente adicional para acordes -->
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     </head>
 <body>
-    <div class="bg-real visible"></div>
+    <!-- Carga la imagen real de fondo para transicion de colores a imagen -->
+    <div class="bg-real"></div>
+
+    
+    <div class="barra-superior text-center">Servicios: Domingos 9:30 AM | Miércoles 7:00 PM | Vienes 6:00 PM</div>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <div class="contenedor-texto-ministerio-de-restauracion-jesucristo-vive">
+                    <span class="col-left">
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-ministerio-de-restauracion">Ministerio de</b>
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-ministerio-de-restauracion">Restauración </b>
+                    </span>
+                    <span class="col-right">
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-jesucris-o">Jesucris</b>
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-t-forma-cruz">t</b>
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-jesucris-o">o </b>
+                        <b class="estilo-ministerio-de-restauracion-jesucristo-vive" id="estilo-vive"> ¡VIVE!</b>
+                    </span>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-principal" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu-principal">
+                <ul class="navbar-nav flex-grow-1 justify-content-evenly ms-lg-5">
+                    <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="index.html"><i class="bi bi-house-door-fill"></i> Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="ministerio.html"><i class="bi bi-people-fill"></i> Ministerios</a></li>
+                    <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="multimedia.html"><i class="bi bi-play-circle-fill"></i> Multimedia</a></li>
+                    <li class="nav-item"><a class="nav-link opciones-barra-de-navegacion" href="contacto.html"><i class="bi bi-envelope-fill"></i> Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <a class="navbar-brand opciones-barra-de-navegacion " href="###" onclick="history.back(); history.back(); return false;"><i class="bi bi-arrow-left-circle"></i> Regresar</a>
+    </div>
     
     <!-- Botones Flotantes Instrumentos -->
     <div class="botones-flotantes-derecha">
@@ -38,50 +75,47 @@
         </button>
     </div>
 
-    <div class="barra-superior">MINISTERIO DE RESTAURACIÓN JESUCRISTO ¡VIVE!</div>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="who-logs-in.html"><i class="bi bi-arrow-left-circle"></i> Volver al Inicio</a>
-        </div>
-    </nav>
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="contenedor-gestion">
-                    <h1 class="titulo-gestion">Gestión de Alabanza y Adoración</h1>
+                    <h1 class="titulo-gestion titulos-grandes" id="titulos-grandes-centrados">Gestión de Alabanza y Adoración</h1>
 
-                    <!-- Menú Principal -->
-                    <div id="menu-principal" class="row">
-                        <div class="col-md-6">
-                            <button class="btn btn-opcion-grande btn-agregar" onclick="mostrarAgregar()">
+                    <!-- Vista Principal (Buscador y Listas) -->
+                    <div id="vista-principal">
+                        <div class="row mb-4 align-items-center">
+                            <div class="col-md-5 mb-3 mb-md-0 opciones-barra-de-navegacion">
+                                <button class="btn btn-opcion-grande btn-agregar mb-0 py-2 fs-5 opciones-barra-de-navegacion" onclick="mostrarAgregar()">
                                 <i class="bi bi-plus-circle-dotted"></i> AGREGAR CANCIÓN
                             </button>
                         </div>
-                        <div class="col-md-6">
-                            <button class="btn btn-opcion-grande btn-editar" onclick="mostrarBuscar()">
-                                <i class="bi bi-pencil-square"></i> EDITAR UNA CANCIÓN
-                            </button>
+                            <div class="col-md-7">
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text border-end-0"><i class="bi bi-search"></i></span>
+                                    <input type="text" id="input-busqueda" class="form-control border-start-0" placeholder="Buscar por título o letra...">
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Sección Buscador -->
-                    <div id="seccion-buscador" class="buscador-container">
-                        <div class="d-flex gap-2 mb-3">
-                            <input type="text" id="input-busqueda" class="form-control" placeholder="Buscar por título o letra...">
-                            <select id="filtro-tipo-busqueda" class="form-select w-auto">
-                                <option value="todos">Todos</option>
-                                <option value="Alabanza">Alabanza</option>
-                                <option value="Adoracion">Adoración</option>
-                            </select>
-                            <button class="btn btn-secondary" onclick="volverAlMenu()">Cancelar</button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="text-center mb-3" style="font-family: 'Charm', cursive; color: rgb(5, 5, 111); font-weight: bold; font-size: 2rem;">Alabanza</h3>
+                                <div id="lista-alabanza" class="list-group list-group-flush">
+                                    <!-- Items se cargan aquí -->
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4 mt-md-0">
+                                <h3 class="text-center mb-3" style="font-family: 'Charm', cursive; color: rgb(179, 74, 9); font-weight: bold; font-size: 2rem;">Adoración</h3>
+                                <div id="lista-adoracion" class="list-group list-group-flush opciones-barra-de-navegacion">
+                                    <!-- Items se cargan aquí -->
+                                </div>
+                            </div>
                         </div>
-                        <div class="list-group" id="lista-resultados"></div>
                     </div>
 
                     <!-- Editor de Canción -->
-                    <div id="editor-cancion" class="editor-container">
-                        <h3 id="titulo-editor" class="mb-3" style="font-family: 'Charm', cursive; color: rgb(5, 5, 111);">Nueva Canción</h3>
+                    <div id="editor-cancion" class="editor-container" style="display: none;">
+                        <h3 id="titulo-editor" class="mb-3 opciones-barra-de-navegacion">Nueva Canción</h3>
                         
                         <form id="form-cancion">
                             <input type="hidden" id="id-cancion-actual">
@@ -91,11 +125,11 @@
                             
                             <div class="row mb-3">
                                 <div class="col-md-8">
-                                    <label class="form-label">Nombre de la Canción</label>
+                                    <label class="form-label opciones-barra-de-navegacion">Nombre de la Canción</label>
                                     <input type="text" id="nombre-cancion" class="form-control" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">Tipo</label>
+                                    <label class="form-label opciones-barra-de-navegacion">Tipo</label>
                                     <select id="tipo-cancion" class="form-select">
                                         <option value="Alabanza">Alabanza</option>
                                         <option value="Adoracion">Adoración</option>
@@ -104,14 +138,22 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Letra y Acordes (Cifrado Americano)</label>
+                                <label class="form-label opciones-barra-de-navegacion">Letra y Acordes (Cifrado Americano)</label>
                                 <p class="text-muted small">
                                     Escribe intercalado: una línea de acordes y abajo la letra. Usa espacios para ubicar el acorde.
                                 </p>
                                 <textarea id="contenido-cancion" class="form-control area-texto-cancion" placeholder="Escribe aquí..."></textarea>
                             </div>
 
-                            <h4 class="mt-4">Vista Previa (Escala Real)</h4>
+                            <div class="d-flex justify-content-between align-items-end mt-4">
+                                <h4 class="opciones-barra-de-navegacion">Vista Previa (Escala Real)</h4>
+                                <!-- Visor de Acordes en el Editor -->
+                                <div id="contenedor-visor-acorde" style="display: none; width: 120px; background: #fff; padding: 5px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #ccc; text-align: center;">
+                                    <small id="nombre-acorde-visor" style="font-weight: bold; color: rgb(179, 74, 9); display: block;"></small>
+                                    <img id="imagen-acorde-visor" src="" class="img-fluid" alt="Acorde">
+                                </div>
+                            </div>
+                            
                             <div id="vista-previa-cancion"></div>
 
                             <div class="d-grid gap-2 mt-4 d-md-flex justify-content-md-end">
@@ -123,22 +165,6 @@
                         </form>
                     </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Acordes -->
-    <div class="modal fade" id="modalAcorde" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="titulo-acorde-modal">Acorde</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <img src="" id="imagen-acorde-modal" alt="Diagrama">
-                    <p class="mt-2 text-muted">Así se hace este acorde.</p>
                 </div>
             </div>
         </div>

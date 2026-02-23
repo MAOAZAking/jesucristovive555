@@ -25,12 +25,17 @@
     </head>
     <body>
 
-        <!-- Contenedor de Validación Facial -->
-        <div id="contenedor-validacion">
-            <div class="spinner-facial"></div>
-            <h2 class="mensaje-estado" id="mensaje-estado">Cargando modelos de reconocimiento...</h2>
-            <!-- El video se mostrará aquí -->
-            <video id="video-input" autoplay muted playsinline></video>
+        <!-- Contenedor para simular la página anterior (Fondo) -->
+        <div id="fondo-simulado"></div>
+
+        <!-- Contenedor de Alertas Flotantes -->
+        <div id="contenedor-alertas"></div>
+
+        <!-- Contenedor Oculto de Validación Facial (Lógica) -->
+        <div id="logica-validacion" style="display: none;">
+            <h2 class="mensaje-estado" id="mensaje-estado">Iniciando...</h2>
+            <!-- El video se mantiene oculto pero funcional para el script -->
+            <video id="video-input" class="video-oculto" autoplay muted playsinline></video>
         </div>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

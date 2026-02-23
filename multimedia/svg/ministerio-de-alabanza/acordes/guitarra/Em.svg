@@ -1,10 +1,5 @@
 <svg width="150" height="180" xmlns="http://www.w3.org/2000/svg">
-
-  <!-- Título (NO se mueve) -->
-  <text x="60" y="15" text-anchor="middle" font-size="16" font-weight="bold">Em</text>
-
-  <!-- Todo lo demás baja 16px -->
-  <g transform="translate(0,16)">
+  <g>
 
     <!-- Cuerdas -->
     <line x1="20" y1="30" x2="20" y2="130" stroke="black"/>

@@ -6,39 +6,48 @@ document.addEventListener('DOMContentLoaded', async () => {
     const MAX_INTENTOS = 2;
     let usuarios = [];
 
-    // 1. Cargar Modelos y Usuarios
+    // 0. Cargar Fondo Simulado y Gestionar Permisos
+    cargarFondoSimulado();
+    gestionarPermisosCamara();
+
+    // 1. Carga Paralela (Modelos + Usuarios + Cámara) para máxima velocidad
     try {
-        mensaje.innerText = "Cargando modelos y usuarios...";
+        // No mostramos mensaje en el DOM oculto, usamos las alertas
+        // Promesas de carga de recursos
+        const pUsuarios = fetch('json/usuarios.json').then(res => res.json());
         
-        // Cargar JSON de usuarios
-        const response = await fetch('json/usuarios.json');
-        usuarios = await response.json();
+        const pModelos = Promise.all([
+            faceapi.nets.ssdMobilenetv1.loadFromUri('modelos_rf'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('modelos_rf'),
+            faceapi.nets.faceRecognitionNet.loadFromUri('modelos_rf')
+        ]);
 
-        // Cargar modelos de face-api (Asumiendo que la carpeta está en la raíz)
-        await faceapi.nets.ssdMobilenetv1.loadFromUri('/modelos_rf');
-        await faceapi.nets.faceLandmark68Net.loadFromUri('/modelos_rf');
-        await faceapi.nets.faceRecognitionNet.loadFromUri('/modelos_rf');
-
-        mensaje.innerText = "Solicitando acceso a la cámara...";
-        startVideo();
-    } catch (error) {
-        console.error(error);
-        mensaje.innerText = "Error cargando recursos. Verifica la consola.";
-    }
-
-    function startVideo() {
-        navigator.mediaDevices.getUserMedia({ video: {} })
+        // Promesa de cámara
+        const pCamara = navigator.mediaDevices.getUserMedia({ video: {} })
             .then(stream => {
                 video.srcObject = stream;
-            })
-            .catch(err => {
-                console.error(err);
-                mensaje.innerText = "Por favor, permite el acceso a la cámara.";
+                return new Promise((resolve) => {
+                    video.onloadedmetadata = () => {
+                        video.play();
+                        resolve();
+                    };
+                });
             });
+
+        // Esperar a que TODO esté listo
+        const [usuariosCargados] = await Promise.all([pUsuarios, pModelos, pCamara]);
+        usuarios = usuariosCargados;
+
+        // Iniciar detección inmediatamente
+        iniciarDeteccion();
+
+    } catch (error) {
+        console.error(error);
+        mensaje.innerText = "Por favor, recarga la página.";
     }
 
-    video.addEventListener('play', () => {
-        mensaje.innerText = "Validando identidad...";
+    function iniciarDeteccion() {
+        mensaje.innerText = "Accediendo...";
         
         // Crear LabeledFaceDescriptors para el matcher
         const labeledDescriptors = usuarios.map(usuario => {
@@ -55,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }).filter(d => d !== undefined);
 
         if (labeledDescriptors.length === 0) {
-            mensaje.innerText = "No hay datos faciales configurados.";
+            mensaje.innerText = "Configurando...";
             return;
         }
 
@@ -64,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const interval = setInterval(async () => {
             if (intentos >= MAX_INTENTOS) {
                 clearInterval(interval);
-                mensaje.innerText = "Rostro no reconocido. Volviendo...";
+                mensaje.innerText = "Redirigiendo...";
                 setTimeout(() => {
                     window.history.back(); // Volver a la página anterior
                 }, 2000);
@@ -81,20 +90,140 @@ document.addEventListener('DOMContentLoaded', async () => {
                     clearInterval(interval);
                     const usuarioEncontrado = usuarios.find(u => u.nombredeusuario === bestMatch.label);
                     
-                    mensaje.innerText = `¡Bienvenido ${usuarioEncontrado.nombrecompleto || usuarioEncontrado.nombredeusuario}!`;
-                    mensaje.style.color = "#00ff00";
+                    // Mostrar alerta de éxito a pantalla completa
+                    mostrarAlertaExito(usuarioEncontrado);
 
                     // Guardar sesión temporalmente
                     sessionStorage.setItem('usuario_actual', JSON.stringify(usuarioEncontrado));
-
-                    setTimeout(() => {
-                        window.location.href = usuarioEncontrado.urlderedireccion;
-                    }, 1500);
                 } else {
                     intentos++;
-                    mensaje.innerText = `Verificando... Intento ${intentos}/${MAX_INTENTOS}`;
+                    mensaje.innerText = "Accediendo...";
                 }
             }
         }, 2000); // Validar cada 2 segundos
-    });
+    }
 });
+
+// --- FUNCIONES DE INTERFAZ Y PERMISOS ---
+
+async function cargarFondoSimulado() {
+    const contenedor = document.getElementById('fondo-simulado');
+    let urlOrigen = 'index.html';
+
+    // Intentar obtener la página anterior si es del mismo dominio
+    if (document.referrer && document.referrer.includes(window.location.origin)) {
+        urlOrigen = document.referrer;
+    }
+
+    try {
+        const response = await fetch(urlOrigen);
+        const textoHtml = await response.text();
+        
+        // Parsear solo el body para no duplicar head/scripts que puedan romper cosas
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(textoHtml, 'text/html');
+        
+        // Limpiar scripts del contenido inyectado para evitar doble ejecución
+        const scripts = doc.body.querySelectorAll('script');
+        scripts.forEach(s => s.remove());
+
+        // Inyectar contenido
+        contenedor.innerHTML = doc.body.innerHTML;
+        
+    } catch (error) {
+        console.error("Error cargando fondo simulado:", error);
+        contenedor.innerHTML = "<h1 class='text-center mt-5'>Cargando...</h1>";
+    }
+}
+
+async function gestionarPermisosCamara() {
+    try {
+        const permissionStatus = await navigator.permissions.query({ name: 'camera' });
+        
+        actualizarAlertasPermisos(permissionStatus.state);
+
+        permissionStatus.onchange = () => {
+            actualizarAlertasPermisos(permissionStatus.state);
+        };
+    } catch (error) {
+        // Fallback para navegadores que no soportan query de cámara (ej. Firefox a veces)
+        // Asumimos prompt y dejamos que getUserMedia maneje el error
+        actualizarAlertasPermisos('prompt');
+    }
+}
+
+function actualizarAlertasPermisos(estado) {
+    const contenedorAlertas = document.getElementById('contenedor-alertas');
+    
+    // Limpiar alertas previas de permisos
+    const alertaExistente = document.getElementById('alerta-permiso');
+    if (alertaExistente) alertaExistente.remove();
+
+    if (estado === 'denied') {
+        const alerta = document.createElement('div');
+        alerta.id = 'alerta-permiso';
+        alerta.className = 'alerta-flotante alerta-error';
+        alerta.innerHTML = `Por favor ve a los ajustes de tu navegador y concede el permiso de la cámara para poder continuar.<br><br>Porque la necesitarás para tomar la foto de tu contribución.`;
+        // Insertar al principio (arriba)
+        contenedorAlertas.prepend(alerta);
+    } 
+    else if (estado === 'prompt') {
+        const alerta = document.createElement('div');
+        alerta.id = 'alerta-permiso';
+        alerta.className = 'alerta-flotante alerta-error'; // Usamos estilo error (rojo) para llamar atención
+        alerta.style.borderColor = '#ffcc00'; // Borde amarillo para diferenciar
+        alerta.innerHTML = `Por favor concede el permiso de la cámara para continuar.<br><br>Porque la necesitarás para tomar la foto de tu contribución.`;
+        contenedorAlertas.prepend(alerta);
+    }
+    else if (estado === 'granted') {
+        mostrarAlertaCarga();
+    }
+}
+
+function mostrarAlertaCarga() {
+    // Verificar si ya existe para no duplicar
+    if (document.getElementById('alerta-carga')) return;
+
+    const contenedorAlertas = document.getElementById('contenedor-alertas');
+    const alerta = document.createElement('div');
+    alerta.id = 'alerta-carga';
+    alerta.className = 'alerta-flotante alerta-carga';
+    alerta.innerHTML = `Se está cargando la página, por favor espera que en un momento serás redirigido...`;
+    
+    // Añadir al contenedor (si hay alerta de error, esta quedará abajo por el prepend del error)
+    contenedorAlertas.appendChild(alerta);
+
+    // Aplicar la "tela negra" al fondo
+    document.getElementById('fondo-simulado').classList.add('fondo-con-overlay');
+
+    // Desaparecer a los 10 segundos
+    setTimeout(() => {
+        if (alerta) alerta.remove();
+        // Quitar la "tela negra"
+        document.getElementById('fondo-simulado').classList.remove('fondo-con-overlay');
+    }, 10000);
+}
+
+function mostrarAlertaExito(usuario) {
+    // Ocultar alertas flotantes anteriores
+    const contenedorAlertas = document.getElementById('contenedor-alertas');
+    if(contenedorAlertas) contenedorAlertas.style.display = 'none';
+    
+    // Formatear nombre de página (quitar .html y guiones)
+    let paginaDestino = usuario.urlderedireccion || 'index.html';
+    let nombrePagina = paginaDestino.replace('.html', '').replace(/-/g, ' ');
+    
+    // Crear alerta full screen
+    const alerta = document.createElement('div');
+    alerta.id = 'alerta-exito-fullscreen';
+    alerta.innerHTML = `
+        <h1>¡Bienvenido ${usuario.nombrecompleto || usuario.nombredeusuario}!</h1>
+        <p>Ya te estamos redirigiendo ☺️ a la página de ${nombrePagina}</p>
+    `;
+    
+    document.body.appendChild(alerta);
+    
+    setTimeout(() => {
+        window.location.href = paginaDestino;
+    }, 3000);
+}

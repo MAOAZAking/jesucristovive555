@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const localData = localStorage.getItem('canciones_local');
     if (localData) {
         listaCanciones = JSON.parse(localData);
+        filtrarCanciones(); // Renderizar inicial
     }
     cargarCancionesDesdeGitHub();
     
@@ -19,11 +20,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         actualizarVistaPrevia(this.value);
     });
     document.getElementById('input-busqueda').addEventListener('input', filtrarCanciones);
-    document.getElementById('filtro-tipo-busqueda').addEventListener('change', filtrarCanciones);
 });
 
 function mostrarAgregar() {
-    document.getElementById('menu-principal').style.display = 'none';
+    document.getElementById('vista-principal').style.display = 'none';
     document.getElementById('editor-cancion').style.display = 'block';
     document.getElementById('titulo-editor').innerText = 'Agregar Nueva Canción';
     
@@ -37,16 +37,10 @@ function mostrarAgregar() {
     document.getElementById('meta-fecha-creacion').value = '';
 }
 
-function mostrarBuscar() {
-    document.getElementById('menu-principal').style.display = 'none';
-    document.getElementById('seccion-buscador').style.display = 'block';
-    filtrarCanciones();
-}
-
 function volverAlMenu() {
-    document.getElementById('menu-principal').style.display = 'flex';
+    document.getElementById('vista-principal').style.display = 'block';
     document.getElementById('editor-cancion').style.display = 'none';
-    document.getElementById('seccion-buscador').style.display = 'none';
+    filtrarCanciones(); // Refrescar listas
 }
 
 function actualizarVistaPrevia(texto) {
@@ -63,6 +57,7 @@ async function cargarCancionesDesdeGitHub() {
             const contenidoDecodificado = decodeURIComponent(escape(window.atob(data.content)));
             listaCanciones = JSON.parse(contenidoDecodificado);
             localStorage.setItem('canciones_local', JSON.stringify(listaCanciones));
+            filtrarCanciones(); // Actualizar vista con datos nuevos
         }
     } catch (error) {
         console.error("Error cargando canciones:", error);
@@ -71,36 +66,35 @@ async function cargarCancionesDesdeGitHub() {
 
 function filtrarCanciones() {
     const texto = document.getElementById('input-busqueda').value.toLowerCase();
-    const tipo = document.getElementById('filtro-tipo-busqueda').value;
-    const contenedor = document.getElementById('lista-resultados');
-    contenedor.innerHTML = '';
+    const listaAlabanza = document.getElementById('lista-alabanza');
+    const listaAdoracion = document.getElementById('lista-adoracion');
+    
+    listaAlabanza.innerHTML = '';
+    listaAdoracion.innerHTML = '';
 
     const filtradas = listaCanciones.filter(c => {
-        const coincideTexto = c.titulo.toLowerCase().includes(texto) || c.contenido.toLowerCase().includes(texto);
-        const coincideTipo = tipo === 'todos' || c.tipo === tipo;
-        return coincideTexto && coincideTipo;
+        // Buscar en título O en contenido (letra)
+        return c.titulo.toLowerCase().includes(texto) || c.contenido.toLowerCase().includes(texto);
     });
 
-    if (filtradas.length === 0) {
-        contenedor.innerHTML = '<div class="list-group-item text-center text-muted">No se encontraron canciones.</div>';
-        return;
-    }
-
     filtradas.forEach(c => {
-        const item = document.createElement('a');
-        item.className = 'list-group-item list-group-item-action item-cancion';
+        const item = document.createElement('div');
+        item.className = 'item-lista-cancion';
+        // Clic en la fila lleva a visualizar
+        item.onclick = () => window.location.href = `visualizar-cancion.html?id=${c.id}`;
+        
         item.innerHTML = `
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">${c.titulo}</h5>
-                <div>
-                    <small class="badge ${c.tipo === 'Alabanza' ? 'bg-primary' : 'bg-warning text-dark'} me-2">${c.tipo}</small>
-                    <a href="visualizar-cancion.html?id=${c.id}" class="btn btn-sm btn-info text-white" onclick="event.stopPropagation();"><i class="bi bi-eye-fill"></i> Ver</a>
-                </div>
-            </div>
-            <p class="mb-1 small text-muted text-truncate">${c.contenido.split('\n')[0]}...</p>
+            <span class="titulo-cancion-lista">${c.titulo}</span>
+            <button class="btn-editar-lista" onclick="event.stopPropagation(); cargarCancionParaEditar('${c.id}')" title="Editar">
+                <i class="bi bi-pencil-square"></i>
+            </button>
         `;
-        item.onclick = () => cargarCancionParaEditar(c.id);
-        contenedor.appendChild(item);
+
+        if (c.tipo === 'Alabanza') {
+            listaAlabanza.appendChild(item);
+        } else if (c.tipo === 'Adoracion') {
+            listaAdoracion.appendChild(item);
+        }
     });
 }
 
@@ -108,7 +102,7 @@ function cargarCancionParaEditar(id) {
     const cancion = listaCanciones.find(c => c.id === id);
     if (!cancion) return;
 
-    document.getElementById('seccion-buscador').style.display = 'none';
+    document.getElementById('vista-principal').style.display = 'none';
     document.getElementById('editor-cancion').style.display = 'block';
     document.getElementById('titulo-editor').innerText = 'Editar Canción';
 
