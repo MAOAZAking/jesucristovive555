@@ -50,30 +50,25 @@ body { color: white; }
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-.editor-container { display: none; animation: fadeIn 0.5s; }
-
-.area-texto-cancion {
-    font-family: 'Roboto Mono', monospace;
-    white-space: pre;
-    min-height: 300px;
-    font-size: 14px;
-    background-color: white;
-    border: 2px solid #ccc;
+/* Asegura que el contenedor del editor tenga fondo blanco sólido */
+#editor-cancion {
+    background-color: #FFFFFF;
 }
 
-#vista-previa-cancion {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    border-radius: 0;
+.editor-container { display: none; animation: fadeIn 0.5s; }
+
+/* Estilo para el nuevo editor en vivo */
+#editor-vivo {
+    white-space: pre-wrap; /* Permite el salto de línea automático sin colapsar espacios */
+    word-wrap: break-word; /* Fuerza el corte de palabras largas */
     font-family: 'Roboto Mono', monospace;
-    white-space: pre; /* Mantiene la alineación exacta */
-    overflow-x: auto; /* Permite scroll horizontal en la vista previa */
-    margin-top: 20px;
-    font-size: 16px; /* Coincide con el tamaño de la vista final */
-    line-height: 1.6; /* Coincide con el interlineado de la vista final */
-    min-height: auto;
-    box-shadow: none;
+    min-height: 300px;
+    font-size: 14px;
+    background-color: #FFFFFF !important; /* Forzar fondo blanco */
+    color: #000000; /* Forzar texto negro para asegurar visibilidad */
+    border: 2px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
 }
 
 #imagen-acorde-modal { max-width: 100%; height: auto; }

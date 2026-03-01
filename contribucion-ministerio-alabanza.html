@@ -62,7 +62,7 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <a class="navbar-brand opciones-barra-de-navegacion " href="###" onclick="history.back(); history.back(); return false;"><i class="bi bi-arrow-left-circle"></i> Regresar</a>
+        <a class="navbar-brand opciones-barra-de-navegacion " href="#" onclick="manejarRegreso(); return false;"><i class="bi bi-arrow-left-circle"></i> Regresar</a>
     </div>
     
     <!-- Botones Flotantes Instrumentos -->
@@ -85,12 +85,12 @@
                     <div id="vista-principal">
                         <div class="row mb-4 align-items-center">
                             <div class="col-md-5 mb-3 mb-md-0 opciones-barra-de-navegacion">
-                                <button class="btn btn-opcion-grande btn-agregar mb-0 py-2 fs-5 opciones-barra-de-navegacion" onclick="mostrarAgregar()">
-                                <i class="bi bi-plus-circle-dotted"></i> AGREGAR CANCIÓN
-                            </button>
-                        </div>
+                                <button class="btn btn-opcion-grande btn-agregar mb-0 py-2 fs-5 opciones-barra-de-navegacion cuadricula-blanca" onclick="mostrarAgregar()">
+                                    <i class="bi bi-plus-circle-dotted"></i> AGREGAR CANCIÓN
+                                </button>
+                            </div>
                             <div class="col-md-7">
-                                <div class="input-group input-group-lg">
+                                <div class="input-group input-group-lg cuadricula-blanca">
                                     <span class="input-group-text border-end-0"><i class="bi bi-search"></i></span>
                                     <input type="text" id="input-busqueda" class="form-control border-start-0" placeholder="Buscar por título o letra...">
                                 </div>
@@ -126,35 +126,28 @@
                             <div class="row mb-3">
                                 <div class="col-md-8">
                                     <label class="form-label opciones-barra-de-navegacion">Nombre de la Canción</label>
-                                    <input type="text" id="nombre-cancion" class="form-control" required>
+                                    <input type="text" id="nombre-cancion" class="form-control cuadricula-blanca" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label opciones-barra-de-navegacion">Tipo</label>
-                                    <select id="tipo-cancion" class="form-select">
+                                    <select id="tipo-cancion" class="form-select cuadricula-blanca">
                                         <option value="Alabanza">Alabanza</option>
                                         <option value="Adoracion">Adoración</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label opciones-barra-de-navegacion">Letra y Acordes (Cifrado Americano)</label>
-                                <p class="text-muted small">
-                                    Escribe intercalado: una línea de acordes y abajo la letra. Usa espacios para ubicar el acorde.
-                                </p>
-                                <textarea id="contenido-cancion" class="form-control area-texto-cancion" placeholder="Escribe aquí..."></textarea>
-                            </div>
+                            <label class="form-label opciones-barra-de-navegacion">Letra y Acordes (Editor Integrado)</label>
+                            <p class="text-muted small">
+                                Escribe directamente en el recuadro. Los acordes se formatearán automáticamente. Usa espacios para alinearlos sobre la letra.
+                            </p>
+                            <div id="editor-vivo" contenteditable="true" class="area-texto-cancion cuadricula-blanca" spellcheck="false"></div>
 
-                            <div class="d-flex justify-content-between align-items-end mt-4">
-                                <h4 class="opciones-barra-de-navegacion">Vista Previa (Escala Real)</h4>
-                                <!-- Visor de Acordes en el Editor -->
-                                <div id="contenedor-visor-acorde" style="display: none; width: 120px; background: #fff; padding: 5px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 1px solid #ccc; text-align: center;">
-                                    <small id="nombre-acorde-visor" style="font-weight: bold; color: rgb(179, 74, 9); display: block;"></small>
-                                    <img id="imagen-acorde-visor" src="" class="img-fluid" alt="Acorde">
-                                </div>
+                            <!-- Visor de Acordes en el Editor (se muestra al hacer clic en un acorde) -->
+                            <div id="contenedor-visor-acorde">
+                                <small id="nombre-acorde-visor" style="font-weight: bold; color: rgb(179, 74, 9); display: block;"></small>
+                                <img id="imagen-acorde-visor" src="" class="img-fluid" alt="Acorde">
                             </div>
-                            
-                            <div id="vista-previa-cancion"></div>
 
                             <div class="d-grid gap-2 mt-4 d-md-flex justify-content-md-end">
                                 <button type="button" class="btn btn-secondary me-md-2" onclick="volverAlMenu()">Cancelar</button>

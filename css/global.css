@@ -998,8 +998,19 @@ footer {
 /* =========================================
    ESTILOS COMPARTIDOS (MÚSICA Y ACORDES)
    ========================================= */
-.linea-acordes { color: rgb(0, 0, 139); font-weight: bold; min-height: 1.5em; }
-.linea-letra { color: black; margin-bottom: 15px; }
+.linea-acordes, .linea-letra {
+    min-height: 1.5em; /* Asegura que las líneas vacías sean clickeables */
+    line-height: 1.7;  /* Espaciado consistente para evitar saltos de "párrafo" */
+}
+.linea-acordes { color: rgb(0, 0, 139); font-weight: bold; }
+.linea-letra { color: black; }
+
+.cuadricula-blanca{
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+    border-radius: 10px
+}
+
 .acorde-link { 
     color: rgb(0, 0, 139); 
     cursor: pointer; 
@@ -1053,4 +1064,49 @@ a:has(.card),
 a:has(.info-box) {
     text-decoration: none !important;
     color: inherit !important;
+}
+
+#contenedor-visor-acorde{
+    display: none;
+    position: absolute; /* Para que flote sobre el contenido */
+    z-index: 1100; /* Por encima de todo */
+    width: 120px;
+    background: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.contenedor-cancion {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 40px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    color: black;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    min-height: 600px;
+}
+.titulo-cancion {
+    font-family: 'Kalam', cursive;
+    color: rgb(179, 74, 9);
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+.tipo-cancion {
+    text-align: center;
+    font-family: 'Playball', cursive;
+    font-size: 1.5rem;
+    color: rgb(5, 5, 111);
+    margin-bottom: 30px;
+}
+.contenido-cancion {
+    font-family: 'Roboto Mono', monospace;
+    white-space: pre; /* Evita que el texto se rompa y desalinee los acordes */
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: auto; /* Agrega scroll horizontal si la línea es muy larga */
 }

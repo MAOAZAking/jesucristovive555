@@ -135,3 +135,36 @@
     font-family: 'Playball', cursive;
     font-size: 2.5rem;
 }
+
+/* Formulario de Login Flotante */
+.formulario-flotante {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+    width: 90%;
+    max-width: 400px;
+    z-index: 10000;
+    text-align: center;
+    animation: slideDown 0.5s ease-out;
+    border: 2px solid rgb(5, 5, 111);
+}
+
+.titulo-login {
+    font-family: 'Kalam', cursive;
+    color: rgb(5, 5, 111);
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.subtitulo-login {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+    font-family: 'Charm', cursive;
+    font-weight: bold;
+}

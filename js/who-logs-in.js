@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let intentos = 0;
     const MAX_INTENTOS = 2;
     let usuarios = [];
+    let usuarioDetectadoPendiente = null; // Para almacenar el usuario detectado por rostro
 
     // 0. Cargar Fondo Simulado y Gestionar Permisos
     cargarFondoSimulado();
@@ -90,11 +91,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                     clearInterval(interval);
                     const usuarioEncontrado = usuarios.find(u => u.nombredeusuario === bestMatch.label);
                     
-                    // Mostrar alerta de éxito a pantalla completa
-                    mostrarAlertaExito(usuarioEncontrado);
-
-                    // Guardar sesión temporalmente
-                    sessionStorage.setItem('usuario_actual', JSON.stringify(usuarioEncontrado));
+                    // LÓGICA DE SEGURIDAD ADICIONAL
+                    // Si la redirección NO es crear-usuario.html, pedimos credenciales
+                    if (usuarioEncontrado.urlderedireccion !== 'crear-usuario.html') {
+                        mostrarFormularioLogin(usuarioEncontrado);
+                    } else {
+                        // Si es para crear/configurar usuario, permitimos el paso directo (o según lógica anterior)
+                        completarLogin(usuarioEncontrado);
+                    }
                 } else {
                     intentos++;
                     mensaje.innerText = "Accediendo...";
@@ -102,6 +106,50 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }, 2000); // Validar cada 2 segundos
     }
+
+    // --- FUNCIONES PARA EL LOGIN SEGURO ---
+
+    function mostrarFormularioLogin(usuario) {
+        usuarioDetectadoPendiente = usuario;
+        
+        // Ocultar mensaje de estado de carga
+        mensaje.style.display = 'none';
+        
+        // Mostrar formulario
+        const formContainer = document.getElementById('formulario-login-facial');
+        formContainer.style.display = 'block';
+        
+        // Enfocar el input de usuario
+        document.getElementById('login-usuario').focus();
+    }
+
+    // Manejar el envío del formulario de login
+    document.getElementById('form-login-seguro').addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const inputUser = document.getElementById('login-usuario').value;
+        const inputPass = document.getElementById('login-pass').value;
+
+        if (!usuarioDetectadoPendiente) return;
+
+        // 1. VALIDACIÓN DE IDENTIDAD (El usuario escrito DEBE ser el mismo del rostro)
+        if (inputUser !== usuarioDetectadoPendiente.nombredeusuario) {
+            alert("⛔ ACCESO DENEGADO: El usuario ingresado no coincide con el rostro detectado.");
+            // "Sacar de una" - Regresar al historial o recargar
+            window.history.back(); 
+            return;
+        }
+
+        // 2. VALIDACIÓN DE CONTRASEÑA
+        if (inputPass !== usuarioDetectadoPendiente.contrasena) {
+            alert("❌ Contraseña incorrecta.");
+            return;
+        }
+
+        // Si todo coincide:
+        document.getElementById('formulario-login-facial').style.display = 'none';
+        completarLogin(usuarioDetectadoPendiente);
+    });
 });
 
 // --- FUNCIONES DE INTERFAZ Y PERMISOS ---
@@ -202,6 +250,11 @@ function mostrarAlertaCarga() {
         // Quitar la "tela negra"
         document.getElementById('fondo-simulado').classList.remove('fondo-con-overlay');
     }, 10000);
+}
+
+function completarLogin(usuario) {
+    mostrarAlertaExito(usuario);
+    sessionStorage.setItem('usuario_actual', JSON.stringify(usuario));
 }
 
 function mostrarAlertaExito(usuario) {

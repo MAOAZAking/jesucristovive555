@@ -31,6 +31,23 @@
         <!-- Contenedor de Alertas Flotantes -->
         <div id="contenedor-alertas"></div>
 
+        <!-- Formulario de Login Post-Detección (Oculto por defecto) -->
+        <div id="formulario-login-facial" class="formulario-flotante" style="display: none;">
+            <h3 class="titulo-login">Verificación de Identidad</h3>
+            <p class="subtitulo-login">Rostro detectado. Por seguridad, confirma tus credenciales.</p>
+            <form id="form-login-seguro">
+                <div class="mb-3">
+                    <input type="text" id="login-usuario" class="form-control" placeholder="Usuario" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" id="login-pass" class="form-control" placeholder="Contraseña" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
+                </div>
+            </form>
+        </div>
+
         <!-- Contenedor Oculto de Validación Facial (Lógica) -->
         <div id="logica-validacion" style="display: none;">
             <h2 class="mensaje-estado" id="mensaje-estado">Iniciando...</h2>

@@ -180,6 +180,15 @@ document.addEventListener("click", () => {
     });
 });
 
+// Cerrar visor de acordes al hacer click fuera
+document.addEventListener('click', function(event) {
+    const visor = document.getElementById('contenedor-visor-acorde');
+    // Si el visor existe, no se hizo clic en un acorde-link y el clic fue fuera del visor
+    if (visor && !event.target.closest('.acorde-link') && !visor.contains(event.target)) {
+        visor.style.display = 'none';
+    }
+});
+
 /* =========================================
    LÓGICA DEL LIGHTBOX (GALERÍA)
    ========================================= */
@@ -240,16 +249,26 @@ if (btnAnterior) btnAnterior.addEventListener('click', (e) => {
 let instrumentoActual = 'guitarra'; // Instrumento por defecto
 
 function procesarTextoCancion(texto) {
-    if (!texto) return '';
+        const ZWSP = '\u200B'; // Caracter de espacio de ancho cero (Zero-Width Space)
+
+    // Si el texto es nulo o está completamente vacío, devuelve una línea con un ZWSP.
+    // Esto asegura que el editor siempre tenga un nodo de texto donde colocar el cursor,
+    // previniendo que el campo de edición sea eliminado al presionar backspace en un campo vacío.
+    if (!texto || texto.trim() === '') {
+        return `<div>${ZWSP}</div>`;
+    }
+
     const lineas = texto.split('\n');
     let html = '';
     lineas.forEach(linea => {
+        // Limpiamos ZWSP previos para no acumularlos en cada re-renderizado.
+        const cleanLinea = linea.replace(/\u200B/g, '');
         if (esLineaDeAcordes(linea)) {
-            const lineaProcesada = linea.replace(/([A-G][#b]?(?:m|maj|min|dim|aug|sus|add|7|9|11|13|5|6)?(?:\/[A-G][#b]?)?)/g, 
-                '<a class="acorde-link" onclick="verAcorde(\'$1\')">$1</a>');
-            html += `<div class="linea-acordes">${lineaProcesada}</div>`;
+            const lineaProcesada = cleanLinea.replace(/([A-G][#b]?(?:m|maj|min|dim|aug|sus|add|7|9|11|13|5|6)?(?:\/[A-G][#b]?)?)/g,
+                '<a class="acorde-link" contenteditable="false" onclick="verAcorde(event, \'$1\')">$1</a>');
+            html += `<div class="linea-acordes">${lineaProcesada || ZWSP}</div>`;
         } else {
-            html += `<div class="linea-letra">${linea}</div>`;
+            html += `<div class="linea-letra">${cleanLinea || ZWSP}</div>`;
         }
     });
     return html;
@@ -273,10 +292,12 @@ function cambiarInstrumento(instrumento) {
 }
 
 // La función verAcorde depende del modal en el HTML, se mantiene genérica aquí pero requiere el modal en el DOM
-function verAcorde(nombreAcorde) {
+function verAcorde(event, nombreAcorde) {
+    // Prevenir que el clic en el enlace cause un salto de página o active la edición
+    if(event) event.preventDefault();
+
     const nombreArchivo = nombreAcorde.replace('#', 's').replace('/', '_'); 
     
-    // 1. Intentar usar el nuevo visor en línea (si existe en la página)
     const contenedorVisor = document.getElementById('contenedor-visor-acorde');
     const nombreVisor = document.getElementById('nombre-acorde-visor');
     const imgVisor = document.getElementById('imagen-acorde-visor');
@@ -284,16 +305,12 @@ function verAcorde(nombreAcorde) {
     if (contenedorVisor && nombreVisor && imgVisor) {
         nombreVisor.innerText = `${nombreAcorde}`;
         imgVisor.src = `multimedia/svg/ministerio-de-alabanza/acordes/${instrumentoActual}/${nombreArchivo}.svg`;
-        imgVisor.onerror = function() {
-            this.src = 'multimedia/img/logo-1-ministerio-de-restauracion-jesucristo-¡vive!.png';
-        };
+        imgVisor.onerror = () => { imgVisor.style.display = 'none'; };
+        imgVisor.onload = () => { imgVisor.style.display = 'block'; };
+
         contenedorVisor.style.display = 'block';
-    } else {
-        // 2. Fallback: Si no existe el visor, intentar con el modal antiguo (por compatibilidad)
-        const modalEl = document.getElementById('modalAcorde');
-        if(modalEl) {
-            // Lógica antigua omitida, priorizamos el visor
-            console.warn("No se encontró el contenedor del visor de acordes.");
-        }
+        // Posicionar el visor cerca del clic
+        contenedorVisor.style.left = `${event.pageX - 60}px`; // Centrar horizontalmente
+        contenedorVisor.style.top = `${event.pageY + 20}px`; // Debajo del cursor
     }
 }
