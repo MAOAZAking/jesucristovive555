@@ -22,10 +22,10 @@
     {
         "nombredeusuario": "Santy",
         "nombrecompleto": "Daniel Santiago Muñoz Rodriguez",
-        "contrasena": "",
+        "contrasena": "panchi123",
         "roles": "ministro-de-alabanza",
         "credenciales": "ministerio-de-alabanza",
-        "urlderedireccion": "crear-usuario.html",
+        "urlderedireccion": "contribucion-ministerio-alabanza.html",
         "datosfaciales": "SANTY_DATOS_FACIALES_JSON",
         "fotodeperfil": "SANTY_FOTO_DE_PERFIL"
     },
