@@ -34,10 +34,32 @@ function renderizarCancion(c) {
     const infoImpl = document.getElementById('info-implementacion');
     const infoEdic = document.getElementById('info-edicion');
     
-    if (c.creadoPor) {
-        infoImpl.innerHTML = `Implementado por: <strong>${c.creadoPor}</strong> el ${c.fechaCreacion}`;
-    }
-    if (c.editadoPor) {
-        infoEdic.innerHTML = `Última revisión por: <strong>${c.editadoPor}</strong> el ${c.fechaEdicion}`;
-    }
+    // Cargar usuarios para obtener el nombre completo y el rol
+    fetch('json/usuarios.json')
+        .then(response => response.json())
+        .then(usuarios => {
+            const implementador = usuarios.find(u => u.nombredeusuario === c.creadoPor);
+            const editor = usuarios.find(u => u.nombredeusuario === c.editadoPor);
+
+            if (c.creadoPor) {
+                const nombreImplementador = implementador ? `${implementador.roles.replace(/-/g, ' ')} ${implementador.nombrecompleto}` : c.creadoPor;
+                infoImpl.innerHTML = `Implementado por: <strong>${nombreImplementador}</strong> el ${c.fechaCreacion}`;
+            }
+            if (c.editadoPor) {
+                const nombreEditor = editor ? `${editor.roles.replace(/-/g, ' ')} ${editor.nombrecompleto}` : c.editadoPor;
+                infoEdic.innerHTML = `Última revisión por: <strong>${nombreEditor}</strong> el ${c.fechaEdicion}`;
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar usuarios:', error);
+            // Si falla la carga de usuarios, mostrar solo el nombre de usuario
+            if (c.creadoPor) {
+                infoImpl.innerHTML = `Implementado por: <strong>${c.creadoPor}</strong> el ${c.fechaCreacion}`;
+            }
+            if (c.editadoPor) {
+                infoEdic.innerHTML = `Última revisión por: <strong>${c.editadoPor}</strong> el ${c.fechaEdicion}`;
+            }
+        });
 }
+
+// ... (resto de funciones como procesarTextoCancion, etc.)

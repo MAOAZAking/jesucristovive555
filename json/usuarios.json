@@ -2,7 +2,7 @@
     {
         "nombredeusuario": "MAOAZAking",
         "nombrecompleto": "Miguel Angel Ortega Ayala",
-        "contrasena": "ENV:ADMIN_PASS_MAOAZAKING",
+        "contrasena": "ENV:CONTRASENA_MAOAZAKING",
         "roles": "ministro-de-alabanza",
         "credenciales": "all",
         "urlderedireccion": "contribucion-ministerio-alabanza.html",
@@ -22,7 +22,7 @@
     {
         "nombredeusuario": "Santy",
         "nombrecompleto": "Daniel Santiago Muñoz Rodriguez",
-        "contrasena": "panchi123",
+        "contrasena": "ENV:CONTRASENA_SANTY",
         "roles": "ministro-de-alabanza",
         "credenciales": "ministerio-de-alabanza",
         "urlderedireccion": "contribucion-ministerio-alabanza.html",
@@ -30,9 +30,9 @@
         "fotodeperfil": "SANTY_FOTO_DE_PERFIL"
     },
     {
-        "nombredeusuario": "equipo-alabanza",
-        "nombrecompleto": "",
-        "contrasena": "ministerio-de-alabanza-jesucristovive555",
+        "nombredeusuario": "CONTRASENA_EQUIPO-ALABANZA",
+        "nombrecompleto": "Equipo De Alabanza",
+        "contrasena": "CONTRASENA_EQUIPO-ALABANZA",
         "roles": "ministro-de-alabanza",
         "credenciales": "ministerio-de-alabanza",
         "urlderedireccion": "contribucion-ministerio-alabanza.html",
