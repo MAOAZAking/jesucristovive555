@@ -1,0 +1,20 @@
+<svg viewBox="0 0 100 140" class="acorde-svg">
+                <text x="50" y="15" font-family="Arial" font-size="14" text-anchor="middle">A#</text>
+                <line x1="10" y1="20" x2="90" y2="20" stroke="black" stroke-width="2"/>
+                <line x1="10" y1="20" x2="10" y2="120" stroke="black" stroke-width="1"/>
+                <line x1="26" y1="20" x2="26" y2="120" stroke="black" stroke-width="1"/>
+                <line x1="42" y1="20" x2="42" y2="120" stroke="black" stroke-width="1"/>
+                <line x1="58" y1="20" x2="58" y2="120" stroke="black" stroke-width="1"/>
+                <line x1="74" y1="20" x2="74" y2="120" stroke="black" stroke-width="1"/>
+                <line x1="90" y1="20" x2="90" y2="120" stroke="black" stroke-width="1"/>
+                <line x1="10" y1="40" x2="90" y2="40" stroke="black" stroke-width="1"/>
+                <line x1="10" y1="60" x2="90" y2="60" stroke="black" stroke-width="1"/>
+                <line x1="10" y1="80" x2="90" y2="80" stroke="black" stroke-width="1"/>
+                <line x1="10" y1="100" x2="90" y2="100" stroke="black" stroke-width="1"/>
+                <text x="10" y="15" font-family="Arial" font-size="12" text-anchor="middle">x</text>
+                <rect x="26" y="20" width="66" height="10" fill="black" rx="5" ry="5"/>
+                <circle cx="42" cy="60" r="5" fill="black"/>
+                <circle cx="58" cy="60" r="5" fill="black"/>
+                <circle cx="74" cy="60" r="5" fill="black"/>
+                <text x="10" y="115" font-family="Arial" font-size="12" text-anchor="middle">1</text>
+            </svg>

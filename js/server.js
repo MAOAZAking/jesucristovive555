@@ -1,11 +1,16 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const dotenv = require('dotenv');
+
+// Cargar variables de entorno desde el archivo .env
+dotenv.config();
+
 const app = express();
 
 // 0. GENERAR DATOS FACIALES (Ejecutar el script de generación antes de iniciar)
 // Esto asegura que el archivo js/datos_faciales.js exista en Render
-require('./generar_datos.js');
+// require('./generar_datos.js'); // Comentado para no ejecutarlo en cada inicio
 
 // Middleware para entender JSON (Importante)
 app.use(express.json());
@@ -17,13 +22,17 @@ app.use(express.static(path.join(__dirname, '../')));
 
 // 2. Endpoint para Login
 app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-    
-    try {
-        // Leer el archivo usuarios.json real
-        const rutaUsuarios = path.join(__dirname, '../json/usuarios.json');
-        const datos = fs.readFileSync(rutaUsuarios, 'utf8');
-        const usuarios = JSON.parse(datos);
+  const { username, password } = req.body;
+
+  // Usar variables de entorno para las credenciales
+  const usuarios = [
+    {
+      "nombredeusuario": process.env.USER1_USERNAME,
+      "contrasena": process.env.USER1_PASSWORD,
+      "nombrecompleto": "Usuario 1",
+      "roles": ["admin"]
+    }
+  ];
 
         // Buscar usuario (mapeando 'username' del login a 'nombredeusuario' del json)
         const user = usuarios.find(u => u.nombredeusuario === username);
@@ -32,11 +41,7 @@ app.post('/api/login', (req, res) => {
         if (user && user.contrasena === password) {
             return res.json({ success: true, nombre: user.nombrecompleto, rol: user.roles });
         }
-    } catch (error) {
-        console.error("Error leyendo usuarios.json:", error);
-        return res.status(500).json({ success: false, message: 'Error interno del servidor' });
-    }
-    
+
     // Login fallido
     res.status(401).json({ success: false, message: 'Credenciales incorrectas' });
 });
