@@ -286,7 +286,7 @@ body {
 
 .contenido-principal-portada {
     flex-grow: 1;
-    background: url('../multimedia/img/devocional-del-mes.jpeg') no-repeat center center;
+    background: url('../multimedia/img/devocional/devocional-del-mes.jpeg') no-repeat center center;
     background-size: cover;
     background-size: auto 100%;
 }

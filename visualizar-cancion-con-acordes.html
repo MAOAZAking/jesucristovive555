@@ -23,7 +23,6 @@
         <link rel="stylesheet" href="css/global.css">
         <link rel="stylesheet" href="css/visualizar-cancion.css">
         <!-- Fuente adicional para acordes -->
-        <link href="https://fonts.googleapis.com/css2?family=Charm:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     </head>
 <body>
@@ -62,28 +61,36 @@
             </div>
         </div>
     </nav>
+    <div class="container-fluid">
+        <a class="navbar-brand opciones-barra-de-navegacion " href="#" onclick="history.back(); return false;"><i class="bi bi-arrow-left-circle"></i> Volver al Listado</a>
+    </div>
 
-    <div class="container mt-4">
-        <div class="row align-items-center">
-            <div class="col-md-4">
-                <a class="opciones-barra-de-navegacion text-decoration-none" href="himnario.html"><i class="bi bi-arrow-left-circle"></i> Volver al Himnario</a>
-            </div>
-            <div class="col-md-8">
-                <div class="input-group cuadricula-blanca shadow-sm">
-                    <span class="input-group-text bg-transparent border-0"><i class="bi bi-search"></i></span>
-                    <input type="text" id="busqueda-rapida" class="form-control border-0" placeholder="Buscar otro himno..." onkeyup="if(event.key === 'Enter') window.location.href='himnario.html?q='+this.value">
-                </div>
-            </div>
-        </div>
+    <!-- Botones Flotantes Instrumentos -->
+    <div class="botones-flotantes-derecha">
+        <button class="btn-instrumento activo" id="btn-guitarra" onclick="cambiarInstrumento('guitarra')" title="Guitarra">
+            🎸
+        </button>
+        <button class="btn-instrumento" id="btn-piano" onclick="cambiarInstrumento('piano')" title="Piano">
+            🎹
+        </button>
     </div>
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="contenedor-cancion mt-4">
-                    <div class="text-center">
-                        <h1 id="titulo" class="titulo-cancion">Cargando...</h1>
-                        <div id="tipo" class="tipo-cancion"></div>
+                <div class="contenedor-cancion">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 d-flex justify-content-center">
+                            <!-- Nuevo Visor de Acordes (Inicialmente oculto) -->
+                            <div id="contenedor-visor-acorde">
+                                <h5 id="nombre-acorde-visor" style="font-family: 'Roboto Mono', monospace; font-weight: bold; color: rgb(179, 74, 9); margin-bottom: 5px;"></h5>
+                                <img id="imagen-acorde-visor" src="" class="img-fluid" alt="Acorde" style="max-height: 150px;">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h1 id="titulo" class="titulo-cancion">Cargando...</h1>
+                            <div id="tipo" class="tipo-cancion"></div>
+                        </div>
                     </div>
                     <hr>
                     <div id="contenido" class="contenido-cancion"></div>
@@ -100,6 +107,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/global.js"></script>
-    <script src="js/visualizar-himno.js"></script>
+    <script src="js/visualizar-cancion.js"></script>
 </body>
 </html>

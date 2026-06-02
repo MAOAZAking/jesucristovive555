@@ -20,15 +20,15 @@
         <!-- Tipo letra para "¡VIVE!" -->
         <link href="https://fonts.googleapis.com/css2?family=Playball&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/index.css">
         <link rel="stylesheet" href="css/contactenos.css">
     </head>
     <body>
         <!-- Carga la imagen real de fondo para transicion de colores a imagen -->
         <div class="bg-real"></div>
 
-
+        
         <div class="barra-superior text-center">Servicios: Domingos 9:30 AM | Miércoles 7:00 PM | Vienes 6:00 PM</div>
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
             <div class="container-fluid">
@@ -73,220 +73,49 @@
             <div class="container" id="contenedor-portada-ministerio-de-restauracion-jesucristo-vive">
                 <div class="barra-lateral-portada">
                     <h3 class="titulo-navegacion-movil">Contenido Página</h3>
-                    <a href="#seccion-ministerios">Nuestros Ministerios</a>
-                    <a href="#seccion-multimedia">Multimedia</a>
-                    <a href="#seccion-eventos">Próximos Eventos</a>
-                    <a href="#seccion-galeria">Galería</a>
-                    <a href="contacto.html">Contacto</a>
+                    <a href="#seccion-ministerio-familiar">Ministerio Familiar</a>
+                    <a href="#seccion-ministerio-de-alabanza">Ministerio de Alabanza</a>
+                    <a href="#seccion-labor-social">Labor Social</a>
                 </div>
                 <div class="contenido-principal-portada">
                 </div>
             </div>
         </section>
-
         <section id="seccion-ministerios" class="pb-5 pt-1">
             <div class="container">
-                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Nuestros Ministerios</h2>
-                <div class="row g-4">
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card shadow text-center p-4" id="tarjeta">
-                            <i class="bi bi-people-fill fs-1" id="icono"></i>
-                            <h5 class="mt-3 titulos-pequenos">Ministerio Familiar</h5>
-                            <p>Fortalecemos matrimonios y familias bajo principios bíblicos.</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card shadow text-center p-4" id="tarjeta">
-                            <i class="bi bi-music-note-beamed fs-1 " id="icono"></i>
-                            <h5 class="mt-3 titulos-pequenos">Alabanza</h5>
-                            <p>Adoramos juntos exaltando el nombre de Dios con música.</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card shadow text-center p-4" id="tarjeta">
-                            <i class="bi bi-heart-fill fs-1" id="icono"></i>
-                            <h5 class="mt-3 titulos-pequenos">Labor Social</h5>
-                            <p>Apoyamos comunidades vulnerables y hogares de ancianos.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <section id="seccion-ministerio-familiar" class="pb-5 pt-1">
+                    <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Nuestros Ministerios</h2>
 
-        <section id="seccion-multimedia" class="py-5">
-            <div id="contenedor-multimedia"class="container">
-                <div id="contenedor-video-devocional-diario" class="row g-4">
-                <div id="devocional-diario" class="col-md-7">
-                    <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Devocional diario</h2>
-                    <div id="contenedor-video-devocional-diario" class="ratio ratio-16x9">
-                        <iframe id="youtubeFrame" class="iframde-devocional-diario" width="600" 
-                                height="315" 
-                                title="YouTube video player" 
-                                src="https://www.youtube.com/embed/fRkMW0vrYTA?rel=0"
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
+                    <h2 class="titulos-grandes seccion-ministerio-familiar" id="titulos-grandes-sin-alinear">Ministerio familiar</h2>
+                    <p>
+                        Estamos dedicados a fortalecer a las familias a través de programas de consejería, talleres de crianza y actividades que promueven la unidad y el amor en el hogar. Nuestro objetivo es ayudar a las familias a crecer en su fe y a enfrentar los desafíos de la vida con esperanza y confianza en Dios.
+                    </p>
+                    <br>
+                </section>
 
-                <div id="contenedor-audio" class="col-md-5">
-                    <div id="musica-para-orar" class="col-md-10">
-                        <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Música para Orar</h2>
-                        <div id="contenedor-musica-para-orar" class="card shadow p-4 text-center contenedor-audio">
-                            <div class="reproductor-audio-editable w-100">
-                                <audio id="audioPrincipal" src="multimedia/audio/musica-instrumental-1.mp3"></audio>
+                <section id="seccion-ministerio-de-alabanza" class="pb-5 pt-1">
+                    <h2 class="titulos-grandes seccion-ministerio-de-alabanza" id="titulos-grandes-sin-alinear">Ministerio de alabanza</h2>
+                    <p>
+                        Estamos dedicados a glorificar a Dios a través de la música y la adoración. Nuestro objetivo es crear un ambiente de worship que inspire a las personas a profundizar en su relación con Dios y a vivir su fe con entusiasmo y devoción.
+                    </p>
 
-                                <!-- Botón reproducir / pausar -->
-                                <button id="boton-reproducir" class="boton-svg">
-                                    <img src="multimedia/svg/svg-reproducir-rojo.svg" alt="Reproducir" id="icono-reproducir">
-                                </button>
-
-                                <div class="contenedor-volumen">
-                                    <!-- Botón silenciar / sonido -->
-                                    <button id="boton-silenciar" class="boton-svg">
-                                        <img src="multimedia/svg/svg-bocina-con-volumen-rojo.svg" alt="Sonido" id="icono-bocina">
-                                    </button>
-                                    <!-- Barra de volumen -->
-                                    <div class="contenedor-barra-volumen">
-                                        <input type="range" id="barra-volumen" min="0" max="1" step="0.01" value="1" class="barra-volumen">
-                                    </div>
-                                </div>
-
-                                <!-- Barra de progreso -->
-                                <input type="range" id="barra-progreso" min="0" max="100" value="0">
-
-                                <!-- Botón de 3 puntos para opciones -->
-                                <div class="contenedor-opciones">
-                                    <button id="boton-opciones" class="boton-svg">
-                                        <img src="multimedia/svg/svg-3-puntos-opciones-rojo.svg" alt="Opciones">
-                                    </button>
-                                    <div id="menu-opciones" class="menu-opciones">
-                                        <button class="velocidad-opcion" data-velocidad="0.25">0.25x</button>
-                                        <button class="velocidad-opcion" data-velocidad="0.5">0.5x</button>
-                                        <button class="velocidad-opcion" data-velocidad="0.75">0.75x</button>
-                                        <button class="velocidad-opcion" data-velocidad="1">1x</button>
-                                        <button class="velocidad-opcion" data-velocidad="1.25">1.25x</button>
-                                        <button class="velocidad-opcion" data-velocidad="1.5">1.5x</button>
-                                        <button class="velocidad-opcion" data-velocidad="2">2x</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="multimedia/audio/musica-instrumental-1.mp3"
-                                class="btn-outline-primary mt-3 boton-descargar-audio"
-                                download="musica-instrumental-1.mp3">
-                                <i class="bi bi-download"></i> Descargar Música para Orar
-                            </a>
-                        </div>
+                    <div class="text-center mt-4">
+                        <a href="himnario.html" class="btn btn-primary shadow-lg p-3 px-5">
+                            <h3 class="titulos-pequenos mb-0" style="color: white; transform: none;">
+                                <i class="bi bi-music-note-list"></i> Ver Himnario Interactivo
+                            </h3>
+                        </a>
+                        <p class="mt-3 text-muted">Accede a nuestro listado completo de cantos de Alabanza y Adoración.</p>
                     </div>
                     <br>
-                    <div id="ultima-predica" class="col-md-10">
-                        <h2 class="titulos-grandes" id="titulos-grandes-sin-alinear">Ultima Predica</h2>
-                        <div id="contenedor-ultima-predica" class="card shadow p-4 text-center contenedor-audio">
-                            <div class="reproductor-audio-editable w-100">
-                                <audio id="audioPrincipal" src="multimedia/audio/ultima-predica.mp3"></audio>
+                </section>
 
-                                <!-- Botón reproducir / pausar -->
-                                <button id="boton-reproducir" class="boton-svg">
-                                    <img src="multimedia/svg/svg-reproducir-rojo.svg" alt="Reproducir" id="icono-reproducir">
-                                </button>
-
-                                <div class="contenedor-volumen">
-                                    <!-- Botón silenciar / sonido -->
-                                    <button id="boton-silenciar" class="boton-svg">
-                                        <img src="multimedia/svg/svg-bocina-con-volumen-rojo.svg" alt="Sonido" id="icono-bocina">
-                                    </button>
-                                    <!-- Barra de volumen -->
-                                    <div class="contenedor-barra-volumen">
-                                        <input type="range" id="barra-volumen" min="0" max="1" step="0.01" value="1" class="barra-volumen">
-                                    </div>
-                                </div>
-
-                                <!-- Barra de progreso -->
-                                <input type="range" id="barra-progreso" min="0" max="100" value="0">
-
-                                <!-- Botón de 3 puntos para opciones -->
-                                <div class="contenedor-opciones">
-                                    <button id="boton-opciones" class="boton-svg">
-                                        <img src="multimedia/svg/svg-3-puntos-opciones-rojo.svg" alt="Opciones">
-                                    </button>
-                                    <div id="menu-opciones" class="menu-opciones">
-                                        <button class="velocidad-opcion" data-velocidad="0.25">0.25x</button>
-                                        <button class="velocidad-opcion" data-velocidad="0.5">0.5x</button>
-                                        <button class="velocidad-opcion" data-velocidad="0.75">0.75x</button>
-                                        <button class="velocidad-opcion" data-velocidad="1">1x</button>
-                                        <button class="velocidad-opcion" data-velocidad="1.25">1.25x</button>
-                                        <button class="velocidad-opcion" data-velocidad="1.5">1.5x</button>
-                                        <button class="velocidad-opcion" data-velocidad="2">2x</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="multimedia/audio/ultima-predica.mp3"
-                                class="btn-outline-primary mt-3 boton-descargar-audio"
-                                download="ultima-predica-1.mp3">
-                                <i class="bi bi-download"></i> Descargar Ultima Predica
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>    
-        </section>
-
-        <section class="estadisticas py-5 text-center animacion-scroll">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-3 col-md-3">
-                        <div class="contador" data-target="559">0</div>
-                        <p>Miembros</p>
-                    </div>
-                    <div class="col-sm-3 col-md-3">
-                        <div class="contador" data-target="14">0</div>
-                        <p>Años de Servicio</p>
-                    </div>
-                    <div class="col-sm-3 col-md-3">
-                        <div class="contador" data-target="1000">0</div>
-                        <p>Eventos</p>
-                    </div>
-                    <div class="col-sm-3 col-md-3">
-                        <div class="contador" data-target="26">0</div>
-                        <p>Voluntarios</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="seccion-eventos" class="py-5 aparecer-izquierda">
-            <div class="container">
-                <h2 class="text-center fw-bold mb-5 titulos-grandes" id="titulos-grandes-centrados">Próximos Eventos</h2>
-                <div class="row g-4">
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card shadow tarjeta-con-filtro">
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" class="card-img-top" alt="Conferencia Juvenil">
-                            <div class="card-body">
-                                <h5 class="titulos-pequenos">Conferencia Juvenil</h5>
-                                <p>15 Marzo 2026</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card shadow tarjeta-con-filtro">
-                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" class="card-img-top" alt="Retiro Espiritual">
-                            <div class="card-body">
-                                <h5 class="titulos-pequenos">Retiro Espiritual</h5>
-                                <p>10 Abril 2026</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card shadow tarjeta-con-filtro">
-                            <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7" class="card-img-top" alt="Jornada Social">
-                            <div class="card-body">
-                                <h5 class="titulos-pequenos">Jornada Social</h5>
-                                <p>25 Abril 2026</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <section id="seccion-labor-social" class="pb-5 pt-1">
+                    <h2 class="titulos-grandes seccion-labor-social" id="titulos-grandes-sin-alinear">Labor social</h2>
+                    <p>
+                        Nos comprometemos a servir a nuestra comunidad a través de programas de ayuda social, visitas a hogares de ancianos, y actividades de servicio que reflejen el amor de Cristo en acción.
+                    </p>
+                </section>
             </div>
         </section>
 
@@ -302,25 +131,28 @@
         </section>
         <br>
 
-        <div class="container">
-            <div class="row justify-content-center animacion-scroll">
-                <div class="col-md-8">
-                    <div class="card tarjeta-whatsapp shadow p-4 text-center tarjeta-con-filtro">
-                        <h4 class="fw-bold mb-4">
-                        <i class="bi bi-whatsapp text-success icono-whatsapp"></i>  <b id="estilo-ministerio-de-restauracion" class="estilo-ministerio-de-restauracion-jesucristo-vive texto-contactenos-whatsapp">¿Tienes una petición o duda? Envíanos tu mensaje</b>
-                        </h4>
-                            <form id="formulario-contacto">
-                            <div class="mb-4 campo-mensaje">
-                                <textarea id="mensaje" class="form-control" rows="5" placeholder="Escribe aquí tu mensaje..." required></textarea>
-                            </div>  
-                            <button type="submit" class="btn btn-whatsapp">
-                            <i class="bi bi-whatsapp"></i> Enviar por WhatsApp
-                            </button>
-                        </form>
+        <section id="seccion-contacto">
+            <div class="container" id>
+                <div class="row justify-content-center animacion-scroll">
+                    <div class="col-md-8">
+                        <div class="card tarjeta-whatsapp shadow p-4 text-center tarjeta-con-filtro">
+                            <h4 class="fw-bold mb-4">
+                            <i class="bi bi-whatsapp text-success icono-whatsapp"></i>  <b id="estilo-ministerio-de-restauracion" class="estilo-ministerio-de-restauracion-jesucristo-vive texto-contactenos-whatsapp">¿Tienes una petición o duda? Envíanos tu mensaje</b>
+                            </h4>
+                                <form id="formulario-contacto">
+                                <div class="mb-4 campo-mensaje">
+                                    <textarea id="mensaje" class="form-control" rows="5" placeholder="Escribe aquí tu mensaje..." required></textarea>
+                                </div>  
+                                <button type="submit" class="btn btn-whatsapp">
+                                <i class="bi bi-whatsapp"></i> Enviar por WhatsApp
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+    
         <br>
         <footer class="text-center">       
             <div class="container">
@@ -353,6 +185,8 @@
         <button id="boton-subir" class="btn btn-primary rounded-circle" aria-label="Subir"><i class="bi bi-arrow-up"></i></button>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Cargar Face-API.js para precarga de modelos -->
+        <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
         <script src="js/index.js"></script>
         <script src="js/global.js"></script>
     </body>
