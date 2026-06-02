@@ -18,29 +18,27 @@ app.use(express.urlencoded({ extended: true }));
 
 // CONFIGURACIÓN PARA SERVIR ARCHIVOS ESTÁTICOS (HTML, CSS, JS)
 // Esto permite que al entrar a la web se vean tus páginas
-app.use(express.static(path.join(__dirname, '../')));
+app.use(express.static(path.join(__dirname, '../'), {
+    extensions: ['html'], // Permite que /himnario cargue /himnario.html automáticamente
+    index: 'who-logs-in.html' // Página por defecto
+}));
 
 // 2. Endpoint para Login
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
 
-  // Usar variables de entorno para las credenciales
-  const usuarios = [
-    {
-      "nombredeusuario": process.env.USER1_USERNAME,
-      "contrasena": process.env.USER1_PASSWORD,
-      "nombrecompleto": "Usuario 1",
-      "roles": ["admin"]
-    }
-  ];
+  // Buscamos la contraseña dinámicamente según el nombre de usuario (Pattern de Render)
+  const contrasenaGuardada = process.env[`CONTRASENA_${username}`];
+  
+  // Opcional: Puedes definir NOMBRE_usuario y ROLES_usuario en tu .env también
+  const nombreCompleto = process.env[`NOMBRE_${username}`] || username;
+  const rolesUsuario = process.env[`ROLES_${username}`] ? process.env[`ROLES_${username}`].split(',') : ["admin"];
 
-        // Buscar usuario (mapeando 'username' del login a 'nombredeusuario' del json)
-        const user = usuarios.find(u => u.nombredeusuario === username);
-
-        // Validar contraseña (usando 'contrasena' sin ñ como ajustaste)
-        if (user && user.contrasena === password) {
-            return res.json({ success: true, nombre: user.nombrecompleto, rol: user.roles });
-        }
+  // Validar si el usuario existe (la variable está definida) y la contraseña coincide
+  if (contrasenaGuardada && contrasenaGuardada === password) {
+      console.log(`Acceso concedido para: ${username}`);
+      return res.json({ success: true, nombre: nombreCompleto, rol: rolesUsuario });
+  }
 
     // Login fallido
     res.status(401).json({ success: false, message: 'Credenciales incorrectas' });

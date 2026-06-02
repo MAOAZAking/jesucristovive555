@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. CARGAR DATOS DE FORMA SEGURA
     cargarDatos();
 
+    // Inicializar el menú para que oculte la opción seleccionada por defecto
+    actualizarMenu();
+
     async function cargarDatos() {
         try {
             const res = await fetch('json/himnario.json');
@@ -70,9 +73,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function cambiarModo(modo) {
     modoActual = modo;
-    const label = modo === 'Adoracion' ? 'Adoración' : modo;
-    document.getElementById('selector-himnario').innerHTML = `Himnario ${label} <i class="bi bi-chevron-down fs-4"></i>`;
+    const titulos = {
+        'Completo': 'Himnario Completo',
+        'Alabanza': 'Himnario de Alabanza',
+        'Adoracion': 'Himnario de Adoración'
+    };
+    document.getElementById('selector-himnario').innerHTML = `${titulos[modo]} <i class="bi bi-chevron-down fs-4"></i>`;
     renderizarLista();
+    actualizarMenu();
+}
+
+function actualizarMenu() {
+    const menu = document.getElementById('menu-categorias');
+    if (!menu) return;
+
+    const opciones = [
+        { id: 'Completo', texto: 'Himnario Completo' },
+        { id: 'Alabanza', texto: 'Himnario de Alabanza' },
+        { id: 'Adoracion', texto: 'Himnario de Adoración' }
+    ];
+
+    // Filtramos para que NO aparezca la opción que ya está seleccionada (modoActual)
+    menu.innerHTML = opciones
+        .filter(opt => opt.id !== modoActual)
+        .map(opt => `<div class="opcion-cat" onclick="cambiarModo('${opt.id}')">${opt.texto}</div>`)
+        .join('');
 }
 
 function renderizarLista() {

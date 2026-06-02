@@ -225,7 +225,7 @@ function filtrarCanciones() {
         const item = document.createElement('div');
         item.className = 'item-lista-cancion';
         // Clic en la fila lleva a visualizar
-        item.onclick = () => window.location.href = `visualizar-cancion.html?id=${c.id}`;
+        item.onclick = () => window.location.href = `visualizar-cancion-con-acordes?id=${encodeURIComponent(c.id)}`;
         
         item.innerHTML = `
             <span class="titulo-cancion-lista">${c.titulo}</span>

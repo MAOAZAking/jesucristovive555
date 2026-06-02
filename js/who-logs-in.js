@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Manejar el envío del formulario de login
-    document.getElementById('form-login-seguro').addEventListener('submit', (e) => {
+    document.getElementById('form-login-seguro').addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const inputUser = document.getElementById('login-usuario').value;
@@ -140,15 +140,30 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        // 2. VALIDACIÓN DE CONTRASEÑA
-        if (inputPass !== usuarioDetectadoPendiente.contrasena) {
-            alert("❌ Contraseña incorrecta.");
-            return;
-        }
+        // 2. VALIDACIÓN DE CONTRASEÑA MEDIANTE EL SERVIDOR (API)
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: inputUser,
+                    password: inputPass
+                })
+            });
 
-        // Si todo coincide:
-        document.getElementById('formulario-login-facial').style.display = 'none';
-        completarLogin(usuarioDetectadoPendiente);
+            const result = await response.json();
+
+            if (result.success) {
+                // Si el servidor confirma que la clave es correcta (según el .env)
+                document.getElementById('formulario-login-facial').style.display = 'none';
+                completarLogin(usuarioDetectadoPendiente);
+            } else {
+                alert("❌ " + (result.message || "Contraseña incorrecta."));
+            }
+        } catch (error) {
+            console.error("Error al conectar con el servidor de login:", error);
+            alert("⚠️ Error de conexión con el servidor de validación.");
+        }
     });
 });
 

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // 1. Obtener ID de la URL
     const params = new URLSearchParams(window.location.search);
     const idCancion = params.get('id');
@@ -17,10 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
         cancion = lista.find(c => c.id === idCancion);
     }
 
+    // 3. Si no está en LocalStorage (modo pruebas local), buscar en el archivo JSON directamente
+    if (!cancion) {
+        try {
+            const response = await fetch('json/canciones.json');
+            const listaRemota = await response.json();
+            cancion = listaRemota.find(c => c.id === idCancion);
+        } catch (error) {
+            console.log("No se pudo cargar canciones.json localmente.");
+        }
+    }
+
     if (cancion) {
         renderizarCancion(cancion);
     } else {
-        document.getElementById('titulo').innerText = "Canción no encontrada (o sincronizando...)";
+        document.getElementById('titulo').innerText = "Canción no encontrada";
     }
 });
 
