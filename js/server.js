@@ -105,7 +105,7 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
             // Check if the file already exists to get its SHA (for updates)
             let sha = null;
             try {
-                const { data: existingFile } = await octokit.repos.getContents({
+                const { data: existingFile } = await octokit.rest.repos.getContents({                    owner: repoOwner,
                     owner: repoOwner,
                     repo: repoName,
                     path: githubPath,
@@ -140,9 +140,10 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
     if (successfulUploads > 0 && failedUploads === 0) {
         res.status(200).json({ message: `Se subieron ${successfulUploads} presentaciones correctamente.`, results: uploadResults });
     } else if (successfulUploads > 0 && failedUploads > 0) {
-        res.status(200).json({ message: `Se subieron ${successfulUploads} presentaciones, pero ${failedUploads} fallaron.`, results: uploadResults });
+        res.status(207).json({ message: `Subida parcial: ${successfulUploads} éxito, ${failedUploads} error.`, results: uploadResults });
     } else {
-        res.status(500).json({ message: `Todas las subidas fallaron.`, results: uploadResults });
+        const detail = uploadResults.length > 0 ? uploadResults[0].message : "Error desconocido";
+        res.status(500).json({ message: `Error: ${detail}`, results: uploadResults });
     }
 });
 
