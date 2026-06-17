@@ -105,7 +105,7 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
             // Check if the file already exists to get its SHA (for updates)
             let sha = null;
             try {
-                const { data: existingFile } = await octokit.rest.repos.getContents({                    owner: repoOwner,
+            const { data: existingFile } = await octokit.repos.getContents({
                     owner: repoOwner,
                     repo: repoName,
                     path: githubPath,
