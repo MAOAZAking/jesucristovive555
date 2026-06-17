@@ -71,7 +71,12 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
         return res.status(400).json({ message: "No se han subido archivos." });
     }
 
-    const types = req.body.types; // This will be an array of strings
+    // Normalizar 'types' a un array (si es un solo archivo, llega como string)
+    let types = req.body.types;
+    if (types && !Array.isArray(types)) {
+        types = [types];
+    }
+
     if (!types || types.length !== req.files.length) {
         return res.status(400).json({ message: "El número de tipos de presentación no coincide con el número de archivos." });
     }
