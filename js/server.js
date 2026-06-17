@@ -105,12 +105,12 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
             // Check if the file already exists to get its SHA (for updates)
             let sha = null;
             try {
-            const { data: existingFile } = await octokit.repos.getContents({
-                    owner: repoOwner,
-                    repo: repoName,
-                    path: githubPath,
-                    branch: branch,
-                });
+            const { data: existingFile } = await octokit.rest.repos.getContents({
+                owner: repoOwner,
+                repo: repoName,
+                path: githubPath,
+                ref: branch,
+            });
                 sha = existingFile.sha;
             } catch (error) {
                 if (error.status !== 404) { // 404 means file doesn't exist, which is fine for creation
@@ -118,7 +118,7 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
                 }
             }
 
-            await octokit.repos.createOrUpdateFileContents({
+        await octokit.rest.repos.createOrUpdateFileContents({
                 owner: repoOwner,
                 repo: repoName,
                 path: githubPath,
