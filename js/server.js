@@ -51,9 +51,25 @@ app.post('/api/login', (req, res) => {
 
 // Endpoint for uploading presentations
 app.post('/api/upload-presentations', upload.array('presentations'), async (req, res) => {
-    const githubPat = process.env.GITHUB_TOKEN;
-    const repoOwner = process.env.GITHUB_OWNER;
-    const repoName = process.env.GITHUB_REPO;
+    // Intentar cargar variables locales de GitHub desde js/config_github.js para facilitar pruebas locales
+    let localToken = null;
+    let localOwner = null;
+    let localRepo = null;
+    try {
+        const configContent = fs.readFileSync(path.join(__dirname, 'config_github.js'), 'utf8');
+        const tokenMatch = configContent.match(/TOKEN:\s*['"`](.*?)['"`]/);
+        const ownerMatch = configContent.match(/OWNER:\s*['"`](.*?)['"`]/);
+        const repoMatch = configContent.match(/REPO:\s*['"`](.*?)['"`]/);
+        if (tokenMatch) localToken = tokenMatch[1];
+        if (ownerMatch) localOwner = ownerMatch[1];
+        if (repoMatch) localRepo = repoMatch[1];
+    } catch (err) {
+        console.warn("No se pudo leer config_github.js para credenciales locales:", err.message);
+    }
+
+    const githubPat = process.env.GITHUB_TOKEN || localToken;
+    const repoOwner = process.env.GITHUB_OWNER || localOwner;
+    const repoName = process.env.GITHUB_REPO || localRepo;
     const branch = 'main'; // Assuming 'main' branch
 
     // Basic authentication check (you might want a more robust one)
@@ -103,17 +119,27 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
 
         try {
             // Check if the file already exists to get its SHA (for updates)
+            // To avoid the 403 Forbidden error returned by GitHub Contents API for files >1MB,
+            // we request the contents of the parent directory instead of the specific large file.
             let sha = null;
             try {
-            const { data: existingFile } = await octokit.rest.repos.getContents({
-                owner: repoOwner,
-                repo: repoName,
-                path: githubPath,
-                ref: branch,
-            });
-                sha = existingFile.sha;
+                const parentPath = `multimedia/presentaciones-power-point/letra-canciones-para-proyectar/${fileType}`;
+                const { data: folderContents } = await octokit.rest.repos.getContent({
+                    owner: repoOwner,
+                    repo: repoName,
+                    path: parentPath,
+                    ref: branch,
+                });
+
+                if (Array.isArray(folderContents)) {
+                    const existingFile = folderContents.find(f => f.name === filename && f.type === 'file');
+                    if (existingFile) {
+                        sha = existingFile.sha;
+                    }
+                }
             } catch (error) {
-                if (error.status !== 404) { // 404 means file doesn't exist, which is fine for creation
+                // A 404 status means the parent directory doesn't exist, which is fine (the file doesn't exist either)
+                if (error.status !== 404) {
                     throw error;
                 }
             }
