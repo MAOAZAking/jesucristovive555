@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 // Esto permite que al entrar a la web se vean tus páginas
 app.use(express.static(path.join(__dirname, '../'), {
     extensions: ['html'], // Permite que /himnario cargue /himnario.html automáticamente
-    index: 'who-logs-in.html' // Página por defecto (o index.html si no hay login)
+    index: 'index.html' // Página por defecto
 }));
 
 // Configure multer to store files in memory
@@ -118,10 +118,8 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
         const content = file.buffer.toString('base64'); // Base64 encode the file content
 
         try {
-            // Check if the file already exists to get its SHA (for updates)
-            // To avoid the 403 Forbidden error returned by GitHub Contents API for files >1MB,
-            // we request the contents of the parent directory instead of the specific large file.
-            let sha = null;
+            // Check if the file already exists to prevent overwriting
+            let fileExists = false;
             try {
                 const parentPath = `multimedia/presentaciones-power-point/letra-canciones-para-proyectar/${fileType}`;
                 const { data: folderContents } = await octokit.rest.repos.getContent({
@@ -132,10 +130,7 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
                 });
 
                 if (Array.isArray(folderContents)) {
-                    const existingFile = folderContents.find(f => f.name === filename && f.type === 'file');
-                    if (existingFile) {
-                        sha = existingFile.sha;
-                    }
+                    fileExists = folderContents.some(f => f.name === filename && f.type === 'file');
                 }
             } catch (error) {
                 // A 404 status means the parent directory doesn't exist, which is fine (the file doesn't exist either)
@@ -144,14 +139,18 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
                 }
             }
 
-        await octokit.rest.repos.createOrUpdateFileContents({
+            if (fileExists) {
+                uploadResults.push({ filename, status: 'failed', message: 'Ya existe un archivo con este nombre en el repositorio' });
+                continue;
+            }
+
+            await octokit.rest.repos.createOrUpdateFileContents({
                 owner: repoOwner,
                 repo: repoName,
                 path: githubPath,
                 message: `feat: Subir presentación ${filename} (${fileType})`,
                 content: content,
-                branch: branch,
-                sha: sha // Include SHA if updating an existing file
+                branch: branch
             });
             uploadResults.push({ filename, status: 'success', message: 'Subido correctamente' });
         } catch (error) {
@@ -173,9 +172,9 @@ app.post('/api/upload-presentations', upload.array('presentations'), async (req,
     }
 });
 
-// Ruta principal: Redirigir a who-logs-in.html si entran a la raíz
+// Ruta principal: Servir index.html si entran a la raíz
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../who-logs-in.html'));
+    res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 // ... resto de tu configuración del servidor ...
